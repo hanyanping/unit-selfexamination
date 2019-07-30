@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <title>日常检查</title>
+    <style >
+        .dailyInspection {
+            margin: 15px 12px;
+        }
+        #qianMin input{
+            width:30%;
+            border-radius: 15px;
+            /*border:1px #ccc solid;*/
+        }
+        #signature{
+            width:100%;
+            height:150px;
+            border:1px solid #f0f0f0;
+            margin:20px auto;
+            overflow: hidden;
+            background-color:#fff;
+            border-radius: 10px;
+        }
+        #someelement{
+            width:90%;
+            margin:0 auto;
+        }
+        #qianButton{
+            text-align: center;
+            margin:20px auto;
+        }
+        #qianButton input{
+            height: 40px;
+            width: 100px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 20px;
+
+        }
+        #reset{
+            background: #f0f0f0;
+            color: #232323;
+            margin-right: 15px;
+        }
+        #yes{
+            background: #1A7FE3;
+            color: #fff;
+        }
+        .selectBox{
+            margin-bottom: 10px;
+        }
+        .selectBox .lableText{
+            font-size: 14px;
+            color: #232323;
+        }
+       .selectBox .warmText{
+            color: #979797;
+            font-size: 14px;
+        }
+        .imgIcon{
+            max-height: 110px;
+            max-width: 110px;
+            display: inline-block;
+            vertical-align: middle;
+            /*line-height: 110px;*/
+            text-align: center;
+        }
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #f0f0f0;
+            border-color: #78C3F3;
+            border-radius: 4px;
+            height: 110px;
+            width: 110px;
+            overflow: hidden;
+            color: #232323;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 100px;
+            text-align: center;
+        }
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+        .file:hover {
+            background: #f0f0f0;
+            border-color: #78C3F3;
+            text-decoration: none;
+        }
+       .file .textBox{
+            line-height: 24px;
+           text-align: center;
+           margin-top: 25px;
+           font-size:14px;
+           color: #979797;
+        }
+         .file .textBox .icon{
+            font-size: 28px;
+             font-weight: 600;
+             margin-bottom: 6px;
+        }
+        .phoneBox{
+            display: flex;
+            justify-content: space-between;
+
+        }
+    </style>
+</head>
+<body>
+<div class="dailyInspection">
+    <div class="selectBox phoneBox">
+        <a href="javascript:;" class="file">
+            <div class="textBox1 textBox">
+                <p class="icon1 icon">+</p>
+                <p class="text1 text">上传照片</p>
+            </div>
+            <input id="showIos1" style="display: none" type="file" class="file"  onchange="getFile(this,'ios','1')"/>
+            <input id='showAndroid1' type="file" class="file" accept="image/*"    onchange="getFile(this,'isAndroid','1')"/>
+            <img src="" class="imgOne imgIcon" style="display: none;">
+        </a>
+
+        <a href="javascript:;" class="file">
+            <div class="textBox2 textBox">
+                <p class="icon2 icon">+</p>
+                <p class="text2 text">上传照片</p>
+            </div>
+            <input id="showIos2" style="display: none" type="file" class="file"  onchange="getFile(this,'ios','2')"/>
+            <input id='showAndroi2' type="file" class="file" accept="image/*"    onchange="getFile(this,'isAndroid','2')"/>
+            <img src="" class="img2 imgIcon" style="display: none;">
+        </a>
+        <a href="javascript:;" class="file">
+            <div class="textBox3 textBox">
+                <p class="icon3 icon">+</p>
+                <p class="text30 text">上传照片</p>
+            </div>
+            <input id="showIos3" style="display: none" type="file" class="file"  onchange="getFile(this,'ios','3')"/>
+            <input id='showAndroi3' type="file" class="file" accept="image/*"    onchange="getFile(this,'isAndroid','3')"/>
+            <img src="" class="img3 imgIcon" style="display: none;">
+        </a>
+    </div>
+
+    <!--<div class="selectBox">-->
+        <!--<span class="lableText">检查员签字：</span>-->
+        <!--<span class="warmText">(请横屏签名，效果更佳)</span>-->
+    <!--</div>-->
+    <!--<div id="qianMin">-->
+        <!--<div id="signature"></div>-->
+        <!--<div id="someelement"></div>-->
+        <!--<div id="qianButton">-->
+            <!--<input type="button" value="重新签字" id="reset"/>-->
+            <!--<input type="button" value="确认" id="yes"/>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+<div id="tanwin" class="tan" style="display:none;"></div>
+</body>
+<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/flashcanvas.js"></script>
+<script src="../js/jSignature.min.js"></script>
+
+<script type="text/javascript" src="../js/exif.js" ></script>
+<script>
+    $(function(){
+        var headerImage = '';
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android??
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios??
+        if(isAndroid){
+            $("#showAndroid").css({"display":'block'});
+            $("#showIos").css({"display":'none'})
+        }else if(isiOS){
+            $("#showAndroid").css({"display":'none'});
+            $("#showIos").css({"display":'block'})
+        }
+
+        var dWidth = document.getElementById('signature').style.width;
+        var $sigdiv = $("#signature");
+        console.log($sigdiv)
+        $("#signature").jSignature({"decor-color":"transparent",height: '150'});//初始化调整手写屏大小
+        // $sigdiv.jSignature({'height':200,'width':dWidth,'lineWidth':"2"});
+        $("#yes").click(function(){
+            //将画布内容转换为图片
+            var datapair = $sigdiv.jSignature("getData", "image");
+            var i = new Image();
+            i.src = "data:" + datapair[0] + "," + datapair[1];
+            $(i).appendTo($("#someelement")); // append the image (SVG) to DOM.
+        });
+        $("#reset").click(function(){
+            $sigdiv.jSignature("reset"); //重置画布，可以进行重新作画.
+            $("#someelement").html("");
+        });
+    })
+    function getFile(file,type,num) {
+        var files = file.files;
+        if (!files.length) {
+            return;
+        }
+        var picavalue = files[0];
+        if (picavalue.size / 1024 > 6000) {
+            tanwin("图片过大不支持上传");
+        } else {
+           imgPreview(picavalue, '',type,num);
+        }
+    };
+    function imgPreview(file, callback,type,num) {
+        //判断支不支持FileReader
+        if (!file || !window.FileReader) return;
+        let reader = new FileReader();
+        // 将图片将转成 base64 格式
+        reader.readAsDataURL(file);
+        var imgType = file.name;
+        reader.onloadend = function () {
+            let result = reader.result;
+            let img = new Image();
+            img.src = result;            //判断图片是否大于100K,是就直接上传，反之压缩图片
+            if (reader.result.length <= (50 * 1024)) {
+                headerImage =result;
+                postImg(num)
+            } else {
+                img.onload = function () {
+                    var orient = getPhotoOrientation(img);
+                    let data = compress(img,orient);
+                    headerImage = data;
+                    if(data){
+                        postImg(num)
+                    }
+                }
+            }
+        }
+    };
+    function  getPhotoOrientation(img) {
+        var orient;
+        EXIF.getData(img, function() {
+            orient = EXIF.getTag(this, 'Orientation');
+        });
+        return orient;
+    };
+    function compress(img,orient) {
+        let canvas = document.createElement("canvas");
+        let ctx = canvas.getContext("2d");
+        let initSize = img.src.length;
+        var originWidth = img.width;
+        var originHeight = img.height;
+        var maxWidth = 800,
+            maxHeight = 800;
+        var targetWidth = originWidth,
+            targetHeight = originHeight;
+//                let width = img.width;
+//                let height = img.height;
+        // 图片尺寸超过400x400的限制
+        if(originWidth > maxWidth || originHeight > maxHeight) {
+            if(originWidth / originHeight > maxWidth / maxHeight) {
+                // 更宽，按照宽度限定尺寸
+                targetWidth = maxWidth;
+                targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+            } else {
+                targetHeight = maxHeight;
+                targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+            }
+        }
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        var canvas_w = Number(ctx.canvas.width);
+        var canvas_h = Number(ctx.canvas.height);
+        // 铺底色
+        // 清除画布
+        ctx.clearRect(0, 0, targetWidth, targetHeight);
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        if (orient == 6) {
+            ctx.save(); //保存状态
+            ctx.translate(canvas_w / 2, canvas_h / 2); //设置画布上的(0,0)位置，也就是旋转的中心点
+            ctx.rotate(90 * Math.PI / 180); //把画布旋转90度
+            // 执行Canvas的drawImage语句
+            ctx.drawImage(img, Number(0) - canvas_h / 2, Number(0) - canvas_w / 2, targetHeight, targetWidth); //把图片绘制在画布translate之前的中心点，
+            ctx.restore(); //恢复状态
+        } else {
+            // 执行Canvas的drawImage语句
+            ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+        }
+        //进行最小压缩
+        let ndata = canvas.toDataURL("image/png", 0.04);
+        return ndata;
+    };
+    function postImg(num){
+        console.log(headerImage)
+        if(num == 1){
+            $(".textBox1").css({'display':'none'})
+            $(".imgOne").css({'display':'inline-block'})
+            $('.imgOne').attr("src",headerImage)
+        }
+        if(num == 2){
+            $(".textBox2").css({'display':'none'})
+            $(".img2").css({'display':'inline-block'})
+            $('.img2').attr("src",headerImage)
+        }
+        if(num == 3){
+            $(".textBox3").css({'display':'none'})
+            $(".img3").css({'display':'inline-block'})
+            $('.img3').attr("src",headerImage)
+        }
+        if(headerImage.length != 0){
+            var index = headerImage.indexOf(',');
+            headerImage = headerImage.substring(index+1)
+        }
+        console.log(headerImage)
+        return
+        // 发送请求;
+        Service.user().changePhone({fileName: this.imgType,
+            fileType: 'img',
+            data: this.headerImage}).then(response => {
+            if(response.errorCode == 0){
+                this.headerImage = '';
+                this.personData.headImageUrl = response.data;
+                this.editorImg()
+            }
+        }, err => {
+
+        })
+    };
+</script>
+</html>

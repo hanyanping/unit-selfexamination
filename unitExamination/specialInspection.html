@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../js/iconfont.css">
+    <title>专项检查</title>
+    <style>
+
+        .zhegaiceng {
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .zhegaiceng .lodingimg {
+            position: absolute;
+            height: 60px;
+            width: 60px;
+            left: 0;
+            right: 0;
+            margin: 30vh auto;
+        }
+        .tabBox{
+            position: fixed;
+            width: 100%;
+            background: #fff;
+            height: 45px;
+            line-height: 45px;
+            top: 0;
+            z-index: 100;
+        }
+        .fixedBox{
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .specialInspection{
+            min-height: 100vh;
+            background: #f0f0f0;
+        }
+        .specialInspection .selecttabTitle{
+            position: relative;
+            color: #0089EB;
+        }
+        .tabTitle{
+            color: #232323;
+        }
+        .lineBox{
+            width: 15px;
+            height: 3px;
+            background-color: #0089EB;
+            border-radius: 3px;
+            bottom: 0;
+            /*left: 50%;*/
+            margin: -3px auto;
+        }
+        .noline{
+            display: none;
+        }
+        .listBox {
+            background: #fff;
+            padding: 0 16px;
+            margin: 12px 0;
+        }
+        .listTop {
+            padding: 10px 0;
+            border-bottom: 1px solid #f4f4f4;
+            font-weight: 600;
+            color: #232323;
+            font-size: 15px;
+        }
+        .nopass {
+            color: #f00;
+        }
+        .already {
+            color: #bbb;
+        }
+        .origin {
+            color: #FF7F35;
+        }
+        .green {
+            color: #2FB86C;
+        }
+        .blue {
+            color: #3186DB;
+        }
+        .listMiddle {
+            font-size: 15px;
+            padding: 16px 0;
+        }
+        .flexLeft {
+            display: flex;
+        }
+        .applayIcon {
+            vertical-align: middle;
+            height: 47px;
+            width: 47px;
+            padding-right: 6px;
+        }
+        .info {
+            line-height: 22px;
+            font-size: 14px;
+            color: #696969;
+        }
+        .infoText{
+            padding: 5px 0;
+        }
+        .flexRight {
+            /*line-height: 60px;*/
+            position: relative;
+        }
+        .godetail {
+            height: 18px;
+            width: 12px;
+            display: inline-block;
+            vertical-align: middle;
+            position: absolute;
+            bottom: 5px;
+            right: 0;
+        }
+        .goSub {
+            position: absolute;
+            display: inline-block;
+            height: 30px;
+            width: 70px;
+            line-height: 30px;
+            text-align: center;
+            right: 0;
+            background: #096FD4;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 14px;
+            top: 0;
+        }
+    </style>
+</head>
+<body style="">
+
+<div class="specialInspection">
+    <div class="tabBox">
+        <div class="fixedBox">
+
+        </div>
+    </div>
+    <div class="scroll" style="display:block">
+
+    </div>
+    <div class="nodataBox" style="display:none;margin: 0 auto;padding-top: 100px;text-align: center;color: #f00;font-weight: 600;font-size: 18px;">
+        您还没有申请记录
+    </div>
+</div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="../images/loadingpop.gif">
+</div>
+
+<div id="tanwin" class="tan" style="display:none;"></div>
+</body>
+<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+</script>
+<script>
+
+var tabData = [{name: '待提交',isSelect: true},{name: '待审核',isSelect: false},{name: '已结案',isSelect: false}],
+str = '',classname = '',lineName = '',phone = '';
+    $(function(){
+        getDataList()
+        if(localStorage.getItem('phone')){
+            phone = localStorage.getItem('phone');
+        }
+        for(var i = 0;i<tabData.length;i++){
+            if(tabData[i].isSelect){
+                classname = 'selecttabTitle';
+                lineName = 'lineBox'
+            }else{
+                classname = 'tabTitle';
+                lineName = 'noline'
+            }
+            str+='<div onclick="selctOrder(this,i)" class="'+classname+'">' +
+                tabData[i].name +
+                '<div class="'+lineName+'"></div>' +
+                '</div>'
+        }
+        $(".fixedBox").append($(str))
+    })
+function goDetail(event){
+
+};
+function getDataList() {
+    var listdata = [{name: 'zhangsjj',auditStatus:'1',auditStatusName: 'fffff',applyTime: '33000',cardNum:'4455',companyName: 'JFK尽快反馈',sex: '男'},{name: 'zhangsjj',auditStatus:'1',cardNum:'4455',auditStatusName: 'fffff',applyTime: '33000',companyName: 'JFK尽快反馈',sex: '男'}]
+    $(".nodataBox").css({'display':'none'});
+    $(".scroll").css({'display':'block'});
+    var strDom = '';
+    for(var i = 0;i< listdata.length;i++){
+        console.log(listdata)
+        if(listdata[i].auditStatus == 1){
+            listdata[i].audit = '待审核'
+        }
+        if(listdata[i].auditStatus == 2){
+            listdata[i].audit = '审核不通过'
+        }
+        if(listdata[i].auditStatus == 3){
+            listdata[i].audit = '审核通过'
+        }
+        strDom+=' <div class="listBox">' +
+            '<div class="flexBetween listTop"> ' +
+            '<span>'+listdata[i].applyTime+'</span><span class="applyStatus origin">'+listdata[i].auditStatusName+'</span>' +
+            '</div>' +
+            '<div class="listMiddle flexBetween" onclick=goDetail("'+listdata[i].applyNum+'")>' +
+            '<div class="flexLeft">' +
+            '<div class="info">' +
+            '<div class="flexBetween infoText">' +
+            '<p>姓名：'+listdata[i].name+'</p>' +
+            ' <span >性别： '+listdata[i].sex+'</span>' +
+            '</div>' +
+            '<p class="idCard infoText" >身份证号：'+listdata[i].cardNum+'</p>' +
+            '<p class="companyName infoText">单位名称：'+listdata[i].companyName+
+            '</p>' +
+            '</div>' +
+            '</div>' +
+            '<div class="flexRight">' +
+            '<img class="godetail" src="../images/right.png">' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+    }
+    $('.scroll').append($(strDom));
+    console.log($(strDom))
+    return;
+    $('.scroll').html('');
+    var data = {
+        phoneNum: phone
+    }
+    data = JSON.stringify(data);
+    $.ajax({
+        url: ajaxUrl + 'getApplyList',
+        timeout: 3000,
+        type: 'post',
+        contentType: 'application/json;charset=utf-8',
+        dataType: "json",
+        data:data,
+        success: function(response) {
+            if(response.rescode == 200){
+                var listdata = response.applyList;
+                if (response.applyList.length != 0) {
+                    $(".nodataBox").css({'display':'none'});
+                    $(".scroll").css({'display':'block'});
+                    var str = '';
+                    for(var i = 0;i< listdata.length;i++){
+                        console.log(listdata)
+                        if(listdata[i].auditStatus == 1){
+                            listdata[i].audit = '待审核'
+                        }
+                        if(listdata[i].auditStatus == 2){
+                            listdata[i].audit = '审核不通过'
+                        }
+                        if(listdata[i].auditStatus == 3){
+                            listdata[i].audit = '审核通过'
+                        }
+                        str+=' <div class="listBox">' +
+                            '<div class="flexBetween listTop"> ' +
+                            '<span>'+listdata[i].applyTime+'</span><span class="applyStatus origin">'+listdata[i].auditStatusName+'</span>' +
+                            '</div>' +
+                            '<div class="listMiddle flexBetween" onclick=goDetail("'+listdata[i].applyNum+'")>' +
+                            '<div class="flexLeft">' +
+                            '<div class="info">' +
+                            '<div class="flexBetween infoText">' +
+                            '<p>姓名：'+listdata[i].name+'</p>' +
+                            ' <span >性别： '+listdata[i].sex+'</span>' +
+                            '</div>' +
+                            '<p class="idCard infoText" >身份证号：'+listdata[i].cardNum+'</p>' +
+                            '<p class="companyName infoText">单位名称：'+listdata[i].companyName+
+                            '</p>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="flexRight">' +
+                            '<img class="godetail" src="./images/right.png">' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>'
+                    }
+                    $('.scroll').append($(str));
+                }
+                if (listdata.length == 0 ) {
+                    $(".nodataBox").css({'display':'block'});
+                    $(".scroll").css({'display':'none'})
+                }
+            }else{
+                $(".nodataBox").css({'display':'block'});
+                $(".scroll").css({'display':'none'})
+                tanwin(response.data.resdes)
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+        },
+        complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+        }
+    });
+}
+
+</script>
+</html>

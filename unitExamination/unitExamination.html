@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <title>单位自查</title>
+    <style>
+        .zhegaiceng {
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .zhegaiceng .lodingimg {
+            position: absolute;
+            height: 60px;
+            width: 60px;
+            left: 0;
+            right: 0;
+            margin: 30vh auto;
+        }
+        .dialog {
+            background: rgba(0, 0, 0, 0.6);
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            top: 0;
+        }
+        .dialog .zhegaiContent {
+            background: #fff;
+            position: absolute;
+            width: 80%;
+            right: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px 20px 5px;
+            border-radius: 10px;
+        }
+        .dialog .warmtitle{
+            text-align: center;
+            margin-bottom: 15px;
+            color: #0089EB;
+            font-size: 20px;
+            position: relative;
+        }
+        .dialog .closeIcon{
+            position: absolute;
+            height: 22px;
+            width: 22px;
+            right: 0px;
+            top: 0
+        }
+        .dialog .chengnuo{
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 10px;
+        }
+        .dialog .chengnuoText {
+            color: #232323;
+            margin-bottom: 25px;
+            font-size: 15px;
+            line-height: 24px;
+        }
+        .dialog .sureBox {
+            margin: 20px auto 20px;
+            text-align: center;
+        }
+        .dialog .sure {
+            background: #0089EB;
+            color: #fff;
+            padding: 12px 60px;
+            font-size: 15px;
+            border-radius: 20px;
+        }
+        .dialog .nosure{
+            display:inline-block;
+            background: #bbb;
+            color: #fff;
+            padding: 12px 60px;
+            font-size: 15px;
+            border-radius: 20px;
+        }
+        .unitExamination{
+            min-height: 100vh;
+            background: #f9f9f9;
+            /*margin: 10px 15px;*/
+        }
+        .uinitTop .userLogo{
+            margin-right: 12px;
+            border-radius: 50%;
+            height: 80px;
+            width: 80px;
+            background: #F8F5F5;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 80px;
+            text-align: center;
+            position: relative;
+
+        }
+        .role{
+            display: inline-block;
+            position: absolute;
+            line-height: 16px;
+            bottom: 0px;
+            text-align: center;
+            min-width: 66px;
+            left: 7px;
+            background: #FEAB07;
+            color: #fff;
+            border-radius: 10px;
+            font-size: 12px;
+            padding: 2px;
+        }
+        .uinitTop{
+            background: #1A7FE3;
+            padding: 20px 12px;
+
+        }
+        .userinfoBox{
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px 8px;
+        }
+        .headIcon{
+            width: 80px;
+            height: 80px;
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 50%;
+        }
+        .userInfo{
+
+        }
+       .userBox{
+           margin-bottom: 8px;
+           font-size: 12px;
+           color: #fff;
+           background: -webkit-linear-gradient(left,#3FBAF7,#8881FC);
+           background: -o-linear-gradient(left,#3FBAF7,#8881FC);
+           background: -moz-linear-gradient(left,#3FBAF7,#8881FC);
+           background: -ms-linear-gradient(left,#3FBAF7,#8881FC);
+           border-radius: 10px;
+           padding: 6px;
+       }
+       .userBox .spanText{
+        }
+       .userBox .userText{
+        }
+        .countBox{
+            color: #232323;
+            font-size:14px;
+            margin-top: 15px;
+        }
+        .count{
+            box-shadow: 0px 0px 8px 0px rgba(26, 127, 227, 0.2);
+            text-align: center;
+            width: 25%;
+            background: #fff;
+            margin-right: 10px;
+            padding: 10px 0;
+        }
+        .count:last-child{
+            margin-right: 15px;
+        }
+        .count:first-child{
+            margin-left: 15px;
+        }
+        .clerk{
+            margin-top: 10px;
+        }
+        .listData{
+            height: 50px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        .listData ul li ,.listMobileData ul li{
+            display:flex;
+            background: #DEE7F3;
+            text-align: center;
+            line-height: 50px;
+            padding-left: 20px;
+            color: #979797;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        .listData img{
+            height: 30px;
+            width: 30px;
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .imgBox{
+             line-height: 50px;
+         }
+        .examinationListBox{
+            background: #fff;
+            box-shadow: 0px 0px 8px 0px rgba(26, 127, 227, 0.2);
+            margin: 15px;
+            border-radius: 10px;
+        }
+        .examinationList{
+            padding: 0 16px;
+            border-bottom: 1px solid #f0f0f0;
+            height: 50px;
+            line-height: 50px;
+        }
+        .examinationIconBox{
+            line-height: 50px;
+            display: inline-block;
+        }
+        .examinationIcon{
+            height: 30px;
+            width: 30px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: -3px;
+        }
+        .examinationList:last-child{
+            border: none;
+        }
+       .examinationList .examinationText{
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="unitExamination">
+    <div class="uinitTop">
+        <div class=" flex userinfoBox">
+            <div class="userLogo">
+                <img class="headIcon" src="../images/icon.jpg">
+                <span class="role">单位领导</span>
+            </div>
+            <div class="userInfo">
+                <p class="userBox">
+                    <span class="spanText">检查员姓名 : </span>
+                    <span class="userName userText">顶大点</span>
+                </p>
+                <p class="userBox">
+                    <span class="spanText">所属单位 : </span>
+                    <span class="userUnit userText">阵阵订单的的阵阵订单的阵阵的</span>
+                </p>
+                <p class="userBox">
+                    <span class="spanText">所属管辖单位 : </span>
+                    <span class="jurisdictionalUnits userText">顶大点</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="listData" id="news">
+        <ul class="listUl"  style="margin-top:0!important">
+        </ul>
+    </div>
+    <div class="countBox flexBetween">
+        <div class="tatal count">
+            <p class="number green">1233 </p>
+            <p class="clerk">提交总量</p>
+        </div>
+        <div class="currentMounth count">
+                <p class="number blue">1233</p>
+                <p class="clerk">本月任务<br>总数</p>
+        </div>
+        <div class="currentMounth count">
+            <p class="number yellow">1233</p>
+            <p class="clerk">本月待完<br>成任务数</p>
+        </div>
+        <div class="waitCompleted count">
+            <p class="number green">1233 </p>
+            <p class="clerk">专项检查<br>待完成数</p>
+        </div>
+    </div>
+    <div class="examinationListBox">
+        <div class="examinationList">
+            <div class="examinationIconBox">
+                <img class='examinationIcon' src="../images/richang.png"/>
+            </div>
+            <span class='examinationText'>日常全量检查</span>
+        </div>
+        <div class="examinationList">
+            <div class="examinationIconBox">
+                <img class='examinationIcon' src="../images/lishi.png"/>
+            </div>
+            <span class='examinationText'>历史检查记录(日常检查)</span>
+        </div>
+        <div class="examinationList">
+            <div class="examinationIconBox">
+                <img class='examinationIcon' src="../images/zhuanxiang.png"/>
+            </div>
+            <span class='examinationText'>专项检查</span>
+        </div>
+        <div class="examinationList">
+            <div class="examinationIconBox">
+                <img class='examinationIcon' src="../images/daishenhe.png"/>
+            </div>
+            <span class='examinationText'>待审核内容</span>
+        </div>
+        <div class="examinationList">
+            <div class="examinationIconBox">
+                <img class='examinationIcon' src="../images/zhinan.png"/>
+            </div>
+            <span class='examinationText'>使用指南</span>
+        </div>
+    </div>
+</div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="../images/loadingpop.gif">
+</div>
+<div class="dialog" style="display:none;">
+    <div class=" zhegaiContenttwo zhegaiContent">
+        <div class="warmtitle">
+            <span class="chengnuo">温馨提示</span>
+            <img  class='closeIcon' src="../images/close.png" onClick="closedia()" >
+        </div>
+
+        <p class="chengnuoText one" style="margin-bottom:5px;">
+            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
+        </p>
+        <p class="chengnuoText two" style="margin-bottom:5px;">
+            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
+        </p>
+        <p class="chengnuoText three" style="margin-bottom:5px;">
+            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
+            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
+            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
+        </p>
+        <p class="chengnuoText four" style="margin-bottom:5px;">
+            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
+        </p>
+        <div class="sureBox">
+            <span class="sure" onClick="closeDialog()" style="display:none;">确认</span>
+            <span class="nosure">6s</span>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(function(){
+        // gouserinfo();
+
+        var arrData = [{"name":"见看得见看看得见看得见",icon:'../images/tongzhi.png'},{"name":"见看得见看看得见看得见",icon:'../images/tongzhi.png'}];
+        var str = '';
+        for(let i in arrData){
+            str+= '<li>' +
+                '<div class="imgBox"><img src="'+arrData[i].icon+'"></div>' +
+                '<span class="nameBox">'+arrData[i].name+'</span>' +
+                '</li>'
+        }
+        $(".listUl").append($(str));
+        setTimeout(function(){
+            // setInterval(autoScroll,1000);
+        },2000)
+    })
+    function autoScroll(){//分享图动画效果
+        $("#news").find('ul li').css({
+            opacity: 1
+        });
+        $("#news").find('ul li:first').animate({
+            opacity: 1
+        },1000);
+        setTimeout(function(){
+            $("#news").find('ul').animate({
+                marginTop: '-50px',
+            },1000,function(){
+                $(this).css({marginTop : "0px"});
+                var li  =$("#news").find('ul').children().first().clone();
+                $("#news").find('ul li:last').after(li );
+                $("#news").find('ul li').eq(1).animate({
+                    opacity: 0
+                },1000);
+                $("#news").find("ul li:first").remove();
+            })
+        },1000)
+    }
+    function closeDialog(){
+        $('.dialog').css({'display':'none'})
+        window.location.href = './userinfo.html'
+    }
+    function closedia(){
+        $('.dialog').css({'display':'none'})
+        clearInterval(t)
+    }
+    function gouserinfo(){
+        $(".dialog").css({"display":'block'})
+        time = 6;
+        $(".nosure").html(time+'s')
+        t = setInterval(countDown,1000);
+    }
+    function  countDown(){
+        time--;
+        $(".nosure").html(time+'s')
+        if(time == 0){
+            clearInterval(t)
+            $(".nosure").css({"display":'none'})
+            $(".sure").css({"display":'inline-block'})
+        }
+    };
+</script>
+</html>
