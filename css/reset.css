@@ -19,7 +19,7 @@ legend,
 img {
     margin: 0;
     padding: 0;
-    fontFamily: Microsoft Yahei, pingfangSC;
+    font-Family: Microsoft Yahei, pingfangSC;
 }
 .green{
     color: #05AF71;
@@ -210,3 +210,82 @@ select {
 .viewer-rotate-left,.viewer-rotate-right,.viewer-one-to-one,.viewer-zoom-out,.viewer-zoom-in,.viewer-flip-vertical,.viewer-flip-horizontal,.viewer-reset{
   display:none;
 }
+/* 签名 */
+.container {
+    width: 100%;
+    height: 100%;
+}
+#canvasBox {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.greet {
+    padding: 12px;
+    font-size: 20px;
+    user-select: none;
+}
+.greet select {
+    font-size: 18px;
+}
+canvas {
+    flex: 1;
+    cursor: crosshair;
+    border:2px dashed lightgray;
+}
+.none{
+    display: none;
+}
+#pic{
+    height: auto;
+    width: 100%;
+}
+#signDate {
+    height: auto;
+    width: 100%;
+}
+.image{
+    max-height: 80px;
+    max-width: 80px;
+}
+.deleteIconindex{
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    right: -6px;
+    top: -6px;
+    cursor: pointer;
+}
+.borderBox{
+    line-height: 74px;
+    height: 81px;
+    width: 81px;
+    text-align: center;
+    position: relative;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    margin: 6px 12px 6px 0px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.borderline{
+    text-decoration: underline;
+}
+.cancledrawButton{
+    background: #f2f2f2;
+    color: #232323;
+    font-size: 14px;
+    width: 80px;
+    border-radius: 5px;
+    height: 28px;
+}
+.drawButton{
+    margin-left: 40px;
+    background: #0076FF;
+    color: #fff;
+    font-size: 14px;
+    width: 80px;
+    border-radius: 5px;
+    height: 28px;
+}
+
