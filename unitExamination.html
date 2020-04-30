@@ -137,33 +137,12 @@
         
        .userBox{
            margin-bottom: 8px;
-           font-size: 12px;
+           font-size: 13px;
            color: #fff;
            padding: 6px;
        }
       
-        .countBox{
-            color: #232323;
-            font-size:14px;
-            margin-top: 15px;
-        }
-        .count{
-            box-shadow: 0px 0px 8px 0px rgba(26, 127, 227, 0.2);
-            text-align: center;
-            width: 25%;
-            background: #fff;
-            margin-right: 10px;
-            padding: 10px 0;
-        }
-        .count:last-child{
-            margin-right: 15px;
-        }
-        .count:first-child{
-            margin-left: 15px;
-        }
-        .clerk{
-            margin-top: 10px;
-        }
+        
         .listData{
             height: 50px;
             overflow: hidden;
@@ -247,7 +226,7 @@
                 <p class="userBox relativeBox">
                     <span class="spanText">角色 : </span>
                     <span class="jurisdictionalUnits userText">顶大点</span>
-                    <span class="underline">任务完成量查询></span>
+                    <span class="underline" onclick="gostatics()">任务完成量查询></span>
                 </p>
             </div>
         </div>
@@ -256,26 +235,9 @@
         <ul class="listUl"  style="margin-top:0!important">
         </ul>
     </div> -->
-    <!-- <div class="countBox flexBetween">
-        <div class="tatal count">
-            <p class="number green">1233 </p>
-            <p class="clerk">提交总量</p>
-        </div>
-        <div class="currentMounth count">
-                <p class="number blue">1233</p>
-                <p class="clerk">本月任务<br>总数</p>
-        </div>
-        <div class="currentMounth count">
-            <p class="number yellow">1233</p>
-            <p class="clerk">本月待完<br>成任务数</p>
-        </div>
-        <div class="waitCompleted count">
-            <p class="number green">1233 </p>
-            <p class="clerk">专项检查<br>待完成数</p>
-        </div>
-    </div> -->
+   
     <div class="examinationListBox">
-        <div class="examinationList">
+        <div class="examinationList" onclick="goselectCategories()">
             <div class="examinationIconBox">
                 <img class='examinationIcon' src="./images/richang.png"/>
             </div>
@@ -314,8 +276,9 @@
         </div>
     </div>
 </div>
+<div id="tanwin" class="tan" style="display:none;"></div>
 <div class="zhegaicengone zhegaiceng" style="display: none;">
-    <img class='lodingimg' src="../images/loadingpop.gif">
+    <img class="lodingimg" src="./images/loadingpop.gif">
 </div>
 <div class="dialog" style="display:none;">
     <div class=" zhegaiContenttwo zhegaiContent">
@@ -348,8 +311,19 @@
 <script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
 <script>
+     window.onload = function () {
+        document.addEventListener('message', function (msg) {
+            var data = JSON.parse(msg.data);
+            if (data.hasOwnProperty('phoneNum')) {
+                phone = data.phoneNum;
+                if (phone) {
+                    getDetail();
+                }
+            }
+        })
+    }
     $(function(){
-        gouserinfo();
+        // gouserinfo();
 
         var arrData = [{"name":"见看得见看看得见看得见",icon:'../images/tongzhi.png'},{"name":"见看得见看看得见看得见",icon:'../images/tongzhi.png'}];
         var str = '';
@@ -364,6 +338,13 @@
             // setInterval(autoScroll,1000);
         },2000)
     })
+    function gostatics(){
+        window.location.href = './statics.html'
+    }
+    function goselectCategories(){
+        window.location.href = './selectCategories.html'
+    
+    }
     function autoScroll(){//分享图动画效果
         $("#news").find('ul li').css({
             opacity: 1

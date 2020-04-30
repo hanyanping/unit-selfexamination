@@ -6,97 +6,63 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
-    <title>选择类别</title>
+    <title>单位法定自查</title>
     <style >
         .selectCategories {
             background: #fff;
             padding: 16px;
         }
-        .categoriesTitle{
-            font-size: 16px;
-            display: inline-block;
-            vertical-align: middle;
-            line-height: 16px;
-            height: 16px;
-            margin-bottom: 15px;
-        }
-        .categoriesTitle .line{
-            display: inline-block;
-            vertical-align: middle;
-            height: 16px;
-            width: 3px;
-            background: #1A7FE3;
-        }
-        .unitList{
-            border-bottom: 1px dashed #f0f0f0;
-            height: 40px;
-            line-height: 40px;
-            margin-left: 15px;
-            font-size: 16px;
-        }
-       .unitList .leftText .unitText{
-            color: #FF487F;
-        }
-        .unitList .leftText{
-            letter-spacing: 2px;
-        }
-        .unitList .rightIcon{
-            height: 20px;
-            width: 20px;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .warmText{
-            margin-top: 30px;
-            font-size: 14px;
-        }
+        
     </style>
 </head>
 <body>
 <div class="selectCategories">
-    <div class="categoriesTitle">
-        <span class="line"></span>
-        <span>请选择管辖部门</span>
-    </div>
-    <div class="unitList flexBetween">
-        <div class="leftText" onclick="goExamination('unitExamination')">进入<span class="unitText">空防</span>管辖页面</div>
-        <div>
-            <img class='rightIcon' src="../images/zhankai.png">
-        </div>
-    </div>
-    <div class="unitList flexBetween">
-        <div class="leftText">进入<span class="unitText">国保</span>管辖页面</div>
-        <div>
-            <img class='rightIcon' src="../images/zhankai.png">
-        </div>
-    </div>
-    <div class="unitList flexBetween">
-        <div class="leftText">进入<span class="unitText">网安</span>管辖页面</div>
-        <div>
-            <img class='rightIcon' src="../images/zhankai.png">
-        </div>
-    </div>
-    <div class="unitList flexBetween">
-        <div class="leftText">进入<span class="unitText">治安</span>管辖页面</div>
-        <div>
-            <img class='rightIcon' src="../images/zhankai.png">
-        </div>
-    </div>
-    <div class="warmText">
-        注：归属多个管辖部门的单位，需分别进入不同管辖部门的页面填写自查表、查看专项检查任务等，系统将根据不同的管辖部门分别统计自查表提交任务量
+    <!-- <div onclick="postFile()">照片</div> -->
+    <div id="tanwin" class="tan" style="display:none;"></div>
+    <div class="zhegaicengone zhegaiceng" style="display: none;">
+        <img class="lodingimg" src="./images/loadingpop.gif">
     </div>
 </div>
 
 </body>
-<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/commen.js" type="text/javascript" charset="utf-8"></script>
-<script>
-    $(function(){
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/selectCategories.js" type="text/javascript" charset="utf-8"></script>
 
-    })
-    function goExamination(value){
-        window.location.href='./unitExamination.html';
+<script>
+    document.addEventListener('message', function (msg) { //获取客户端返回数据数据
+        $(".zhegaiceng").css({
+            'display': 'none'
+        })
+    var data = JSON.parse(msg.data)
+    if (data) {
+        if (data.hasOwnProperty('photograph')) {
+        addPhoto(data.photograph);
+        }else if (data.hasOwnProperty('location')) {
+        $('#adress').val(data.location.address);
+        }
+    } else {
+        tanwin("上传照片")
     }
+    });
+   
+    //照片
+function postFile() {
+  var photo = [];
+  if ($(".image")) {
+    $('.image').each(function () {
+      var obj = {};
+      obj.photoData = $(this).attr('data-src')
+      photo.push(obj);
+    })
+  }
+  if (photo.length >= 10) {
+    tanwin('照片不得超过10张');
+    return;
+  }
+  window.postMessage('photograph'); //发送获取照片消息
+}
+  
 
 </script>
 </html>
