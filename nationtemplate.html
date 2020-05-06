@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <title>选择检查单类型</title>
+    <style>
+    </style>
+    <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        #home{
+            padding: 20px;
+        }
+        .chooseBox{
+            background: #F99B16;
+            height: 60px;
+            width: 96px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div id="home">
+    <div class="nationDefence">
+        <div onclick='gonationExamine()' class='chooseBox colorfff font14'>基础设施
+        </div>
+    </div>
+</div>
+<div id="tanwin" class="tan" style="display:none;"></div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="./images/loadingpop.gif">
+</div>
+
+
+</body>
+<script>
+    function gonationExamine(){
+        window.location.href='./nationexamine.html'
+    }
+    function goInvoice(){
+        toast('即将开通，敬请期待')
+        // window.location.href='./inputCode.html'
+    }
+    function getDetail(){
+        localStorage.setItem('phone',phone)
+        var decodephone = encrypt(phone)
+        // localStorage.setItem('decodephone',decodephone)
+        $(".zhegaiceng").css({'display': 'block'})
+        var data = {
+            phone: decodephone
+        }
+        data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'officialcert/getUserRole',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function(response) {
+                $(".zhegaiceng").css({'display': 'none'})
+                if(response.rescode == 200){
+                }else{
+                    toast(response.resdes)
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({'display': 'none'})
+            },
+            complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                $(".zhegaiceng").css({'display': 'none'})
+            }
+        });
+    }
+</script>
+</html>

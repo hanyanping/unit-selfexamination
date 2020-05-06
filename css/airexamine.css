@@ -1,0 +1,44 @@
+.radioTitle{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 18px;
+    margin: 6px 0 5px;
+}
+.titletext{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+}
+.content{
+    margin: 10px 10px 0;
+    background: #fff;
+    padding: 12px;
+    border-radius: 5px;
+}
+.contentOne{
+    background: #fff;
+    padding: 2px 12px;
+    margin: 0px 10px;
+}
+.textareaBox{
+    height:100px;
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.signButton{
+    height:40px;
+    width: 150px;
+    line-height: 40px;
+    text-align: center;
+    background: #8BC34A;
+}
+.signBox{
+    margin: 0px 20px;
+    padding: 12px 0;
+    line-height: 40px;
+}
+#pic{
+    height: auto;
+    width: 100%;
+}

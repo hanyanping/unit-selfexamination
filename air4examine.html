@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/airexamine.css">
+    <title>货运区空防安全检查单
+    </title>
+    <style>
+        .inputButton{
+            display: flex;
+            justify-content: center;
+        }
+        .inputButton input{
+            margin-right: 15px;
+        }
+        .sigincheck,.sigincheck1{
+            margin-bottom: 10px;
+            display: none;
+        }
+        #signature,#signature1{
+            height: 200px;
+        }
+        .smallButton{
+            margin-top: 45px;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+        #canvasBox {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .greet {
+            padding: 12px;
+            font-size: 20px;
+            user-select: none;
+        }
+        .greet select {
+            font-size: 18px;
+        }
+        canvas {
+            flex: 1;
+            cursor: crosshair;
+            border:2px dashed lightgray;
+        }
+        .none{
+            display: none;
+        }
+        #pic,#pic1{
+            height: auto;
+            width: 100%;
+        }
+        .drawButton{
+            border: 1px solid #f9f9f9;
+            border-radius: 10px;
+            padding: 10px 16px;
+            background: #fff;
+            color: #232323;
+            font-size: 16px;
+            margin-left: 18px;
+        }
+        .radioContent{
+            margin-top: 12px;
+        }
+    </style>
+
+</head>
+<body style="background:#f9f9f9;">
+<div class="container none" >
+    <div id="canvasBox" >
+        <div class="greet">
+            <span>请在下方空白处签名</span>
+            <input type="button" class="drawButton" value="清除" ontouchstart="cleardraw()" onmousedown="cleardraw()"/>
+            <input type="button" class="drawButton" value="确定" ontouchstart="savePNG()" onmousedown="savePNG()"/>
+        </div>
+        <canvas></canvas>
+    </div>
+</div>
+<div id="examine">
+    <div class="content">
+    </div>
+    <div class="contentOne" style="margin-bottom: 0;">
+        <div class="radioContent flex">
+            <div class="font14">隐患情况：</div>
+            <textarea class="textareaBox font14 y48" placeholder="多行输入"></textarea>
+        </div>
+        <div class="radioContent flex">
+            <div class="font14">整改要求：<br>(时限)</div>
+            <textarea  class="textareaBox font14 z51" placeholder="多行输入"></textarea>
+        </div>
+        <div class="title">
+            <span class="lineBox"></span>
+            <span class="font16 titletext fontWeight" >签字</span>
+        </div>
+        <div class="flexBetween signBox">
+            <div class="font14">检查员签字:</div>
+            <div  class="signButton checkbutton" onclick="showsign()">请手写签名</div>
+        </div>
+        <img id="pic" src=""/>
+        <div class="flexBetween signBox">
+            <div class="font14">负责人签字:</div>
+            <div  class="signButton checkbutton1" onclick="showsign1()">请手写签名</div>
+        </div>
+        <img id="pic1" />
+    </div>
+    <div class="flex">
+        <div class="smallButton" onclick="goback()">上一步</div>
+        <div class="smallButton" onclick="sunbmit()">提交</div>
+    </div>
+
+
+</div>
+<div id="tanwin" class="tan" style="display:none;"></div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="./images/loadingpop.gif">
+</div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/airexamine.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/draw.js" type="text/javascript" charset="utf-8"></script>
+</html>
+<script>
+    var j49 = '',f50 = '';
+    function savePNG() {
+        signImage = draw.getPNGImage();
+        $('.container').addClass('none');
+        $("#examine").removeClass('none');
+        var bzrPhoto = signImage;
+        var index = bzrPhoto.indexOf(',');
+        if(sign == 1){
+            $("#pic").attr("src",signImage)
+            j49 = bzrPhoto.substring(index+1);
+        }
+        if(sign == 2){
+            $("#pic1").attr("src",signImage)
+            f50 = bzrPhoto.substring(index+1);
+        }
+    }
+    $(function(){
+        if(localStorage.getItem('air48')){
+            $('.y48').val(localStorage.getItem('air48'))
+        }
+        if(localStorage.getItem('air51')){
+            $('.z51').val(localStorage.getItem('air51'))
+        }
+
+        if(localStorage.getItem('airObj4')){
+            var  airObj = JSON.parse(localStorage.getItem('airObj4'));
+            $.each(airObj, function(key, val) {
+                if(airObj[key]){
+                    $("input[name='"+key+"'][value='"+airObj[key]+"']").attr('checked','true');
+                }
+            });
+        }
+        var obj = {
+            j33: '',
+            x34: '',
+            b35: '',
+            s36: '',
+            y37: '',
+            s38: '',
+            b39: '',
+            p40: '',
+            s41: '',
+            j42: '',
+            s43: '',
+            s44: '',
+            s45: '',
+            s46: '',
+            s47: ''
+        };
+        $.each(obj, function(key, val) {
+            $("input:radio[name='"+key+"']").change(function () {
+                if(JSON.parse(localStorage.getItem('airObj4'))){
+                    obj = JSON.parse(localStorage.getItem('airObj4'))
+                }
+                obj[key] = $("input[name='"+key+"']:checked").val();
+                localStorage.setItem('airObj4',JSON.stringify(obj))
+            })
+        });
+        $(".y48").change(function () {
+            localStorage.setItem('air48',$(this).val())
+        })
+        $(".z51").change(function () {
+            localStorage.setItem('air51',$(this).val())
+        })
+
+
+    })
+    function sunbmit(){
+        var airObj = JSON.parse(localStorage.getItem('airObj'));
+        var airObj1 = JSON.parse(localStorage.getItem('airObj1'));
+        var airObj2 = JSON.parse(localStorage.getItem('airObj2'));
+        var airObj3 = JSON.parse(localStorage.getItem('airObj3'));
+        if(!localStorage.getItem('airObj4')){
+            var airObj4 = {
+                j33: '',
+                x34: '',
+                b35: '',
+                s36: '',
+                y37: '',
+                s38: '',
+                b39: '',
+                p40: '',
+                s41: '',
+                j42: '',
+                s43: '',
+                s44: '',
+                s45: '',
+                s46: '',
+                s47: ''
+            };
+        }else{
+            airObj4 = JSON.parse(localStorage.getItem('airObj4'))
+        }
+
+        $.each(airObj4, function(key, val) {
+            $("input:radio[name='"+key+"']").change(function () {
+                if(JSON.parse(localStorage.getItem('airObj4'))){
+                    airObj4 = JSON.parse(localStorage.getItem('airObj4'))
+                }
+                airObj4[key] = $("input[name='"+key+"']:checked").val();
+                localStorage.setItem('airObj4',JSON.stringify(airObj4))
+            })
+        });
+        var obj = {
+            applyNum: applyNum,
+            y48: '',
+            z51: '',
+            j49: j49,
+            f50: f50
+        }
+        if($('.y48').val()){
+            obj.y48 = $('.y48').val();
+        }
+        if($('.z51').val()){
+            obj.z51 = $('.z51').val();
+        }
+
+        var data = Object.assign(airObj,airObj1,airObj2,airObj3,airObj4,obj)
+        data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'supervisionTemplate/kfHyqkfaqCheckList',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function(response) {
+                $(".zhegaiceng").css({'display': 'none'})
+                if(response.rescode == 200){
+                    localStorage.removeItem('airObj')
+                    localStorage.removeItem('airObj2')
+                    localStorage.removeItem('airObj1')
+                    localStorage.removeItem('airObj3')
+                    localStorage.removeItem('airObj4')
+                    localStorage.removeItem('air48')
+                    localStorage.removeItem('air51')
+
+                    window.postMessage('success');//向app发送提交成功消息
+                }else{
+                    toast(response.resdes)
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({'display': 'none'})
+            },
+            complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                $(".zhegaiceng").css({'display': 'none'})
+            }
+        });
+    }
+</script>

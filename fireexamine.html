@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/airexamine.css">
+    <title>公安派出所日常消防监督检查记录</title>
+    <style>
+        .content{
+            padding: 12px 10px;
+            margin: 10px 8px 0;
+        }
+        .radioList{
+            margin-top:6px;
+        }
+
+        .textareaBox{
+            width:100%;
+            margin-top:6px;
+        }
+        .contentBox{
+            border-bottom: 1px dashed #ccc;
+        }
+        .checkbox .radiobox{
+            width:50%;
+        }
+        .inputLable{
+            display: inline-block;
+            width: 160px;
+        }
+        .inputText{
+            width:170px;
+        }
+        .dayInput{
+            width: 60px;
+            height: 26px;
+            border: 1px solid #ccc;
+        }
+        .inputButton{
+            display: flex;
+            justify-content: center;
+        }
+        .inputButton input{
+            margin-right: 15px;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+        #canvasBox {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .greet {
+            padding: 12px;
+            font-size: 20px;
+            user-select: none;
+        }
+        .greet select {
+            font-size: 18px;
+        }
+        canvas {
+            flex: 1;
+            cursor: crosshair;
+            border:2px dashed lightgray;
+        }
+        .none{
+            display: none;
+        }
+        #pic,#pic1{
+            height: auto;
+            width: 100%;
+        }
+        .drawButton{
+            border: 1px solid #f9f9f9;
+            border-radius: 10px;
+            padding: 10px 16px;
+            background: #fff;
+            color: #232323;
+            font-size: 16px;
+            margin-left: 18px;
+        }
+        .radiobox1{
+            margin: 8px 10px;
+        }
+    </style>
+</head>
+<body style="background:#f9f9f9;">
+<div class="container none" >
+    <div id="canvasBox" >
+        <div class="greet">
+            <span>请在下方空白处签名</span>
+            <input type="button" class="drawButton" value="清除" ontouchstart="cleardraw()" onmousedown="cleardraw()"/>
+            <input type="button" class="drawButton" value="确定" ontouchstart="savePNG()" onmousedown="savePNG()"/>
+        </div>
+        <canvas></canvas>
+    </div>
+</div>
+<div id="examine">
+    <div class="contentTitle">公安派出所日常消防监督检查记录</div>
+
+    <div class="content">
+
+        <div class="radioList">
+            <div class="title">
+                <span class="lineBox"></span><span class="font14 titletext fontWeight">检查内容和情况记录</span>
+            </div>
+            <div class="inputBox">
+                <span class="font14 inputLable">法定代表人/主要负责人：</span>
+                <input  class="inputText font14 f1" onchange="changeValue('f1')" type='text' placeholder="法定代表人/主要负责人"/>
+            </div>
+            <div class="inputBox">
+                <span class="font14  inputLable">地    址：</span>
+                <input  class="inputText font14 d2" onchange="changeValue('d2')" type='text' placeholder="地址"/>
+            </div>
+            <div class="inputBox">
+                <span class="font14 inputLable">单位性质：</span>
+                <input  class="inputText font14 d3" onchange="changeValue('d3')" type='text' placeholder="单位性质"/>
+            </div>
+            <div class="inputBox">
+                <span class="font14 inputLable">使用的建筑面积(m2)：</span>
+                <input  class="inputText font14 s4" onchange="changeValue('s4')" type='text' placeholder="使用的建筑面积(m2)"/>
+            </div>
+            <div class="inputBox">
+                <span class="font14 inputLable">使用的建筑具体层数：</span>
+                <input  class="inputText font14 s5" onchange="changeValue('s5')" type='text' placeholder="使用的建筑具体层数"/>
+            </div>
+            <div class="inputBox">
+                <span class="font14 inputLable">所在建筑高度(m)：</span>
+                <input  class="inputText font14 s6" onchange="changeValue('s6')" type='text' placeholder="所在建筑高度(m)"/>
+            </div>
+            <div class="inputBox">
+                <span class="font14 inputLable">使用的建筑面积(m2)：</span>
+                <input  class="inputText font14 s7" onchange="changeValue('s7')" type='text' placeholder="使用的建筑面积(m2)"/>
+            </div>
+        </div>
+        <div class="radioList">
+            <div class="font16 fontWeight">
+                一、单位履行消防安全职责情况
+            </div>
+            <div class="title">
+                <span class="lineBox"></span>
+                <span class="font14 titletext fontWeight" >合法性</span>
+            </div>
+            <div class="inputBox">
+                <span class="font14 inputLable" style="width: 120px;">被查建筑物名称：</span>
+                <input  class="inputText font14 b8" onchange="changeValue('b8')" type='text' placeholder="被查建筑物名称"/>
+            </div>
+            <div class="radiobox radiobox1 font14">
+                <input type="radio" name="b9" value="1"><label></label>
+                <span class="font14">1998年9月1日之前竣工建筑且此后未改建（含装修、用途变更）</span>
+            </div>
+            <div class="radiobox radiobox1 font14">
+                <input type="radio" name="b9" value="2"><label></label>
+                <span class="font14">依法通过消防验收    </span>
+            </div>
+            <div class="radiobox radiobox1 font14">
+                <input type="radio" name="b9" value="3"><label></label>
+                <span class="font14">依法进行竣工验收消防备案</span>
+            </div>
+            <div class="flex">
+                <div class="radiobox radiobox1 font14">
+                    <input type="radio" name="b9" value="4"><label></label>
+                    <span class="font14">其他情况： </span>
+                </div>
+                <input  class="inputText font14 q10" onchange="changeValue('q10')" type='text' placeholder="请输入"/>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">公众聚集场所 </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="g11" value="2" ><label></label><span class="font14">否</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="g11" value="1"><label></label><span class="font14">是</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">依法通过投入使用、营业前消防安全检查 </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="y12" value="2" ><label></label><span class="font14">否</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="y12" value="1"><label></label><span class="font14">是</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="title">
+                <span class="lineBox"></span>
+                <span class="font14 titletext fontWeight" >消防安全管理</span>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">1.消防安全制度  </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="x13" value="2" ><label></label><span class="font14">无</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="x13" value="1"><label></label><span class="font14">有</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">2.员工消防安全教育培训 </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="y14" value="2" ><label></label><span class="font14">未组织开展</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="y14" value="1"><label></label><span class="font14">组织开展</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">3.防火检查 </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="f15" value="2"><label></label><span class="font14">未组织开展</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="f15" value="1"><label></label><span class="font14">组织开展</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">4.灭火和应急疏散预案 </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="m16" value="2" ><label></label><span class="font14">无</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="m16" value="1"><label></label><span class="font14">有</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">5.消防演练 </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="x17" value="2" ><label></label><span class="font14">未组织</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="x17" value="1"><label></label><span class="font14">组织</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <p class="radioTitle font14">6.其他情况 </p>
+                <input  class="inputText font14 q18" onchange="changeValue('q18')" type='text' placeholder="请输入"/>
+            </div>
+
+            <div class="title">
+                <span class="lineBox"></span>
+                <span class="font14 titletext fontWeight" >建筑防火</span>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">1.消防车通道  </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="x19" value="3" ><label></label><span class="font14">无</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="x19" value="2"><label></label><span class="font14">被堵塞、占用 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="x19" value="1" ><label></label><span class="font14">畅通</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">2.疏散通道 </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="s20" value="3" ><label></label><span class="font14">锁闭</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s20" value="2"><label></label><span class="font14">堵塞</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s20" value="1"><label></label><span class="font14">畅通</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">3.安全出口 </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="a21" value="4" ><label></label><span class="font14">缺少</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="a21" value="3"><label></label><span class="font14">锁闭</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="a21" value="2" ><label></label><span class="font14">堵塞</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="a21" value="1"><label></label><span class="font14">畅通</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">4.防 火 门 </p>
+                <div class="flex showright flexWrap" style="margin-left: 90px;">
+
+                    <div class="radiobox font14">
+                        <input type="radio" name="f22" value="4" ><label></label><span class="font14">常闭式防火门常开</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="f22" value="3"><label></label><span class="font14">完好有效</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="f22" value="2" ><label></label><span class="font14">不涉及</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="f22" value="1"><label></label><span class="font14">损坏</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">5.疏散指示标志 </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="s23" value="1" ><label></label><span class="font14">完好有效</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s23" value="2"><label></label><span class="font14">损坏</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s23" value="3" ><label></label><span class="font14">缺少</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s23" value="4"><label></label><span class="font14">组织</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">6.应急照明 </p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="y24" value="4" ><label></label><span class="font14">无</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="y24" value="3"><label></label><span class="font14">缺少 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="y24" value="2" ><label></label><span class="font14">损坏</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="y24" value="1"><label></label><span class="font14">完好有效</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">7.人员密集场所外墙门窗上是否设置影响逃生、灭火救援的障碍物</p>
+                <div class="flex showright">
+                    <div class="radiobox font14">
+                        <input type="radio" name="r25" value="3" ><label></label><span class="font14">不涉及</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="r25" value="2"><label></label><span class="font14">是</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="r25" value="1" ><label></label><span class="font14">否</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <p class="radioTitle font14">8.其他情况 </p>
+                <input  class="inputText font14 q26" onchange="changeValue('q26')" type='text' placeholder="请输入"/>
+            </div>
+
+            <div class="title">
+                <span class="lineBox"></span>
+                <span class="font14 titletext fontWeight" >消防设施</span>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">1.室内消火栓  </p>
+                <div class="flex flexWrap" style="margin-left: 22px;">
+                    <div class="radiobox font14">
+                        <input type="radio" name="s27" value="1" ><label></label><span class="font14">不涉及</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s27" value="2"><label></label><span class="font14">被遮挡、圈占</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s27" value="3" ><label></label><span class="font14">配件不齐</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s27" value="4" ><label></label><span class="font14">无水 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s27" value="5"><label></label><span class="font14">损坏 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s27" value="6" ><label></label><span class="font14">完好有效</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s27" value="7" ><label></label><span class="font14">未设置</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">2.灭火器 </p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="m28" value="4" ><label></label><span class="font14">缺少</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="m28" value="3"><label></label><span class="font14">失效</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="m28" value="2"><label></label><span class="font14">完好有效</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="m28" value="1"><label></label><span class="font14">未配置</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">3..建筑消防设施 </p>
+                <div class="flex flexWrap" style="margin-left: 50px;">
+                    <div class="radiobox font14">
+                        <input type="radio" name="j29" value="1"><label></label><span class="font14">定期维修保养并记录</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="j29" value="2"><label></label><span class="font14">无记录
+</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="j29" value="3" ><label></label><span class="font14">未定期维修保养</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="j29" value="4"><label></label><span class="font14">不涉及
+</span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">4.物业服务企业对管理区域内共用消防设施是否维护管理 </p>
+                <div class="flex showright flexWrap" style="margin-left: 90px;">
+                    <div class="radiobox font14">
+                        <input type="radio" name="w30" value="3"><label></label><span class="font14">不涉及</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="w30" value="2" ><label></label><span class="font14">否 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="w30" value="1"><label></label><span class="font14">损坏</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="title">
+                <span class="lineBox"></span>
+                <span class="font14 titletext fontWeight" >危险品管理</span>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">1.是否存在违反规定使用明火作业或在具有火灾、爆炸危险  的场所吸烟、使用明火  </p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="s31" value="3" ><label></label><span class="font14">不涉及</span>
+                    </div>
+
+                    <div class="radiobox font14">
+                        <input type="radio" name="s31" value="2" ><label></label><span class="font14">是 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s31" value="1" ><label></label><span class="font14">否 </span>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">2.是否存在违反消防安全规定进入生产、储存易燃易爆危险  品场所  </p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="s32" value="3" ><label></label><span class="font14">不涉及</span>
+                    </div>
+
+                    <div class="radiobox font14">
+                        <input type="radio" name="s32" value="2" ><label></label><span class="font14">是 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s32" value="1" ><label></label><span class="font14">否 </span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">3.生产、储存、经营易燃易爆危险品的场所是否与居住场所设置在同一建筑物内 </p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="s33" value="3" ><label></label><span class="font14">不涉及</span>
+                    </div>
+
+                    <div class="radiobox font14">
+                        <input type="radio" name="s33" value="2" ><label></label><span class="font14">是 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="s33" value="1" ><label></label><span class="font14">否 </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="radioList">
+            <div class="font16 fontWeight">
+                二、村(居)民委员会履行消防安全职责情况
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">1.消防安全管理人   </p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="x34" value="2" ><label></label><span class="font14">未确定</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="x34" value="1" ><label></label><span class="font14">确定 </span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">2.消防安全工作制度</p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="x35" value="2" ><label></label><span class="font14">无 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="x35" value="1" ><label></label><span class="font14">有 </span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">3.防火安全公约 </p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="f36" value="2" ><label></label><span class="font14">无 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="f36" value="1" ><label></label><span class="font14">有 </span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14"> 4.消防宣传教育</p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="x37" value="2" ><label></label><span class="font14">未开展 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="x37" value="1" ><label></label><span class="font14">开展 </span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">5.防火安全检查 </p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="f38" value="2" ><label></label><span class="font14">未开展 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="f38" value="1" ><label></label><span class="font14">开展 </span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">6.消防水源、消防车通道、消防器材</p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="x39" value="2" ><label></label><span class="font14">未维护管理
+ </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="x39" value="1" ><label></label><span class="font14">维护管理 </span>
+                    </div>
+                </div>
+            </div>
+            <div class="radioContent">
+                <p class="radioTitle font14">7.多种形式消防组织 </p>
+                <div class="flex showright" >
+                    <div class="radiobox font14">
+                        <input type="radio" name="d40" value="2" ><label></label><span class="font14">未建立 </span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="d40" value="1" ><label></label><span class="font14">建立 </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="radioList">
+            <div class="font16 fontWeight">
+                三、责令改正情况
+            </div>
+            <div class="radioContent" style="margin-top:5px;">
+                <div class="font14"> 制发的法律文书名称和编号：</div>
+                <textarea class="textareaBox font14 z41" onchange="changeValue('z41')" placeholder="多行输入"></textarea>
+            </div>
+        </div>
+
+        <div class="radioContent font14">
+            <div class="font16 fontWeight">
+                四、移送相关机构处理的内容
+            </div>
+            <div>发现的下列第
+                <input type='tel' class='dayInput f42' onchange="changeValue('f42')" /> 项消防安全违法行为，移送<input type='tel' class='inputText y43' onchange="changeValue('y43')" />
+               依法处理：
+            </div>
+            <div class="radiobox radiobox1 font14">
+                <input type="radio" name="y44" value="1" ><label></label>
+                <span class="font14">1.建筑物未依法通过住房和城乡建设主管部门消防验收，擅自投入使用；
+</span>
+            </div>
+            <div class="radiobox radiobox1 font14">
+                <input type="radio" name="y44" value="2" ><label></label>
+                <span class="font14">2.建筑物未依法进行竣工验收消防备案；</span>
+            </div>
+            <div class="radiobox radiobox1 font14">
+                <input type="radio" name="y44" value="3" ><label></label>
+                <span class="font14">3.公众聚集场所未依法通过使用、营业前消防安全检查，擅自投入使用、营业。</span>
+            </div>
+            <div class="radioContent" style="margin-top:5px;">
+                <div class="font14"> 备注：</div>
+                <textarea class="textareaBox font14 b45" onchange="changeValue('b45')" placeholder="多行输入"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="contentOne">
+        <div class="title">
+            <span class="lineBox"></span>
+            <span class="font16 titletext fontWeight" >签字</span>
+        </div>
+        <div class="flexBetween signBox">
+            <div class="font14">监督检查人员签名:</div>
+            <div  class="signButton checkbutton" onclick="showsign()">请手写签名</div>
+        </div>
+        <img id="pic" src=""/>
+        <div class="flexBetween signBox">
+            <div class="font14">单位随同检查人员名:</div>
+            <div  class="signButton checkbutton1" onclick="showsign1()">请手写签名</div>
+        </div>
+        <img id="pic1" />
+    </div>
+    <div class="smallButton" onclick="submit()">提交</div>
+</div>
+<div id="tanwin" class="tan" style="display:none;"></div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="./images/loadingpop.gif">
+</div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/fireexamine.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/draw.js" type="text/javascript" charset="utf-8"></script>
+</html>
+<script>
+
+</script>
+</html>

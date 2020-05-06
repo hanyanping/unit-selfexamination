@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <title>公务用车审批</title>
+    <style>
+        .infoDetail {
+            background: #f9f9f9;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+
+        .backline:before {
+            content: '';
+            position: absolute;
+            height: 18px;
+            width: 3px;
+            background: #0076FF;
+            left: -12px;
+            top: 2px;
+        }
+
+        .detailTitle {
+            margin-bottom: 6px;
+        }
+
+        .verticalMiddle {
+            position: relative;
+            margin-left: 10px;
+        }
+
+        .detailBox {
+            padding: 16px;
+        }
+
+        .lingqu_btn {
+            background: #0076FF;
+            color: #fff;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 5px;
+            margin: 5px auto 0;
+            cursor: pointer;
+        }
+
+        .borderRed {
+            border: 1px solid #E51C23;
+            height: 22px;
+            line-height: 22px;
+            padding: 0 8px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .margnleft {
+            margin-left: 5px;
+        }
+
+        .infoDetailBox {
+            background: #fff;
+            padding: 16px;
+            border-radius: 6px;
+        }
+
+        .info {
+            margin: 0px 0 16px;
+        }
+
+        .lableText {
+            display: inline-block;
+            max-width: 120px;
+            min-width: 98px;
+        }
+
+        .areaspan {
+            margin-right: 12px;
+        }
+
+        .sureBox {
+            position: absolute;
+            bottom: 0px;
+            left: 50%;
+            margin-left: -70px;
+        }
+
+        .zhegaicengone {
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .searchContent {
+            background: #fff;
+            height: 340px;
+            width: 280px;
+            top: 50%;
+            left: 50%;
+            margin-left: -140px;
+            margin-top: -170px;
+            position: absolute;
+            border-radius: 5px;
+        }
+
+        .searchInfo {
+            overflow: auto;
+            max-height: 240px;
+            min-height: 200px;
+            margin: 20px;
+            border-radius: 5px;
+            padding: 10px
+        }
+
+        .tableBox {
+            margin: 10px auto;
+        }
+
+        .tableBox tr td {
+            border: 1px solid #bbb;
+            padding: 6px 16px;
+        }
+
+        .fgxLine {
+            border-top: 1px solid #eee;
+            padding-bottom: 16px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container none" >
+        <div id="canvasBox" >
+            <div class="greet">
+                <span>请在下方空白处签名</span>
+                <input type="button" class="drawButton" value="清除" ontouchstart="cleardraw()" onmousedown="cleardraw()"/>
+                <input type="button" class="drawButton" value="确定" ontouchstart="savePNG()" onmousedown="savePNG()"/>
+            </div>
+            <canvas></canvas>
+        </div>
+    </div>
+ 
+     
+ 
+
+       
+    <div class="detailBox" id="bodyBox">
+        <div class="infoDetailBox">
+            <div class="info flexcenter">
+                <div  class="signButton checkbutton" onclick="showsign()">请手写签名</div>
+            </div>
+            <div class="applyDay">
+                <img id="pic" class="signUrl" />
+            </div>
+            
+        </div>
+    </div>
+        
+    </div>
+    <div class="ptrBox zhegaicengone" style="display: none;">
+        <div class='searchContent'>
+            <div class='searchInfo'>
+                <table class="tableBox font14">
+
+                </table>
+            </div>
+            <div class='smallButton sureBox' onclick='closeBox()'>知道了</div>
+        </div>
+    </div>
+    <div id="tanwin" class="tan" style="display:none;"></div>
+    <div class="zhegaicengone zhegaiceng" style="display: none;">
+        <img class='lodingimg' src="./images/loadingpop.gif">
+    </div>
+</body>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/draw.js" type="text/javascript" charset="utf-8"></script>
+</html>
+<script>
+    function savePNG() {
+        signImage = draw.getPNGImage();
+        $('.container').addClass('none');
+        $("#bodyBox").removeClass('none');
+        $("#pic").attr("src",signImage)
+    }
+</script>

@@ -1,0 +1,48 @@
+.contentBox{
+    height: 100vh;
+    width: 100%;
+    background: #f6f6f6;
+}
+.tabBox {
+    background: #fff;
+    padding: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.selectTabBox {
+    border-bottom: 2px solid #3D89EB;
+    color: #3D89EB;
+}
+
+.leftTab {
+    padding-bottom: 6px;
+}
+.staticsName{
+    margin-top: 15px;
+}
+.countBox{
+    color: #232323;
+    font-size:14px;
+    margin-top: 15px;
+}
+.count{
+    box-shadow: 0px 0px 8px 0px rgba(13,118,238, 0.2);
+    text-align: center;
+    width: 30%;
+    background: #fff;
+    margin-right: 10px;
+    padding: 10px 0;
+    border-radius: 10px;
+}
+.count:last-child{
+    margin-right: 15px;
+}
+.count:first-child{
+    margin-left: 15px;
+}
+.clerk{
+    margin-top: 10px;
+}

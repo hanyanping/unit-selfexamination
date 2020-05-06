@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/airexamine.css">
+    <title>货运区空防安全检查单
+    </title>
+    <style>
+    </style>
+    
+    <style>
+        
+    </style>
+</head>
+<body style="background:#f9f9f9;">
+    
+<div id="examine">
+    <div class="content">
+    </div>
+    <div class="flex">
+        <div class="smallButton" onclick="goback()">上一步</div>
+        <div class="smallButton" onclick="goair()">下一步</div>
+    </div>
+</div>
+<div id="tanwin" class="tan" style="display:none;"></div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="./images/loadingpop.gif">
+</div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/airexamine.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(function(){
+        if(localStorage.getItem('airObj1')){
+            var  airObj = JSON.parse(localStorage.getItem('airObj1'));
+            $.each(airObj, function(key, val) {
+                if(airObj[key]){
+                    $("input[name='"+key+"'][value='"+airObj[key]+"']").attr('checked','true');
+                }
+            });
+        }
+    })
+    function goair(){
+        var obj = {
+            y6: '',
+            m7: '',
+            m8: '',
+            m9: '',
+            y10: '',
+            b11: ''
+        };
+        $.each(obj, function(key, val) {
+            if($("input[name='"+key+"']:checked").val()){
+                obj[key] = $("input[name='"+key+"']:checked").val()
+            }
+        });
+        console.log(obj)
+        obj = JSON.stringify(obj);
+        localStorage.setItem('airObj1',obj)
+        window.location.href = './air2examine.html'
+    }
+
+</script>
+</html>

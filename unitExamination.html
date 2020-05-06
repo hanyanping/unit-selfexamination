@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <link rel="stylesheet" type="text/css" href="../css/reset.css">
-    <title>单位自查</title>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <title>单位法定自查</title>
     <style>
         .zhegaiceng {
             height: 100vh;
@@ -44,7 +44,7 @@
         .dialog .warmtitle{
             text-align: center;
             margin-bottom: 15px;
-            color: #0089EB;
+            color: #3D89EB;
             font-size: 20px;
             position: relative;
         }
@@ -71,7 +71,7 @@
             text-align: center;
         }
         .dialog .sure {
-            background: #0089EB;
+            background: #3D89EB;
             color: #fff;
             padding: 12px 60px;
             font-size: 15px;
@@ -118,12 +118,12 @@
             padding: 2px;
         }
         .uinitTop{
-            background: #1A7FE3;
-            padding: 20px 12px;
+            background: #3D89EB;
+            padding: 20px 8px;
 
         }
         .userinfoBox{
-            background: #fff;
+            background: #3D89EB;
             border-radius: 8px;
             padding: 10px 8px;
         }
@@ -134,46 +134,15 @@
             vertical-align: middle;
             border-radius: 50%;
         }
-        .userInfo{
-
-        }
+        
        .userBox{
            margin-bottom: 8px;
-           font-size: 12px;
+           font-size: 13px;
            color: #fff;
-           background: -webkit-linear-gradient(left,#3FBAF7,#8881FC);
-           background: -o-linear-gradient(left,#3FBAF7,#8881FC);
-           background: -moz-linear-gradient(left,#3FBAF7,#8881FC);
-           background: -ms-linear-gradient(left,#3FBAF7,#8881FC);
-           border-radius: 10px;
            padding: 6px;
        }
-       .userBox .spanText{
-        }
-       .userBox .userText{
-        }
-        .countBox{
-            color: #232323;
-            font-size:14px;
-            margin-top: 15px;
-        }
-        .count{
-            box-shadow: 0px 0px 8px 0px rgba(26, 127, 227, 0.2);
-            text-align: center;
-            width: 25%;
-            background: #fff;
-            margin-right: 10px;
-            padding: 10px 0;
-        }
-        .count:last-child{
-            margin-right: 15px;
-        }
-        .count:first-child{
-            margin-left: 15px;
-        }
-        .clerk{
-            margin-top: 10px;
-        }
+      
+        
         .listData{
             height: 50px;
             overflow: hidden;
@@ -228,89 +197,105 @@
        .examinationList .examinationText{
             margin-left: 15px;
         }
+        .relativeBox{
+            position: relative;
+        }
+        .underline{
+            text-decoration: underline;
+            position: absolute;
+            right: 8px;
+        }
+        .levelinfo{
+            color: #fff;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .starIcon{
+            height: 20px;
+            width: 20px;
+            margin-left: 3px;
+
+        }
     </style>
 </head>
 <body>
 <div class="unitExamination">
     <div class="uinitTop">
+        <div class="levelinfo flex">
+            <span style="margin-top: 1px;">诚信等级：</span>
+            <div class="imgbox">
+
+            </div>
+        </div>
         <div class=" flex userinfoBox">
             <div class="userLogo">
-                <img class="headIcon" src="../images/icon.jpg">
-                <span class="role">单位领导</span>
+                <img class="headIcon" src="./images/icon.jpg">
             </div>
             <div class="userInfo">
                 <p class="userBox">
                     <span class="spanText">检查员姓名 : </span>
-                    <span class="userName userText">顶大点</span>
+                    <span class="userName userText name">顶大点</span>
                 </p>
                 <p class="userBox">
                     <span class="spanText">所属单位 : </span>
-                    <span class="userUnit userText">阵阵订单的的阵阵订单的阵阵的</span>
+                    <span class="userUnit userText companyName">阵阵订单的的阵阵订单的阵阵的</span>
                 </p>
-                <p class="userBox">
-                    <span class="spanText">所属管辖单位 : </span>
-                    <span class="jurisdictionalUnits userText">顶大点</span>
+                <p class="userBox relativeBox">
+                    <span class="spanText">角色 : </span>
+                    <span class="jurisdictionalUnits userText roleName">顶大点</span>
+                    <span class="underline" onclick="gostatics()">任务完成量查询></span>
                 </p>
             </div>
         </div>
     </div>
-    <div class="listData" id="news">
+    <!-- <div class="listData" id="news">
         <ul class="listUl"  style="margin-top:0!important">
         </ul>
-    </div>
-    <div class="countBox flexBetween">
-        <div class="tatal count">
-            <p class="number green">1233 </p>
-            <p class="clerk">提交总量</p>
-        </div>
-        <div class="currentMounth count">
-                <p class="number blue">1233</p>
-                <p class="clerk">本月任务<br>总数</p>
-        </div>
-        <div class="currentMounth count">
-            <p class="number yellow">1233</p>
-            <p class="clerk">本月待完<br>成任务数</p>
-        </div>
-        <div class="waitCompleted count">
-            <p class="number green">1233 </p>
-            <p class="clerk">专项检查<br>待完成数</p>
-        </div>
-    </div>
+    </div> -->
+   
     <div class="examinationListBox">
-        <div class="examinationList">
+        <div class="examinationList" onclick="goselectCategories()">
             <div class="examinationIconBox">
-                <img class='examinationIcon' src="../images/richang.png"/>
+                <img class='examinationIcon' src="./images/richang.png"/>
             </div>
-            <span class='examinationText'>日常全量检查</span>
+            <span class='examinationText'>日常检查</span>
         </div>
         <div class="examinationList">
             <div class="examinationIconBox">
-                <img class='examinationIcon' src="../images/lishi.png"/>
+                <img class='examinationIcon' src="./images/richang.png"/>
             </div>
-            <span class='examinationText'>历史检查记录(日常检查)</span>
+            <span class='examinationText'>自定义检查</span>
         </div>
         <div class="examinationList">
             <div class="examinationIconBox">
-                <img class='examinationIcon' src="../images/zhuanxiang.png"/>
+                <img class='examinationIcon' src="./images/zhuanxiang.png"/>
             </div>
             <span class='examinationText'>专项检查</span>
         </div>
         <div class="examinationList">
             <div class="examinationIconBox">
-                <img class='examinationIcon' src="../images/daishenhe.png"/>
+                <img class='examinationIcon' src="./images/lishi.png"/>
             </div>
-            <span class='examinationText'>待审核内容</span>
+            <span class='examinationText'>历史检查记录</span>
+        </div>
+      
+        <div class="examinationList">
+            <div class="examinationIconBox">
+                <img class='examinationIcon' src="./images/daishenhe.png"/>
+            </div>
+            <span class='examinationText'>审核</span>
         </div>
         <div class="examinationList">
             <div class="examinationIconBox">
-                <img class='examinationIcon' src="../images/zhinan.png"/>
+                <img class='examinationIcon' src="./images/zhinan.png"/>
             </div>
             <span class='examinationText'>使用指南</span>
         </div>
     </div>
 </div>
+<div id="tanwin" class="tan" style="display:none;"></div>
 <div class="zhegaicengone zhegaiceng" style="display: none;">
-    <img class='lodingimg' src="../images/loadingpop.gif">
+    <img class="lodingimg" src="./images/loadingpop.gif">
 </div>
 <div class="dialog" style="display:none;">
     <div class=" zhegaiContenttwo zhegaiContent">
@@ -340,10 +325,23 @@
     </div>
 </div>
 </body>
-<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    var phone = '';
+     window.onload = function () {
+        document.addEventListener('message', function (msg) {
+            var data = JSON.parse(msg.data);
+            if (data.hasOwnProperty('phoneNum')) {
+                phone = data.phoneNum;
+                if (phone) {
+                    getUserRole();
+                }
+            }
+        })
+    }
     $(function(){
+        // getUserRole();
         // gouserinfo();
 
         var arrData = [{"name":"见看得见看看得见看得见",icon:'../images/tongzhi.png'},{"name":"见看得见看看得见看得见",icon:'../images/tongzhi.png'}];
@@ -359,6 +357,53 @@
             // setInterval(autoScroll,1000);
         },2000)
     })
+    function gostatics(){
+        window.location.href = './statics.html'
+    }
+    function goselectCategories(){
+        window.location.href = './selectCategories.html'
+    
+    }
+    function getUserRole(){
+        $(".zhegaiceng").css({
+            'display': 'block'
+        });
+        var data = {
+            phone: encrypt(phone),
+        };
+        data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'companycheck/getUserRole',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function(response) {
+                $(".zhegaiceng").css({'display': 'none'})
+                if(response.rescode == 200){
+                    $(".roleName").html(response.roleName)
+                    $(".companyName").html(response.companyName)
+                    $(".name").html(response.name)
+                    var level = response.level;
+                    var str = '';
+                    for(let i in level){
+                        str+= '<img class="starIcon" src="./images/staricon.png"/>';
+                    }
+                    $(".imgbox").append($(str))
+
+                }else{
+                    toast(response.resdes)
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({'display': 'none'})
+            },
+            complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                $(".zhegaiceng").css({'display': 'none'})
+            }
+        });
+    }
     function autoScroll(){//分享图动画效果
         $("#news").find('ul li').css({
             opacity: 1

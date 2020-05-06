@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>国门公安综合管理后台</title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        html,body,ul,li,ol,dl,dd,dt,p,h1,h2,h3,h4,h5,h6,form,fieldset,legend,img {
+            margin: 0;
+            padding: 0
+        }
+          input {
+            border: none;
+            outline: none;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            -ms-appearance: none;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+         .login{
+            background: url(../assets/images/loginBac.jpg) no-repeat center center;
+            height: 100vh;
+            width: 100%;
+            background-size: cover;
+            position: relative;
+         }
+        .loginInfo{
+            color: #232323;
+            position: absolute;
+            width: 380px;
+            height: 320px;
+            background: #fff;
+            left: 200px;
+            top: calc(0.5*(100vh - 500px));
+            border-radius: 10px;
+        }
+      
+        .loginText{
+            font-size: 24px;
+            text-align: center;
+            color: #001C84;
+            margin: 20px;
+        }
+        .codeBox{
+            margin: 18px auto;
+            background: #F6F6F6;
+            width: 340px;
+            border-radius: 6px;
+            display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */  
+            display: -moz-box; /* Firefox 17- */  
+            display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */  
+            display: -moz-flex; /* Firefox 18+ */  
+            display: -ms-flexbox; /* IE 10 */  
+            display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */  
+            align-items: center;
+        }
+        .code{
+            font-size: 14px;
+            width: 300px;
+            background: #F6F6F6;
+            height: 35px;
+            line-height: 35px;
+            text-indent: 6px;
+        }
+        .verficode{
+            width: 190px;
+            margin-right: 10px;
+        }
+        .verficodeimg{
+            width: 100px;
+            max-height: 35px;
+            cursor: pointer;
+        }
+        .loginIcon{
+            height: 25px;
+            width: 25px;
+            margin-left: 15px;
+        }
+        .loginButton{
+            margin: 30px auto;
+            width: 80%;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: #5A8CFB;
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <div class="loginInfo">
+            <div class="infoBox">
+                <div class="loginRight">
+                    <!-- <h3 class="loginText">国门公安管理后台</h3> -->
+                    <h3 class="loginText">登录</h3>
+                    <div class="codeBox">
+                        <img class="loginIcon" src="../assets/images/headurl.png">
+                        <input class="code accountnumber" type="text"  placeholder="请输入账号">
+                    </div>
+                    <div class="codeBox">
+                        <img class="loginIcon" src="../assets/images/headurl.png">
+                        <input class='code password'type="text" placeholder="请输入密码">
+                    </div>
+                    <div class="codeBox">
+                        <img class="loginIcon" src="../assets/images/headurl.png">
+                        <input class='verficode code'type="text" placeholder="请输入验证码">
+                        <img class="verficodeimg" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588076563185&di=f7f1a921afea5f7e0926b07557ee1300&imgtype=0&src=http%3A%2F%2Faliyunzixunbucket.oss-cn-beijing.aliyuncs.com%2Fjpg%2F0674271ec5dc545aa8b90f2e1a54a4c6.jpg%3Fx-oss-process%3Dimage%2Fresize%2Cp_100%2Fauto-orient%2C1%2Fquality%2Cq_90%2Fformat%2Cjpg%2Fwatermark%2Cimage_eXVuY2VzaGk%3D%2Ct_100">
+                    </div>
+                    <div class="loginButton cursor" id='submit_btn' >登录</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script>
+
+</script>
+
+</html>

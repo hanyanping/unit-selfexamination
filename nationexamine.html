@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/airexamine.css">
+    <title>公安行政检查
+    </title>
+    <style>
+        .contentTitle{
+            text-align: center;
+            margin:10px auto;
+        }
+        .textareaBox{
+            width:100%;
+            margin-top:6px;
+        }
+    </style>
+</head>
+<body style="background:#f9f9f9;">
+<div id="examine">
+    <div class="contentTitle">安全检查单（基础设施类）</div>
+    <div class="content">
+    </div>
+    <div class="smallButton" onclick="submit()">提交</div>
+</div>
+<div id="tanwin" class="tan" style="display:none;"></div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="./images/loadingpop.gif">
+</div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/nationexamine.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var phone = '';
+    window.onload = function() {
+    }
+    function localData(){
+        var obj = {
+            b1: '',
+            s2: '',
+            s3: '',
+            s4: '',
+            s5: '',
+            c6: '',
+            b7: '',
+            j8: '',
+            s9: '',
+            d11: '',
+            d12: '',
+            z13: '',
+            s14: '',
+            c15: '',
+            s16: '',
+            d17: '',
+            s19: '',
+            s20: '',
+            s21: '',
+            j22: '',
+            s23: '',
+            w24: '',
+            j25: '',
+            s26: '',
+            s27: '',
+            k28: ''
+        };
+        $.each(obj, function(key, val) {
+            $("input:radio[name='"+key+"']").change(function () {
+                if(JSON.parse(localStorage.getItem('nationobj'))){
+                    obj = JSON.parse(localStorage.getItem('nationobj'))
+                }
+                obj[key] = $("input[name='"+key+"']:checked").val();
+                localStorage.setItem('nationobj',JSON.stringify(obj))
+            })
+        });
+        var obj1 = {
+            j10: '',
+            j18: '',
+            j29: ''
+        }
+        $.each(obj1, function(key, val) {
+            $("."+key).change(function () {
+                if(JSON.parse(localStorage.getItem('textobj'))){
+                    obj1 = JSON.parse(localStorage.getItem('textobj'))
+                }
+                console.log( $(this).val())
+                obj1[key] = $(this).val();
+                localStorage.setItem('textobj',JSON.stringify(obj1))
+            })
+        })
+        console.log(obj)
+    }
+    $(function(){
+        if(localStorage.getItem('textobj')){
+            var  textObj = JSON.parse(localStorage.getItem('textobj'));
+            $.each(textObj, function(key, val) {
+                if(textObj[key]){
+                    $('.'+key).val(textObj[key])
+                }
+            });
+        }
+        if(localStorage.getItem('nationobj')){
+            var  nationObj = JSON.parse(localStorage.getItem('nationobj'));
+            $.each(nationObj, function(key, val) {
+                if(nationObj[key]){
+                    $("input[name='"+key+"'][value='"+nationObj[key]+"']").attr('checked','true');
+                }
+            });
+        }
+        localData();
+    })
+
+    function submit(){
+        var  textobj = {},nationobj = {};
+        if(!localStorage.getItem('textobj')){
+             textobj = {
+                j10: '',j18: '',j29: ''
+            }
+
+        }else{
+             textobj = JSON.parse(localStorage.getItem('textobj'));
+        }
+        if(!localStorage.getItem('nationobj')){
+            nationobj = {
+                b1: '',
+                s2: '',
+                s3: '',
+                s4: '',
+                s5: '',
+                c6: '',
+                b7: '',
+                j8: '',
+                s9: '',
+                d11: '',
+                d12: '',
+                z13: '',
+                s14: '',
+                c15: '',
+                s16: '',
+                d17: '',
+                s19: '',
+                s20: '',
+                s21: '',
+                j22: '',
+                s23: '',
+                w24: '',
+                j25: '',
+                s26: '',
+                s27: '',
+                k28: ''
+            };
+        }else{
+            nationobj = JSON.parse(localStorage.getItem('nationobj'));
+        }
+        var obj = {
+            applyNum: applyNum
+        }
+        var data = Object.assign(textobj,nationobj,obj);
+        $(".zhegaiceng").css({'display': 'block'})
+       console.log(data)
+        data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'supervisionTemplate/gbAqjcdCheckList',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function(response) {
+                $(".zhegaiceng").css({'display': 'none'})
+                if(response.rescode == 200){
+                    localStorage.removeItem('nationobj')
+                    localStorage.removeItem('textobj')
+                    window.postMessage('success');//向app发送提交成功消息
+                }else{
+                    toast(response.resdes)
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({'display': 'none'})
+            },
+            complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                $(".zhegaiceng").css({'display': 'none'})
+            }
+        });
+
+    }
+</script>
+</html>

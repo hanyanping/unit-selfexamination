@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <title>单位法定自查</title>
+    <style >
+        .selectCategories {
+            background: #fff;
+            padding: 16px;
+        }
+        .radiobox label{
+            left: -24px;
+            top: 0px;
+        }
+        .radiobox{
+            margin: 0 22px 8px;
+        }
+        .radiobox input{
+            left: -24px;
+            top: 0px;
+        }
+        .deptBox,.airportBox {
+            margin-left: 6px;
+        }
+        .margintop{
+            margin-top: 10px;
+        }
+        .minwidth{
+            widthL: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="selectCategories">
+    <!-- <div onclick="postFile()">照片</div> -->
+    <div class="airportList flexWrap aligncenter">
+        <div class="minwidth">选择机场：</div>
+        <div class="airportBox flexWrap">
+
+
+        </div>
+
+    </div>
+    <div class="deptList margintop flexWrap">
+        <div class="minwidth">选择类别：</div>
+        <div class="deptBox flexWrap">
+
+        </div>
+    </div>
+    <div id="tanwin" class="tan" style="display:none;"></div>
+    <div class="zhegaicengone zhegaiceng" style="display: none;">
+        <img class="lodingimg" src="./images/loadingpop.gif">
+    </div>
+</div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/selectCategories.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+    // document.addEventListener('message', function (msg) { //获取客户端返回数据数据
+    //     $(".zhegaiceng").css({
+    //         'display': 'none'
+    //     })
+    //     var data = JSON.parse(msg.data)
+    //     if (data) {
+    //         if (data.hasOwnProperty('photograph')) {
+    //             addPhoto(data.photograph);
+    //         }else if (data.hasOwnProperty('location')) {
+    //             $('#adress').val(data.location.address);
+    //         }
+    //     } else {
+    //         tanwin("上传照片")
+    //     }
+    // });
+var phone = localStorage.getItem('phone');
+    getUserCompanyAirDept()
+function getUserCompanyAirDept(){
+    $(".zhegaiceng").css({
+        'display': 'block'
+    });
+    var data = {
+        phone: encrypt(phone),
+    };
+    data = JSON.stringify(data)
+    $.ajax({
+        url: ajaxUrl + 'companycheck/getUserCompanyAirDept',
+        timeout: timeDelay,
+        type: 'post',
+        contentType: 'application/json;charset=utf-8',
+        dataType: "json",
+        data: data,
+        success: function(response) {
+            $(".zhegaiceng").css({'display': 'none'})
+            if(response.rescode == 200){
+                var deptList = response.deptList;
+                var airportList = response.airportList;
+                var str = '',str1 = '';
+                for(let i in airportList){
+                    str+=' <div class="radiobox font14">' +
+                        '<input type="radio" name="j12" value="'+airportList[i].airportNum+'"> <label></label>\n' +
+                        '<span class="font14">'+airportList[i].airportName+'</span>' +
+                        '</div>'
+                }
+                $(".airportBox").append($(str))
+
+                for(let i in deptList){
+                    str1+=' <div class="radiobox font14">' +
+                        '<input type="radio" name="j12" value="'+deptList[i].deptNum+'"> <label></label>\n' +
+                        '<span class="font14">'+deptList[i].deptName+'</span>' +
+                        '</div>'
+                }
+                $(".deptBox").append($(str1))
+
+            }else{
+                toast(response.resdes)
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            $(".zhegaiceng").css({'display': 'none'})
+            var deptList = [{deptNum:1,deptNum: '坚决打击'},{deptNum:2,deptName: 'ddf打击'},{deptNum:3,deptName: 'ddf打击'},{deptNum:4,deptName: 'ddf打击'}];
+
+            var airportList = [{airportNum:1,airportName: '坚决打击'},{airportNum:2,airportName: 'ddf打击'}];
+            var str = '',str1 = '';
+            for(let i in airportList){
+                str+=' <div class="radiobox font14">' +
+                    '<input type="radio" name="j12" value="'+airportList[i].airportNum+'"> <label></label>\n' +
+                    '<span class="font14">'+airportList[i].airportName+'</span>' +
+                    '</div>'
+            }
+            $(".airportBox").append($(str))
+
+            for(let i in deptList){
+                str1+=' <div class="radiobox font14">' +
+                    '<input type="radio" name="j12" value="'+deptList[i].deptNum+'"> <label></label>\n' +
+                    '<span class="font14">'+deptList[i].deptName+'</span>' +
+                    '</div>'
+            }
+            $(".deptBox").append($(str1))
+        },
+        complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+            $(".zhegaiceng").css({'display': 'none'})
+        }
+    });
+}
+    //照片
+function postFile() {
+  var photo = [];
+  if ($(".image")) {
+    $('.image').each(function () {
+      var obj = {};
+      obj.photoData = $(this).attr('data-src')
+      photo.push(obj);
+    })
+  }
+  if (photo.length >= 10) {
+    tanwin('照片不得超过10张');
+    return;
+  }
+  window.postMessage('photograph'); //发送获取照片消息
+}
+  
+
+</script>
+</html>
