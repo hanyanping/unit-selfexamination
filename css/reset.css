@@ -19,19 +19,13 @@ legend,
 img {
     margin: 0;
     padding: 0;
-    font-Family: Microsoft Yahei, pingfangSC;
+    fontFamily: Microsoft Yahei, pingfangSC;
 }
-.green{
-    color: #05AF71;
+html,
+body{
+    height:100%;
 }
-.blue{
-    color: #1A7FE3;
-}
-
-.yellow{
-    color: #FE9131;
-}
-.tan{position: fixed;top: 50%;left:50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);width: 80%;padding: 20px 2px;background: rgba(0,0,0,0.7);text-align: center;color: white;border-radius:10px; }
+.tan{position: fixed;top: 50%;left:50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);width: 80%;padding: 20px 2px;background: rgba(0,0,0,0.7);text-align: center;color: white;border-radius:10px;z-index:1000; }
 fieldset,
 img {
     border: 0
@@ -142,23 +136,12 @@ table {
     display: flex;
     justify-content: space-around;
 }
-.flexWrap{
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-wrap: wrap;
-}
-.fontWeight{
-    font-weight: 600;
-}
-.aligncenter{
-    scroll-snap-align: center;
-}
 
 .border-none {
     border: 0;
+}
+.fontWeight{
+    font-weight: 600;
 }
 
 .line {
@@ -177,27 +160,27 @@ input {
 }
 
 input::-webkit-input-placeholder {
-    font-size: 14px;
+    font-size: 13px;
     color: #929292;
 }
 
 input::-moz-placeholder {
     /* Mozilla Firefox 19+ */
-    font-size: 14px;
+    font-size: 13px;
     color: #929292;
     font-family: "微软雅黑",PingFang SC, Microsoft YaHei UI, Microsoft YaHei, Arial, sans-serif;
 }
 
 input:-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
-    font-size: 14px;
+    font-size: 13px;
     color: #929292;
     font-family: "微软雅黑",PingFang SC, Microsoft YaHei UI, Microsoft YaHei, Arial, sans-serif;
 }
 
 input:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    font-size: 14px;
+    font-size: 13px;
     color: #929292;
     font-family: "微软雅黑",PingFang SC, Microsoft YaHei UI, Microsoft YaHei, Arial, sans-serif;
 }
@@ -212,7 +195,28 @@ select {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     /* 点击去除高亮的颜色*/
 }
-
+.smallButton{
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: #0076FF;
+    border-radius: 20px;
+    margin: 30px auto;
+    font-size: 14px;
+}
+.bigButton{
+    width: 240px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: #0076FF;
+    border-radius: 6px;
+    margin: 16px auto;
+    font-size: 14px;
+}
 .mu-dialog-title {
     font-size: 12px;
     padding: 16px 0 12px 0;
@@ -222,41 +226,97 @@ select {
     padding: 16px;
 }
 .viewer-rotate-left,.viewer-rotate-right,.viewer-one-to-one,.viewer-zoom-out,.viewer-zoom-in,.viewer-flip-vertical,.viewer-flip-horizontal,.viewer-reset{
-  display:none;
+    display:none;
 }
-/* 签名 */
-.container {
-    width: 100%;
-    height: 100%;
+.colorfff{
+    color: #fff;
 }
-#canvasBox {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+.colorBlue{
+    color: #0076FF;
 }
-.greet {
-    padding: 12px;
-    font-size: 20px;
-    user-select: none;
+.colorRed{
+    color: #E51C23;
 }
-.greet select {
+.font12{
+    font-size: 12px;
+}
+.font14{
+    font-size: 14px;
+}
+.font16{
+    font-size: 16px;
+}
+.font18{
     font-size: 18px;
 }
-canvas {
-    flex: 1;
-    cursor: crosshair;
-    border:2px dashed lightgray;
+.font20{
+    font-size: 20px;
 }
-.none{
-    display: none;
+.nodata{
+    margin: 60px auto;
+    text-align: center;
 }
-#pic{
-    height: auto;
+.nodataIcon{
+    height: 100px;
+    width: 150px;
+}
+.nodataText{
+    color: #232323;
+    margin-top: 20px;
+}
+.zhegaiceng {
+    height: 100vh;
     width: 100%;
+    position: fixed;
+    top: 0;
+    background: rgba(0, 0, 0, 0.4);
 }
-#signDate {
-    height: auto;
-    width: 100%;
+
+.zhegaiceng .lodingimg {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    left: 0;
+    right: 0;
+    margin: 30vh auto;
+}
+
+.flexWrap {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+}
+.file {
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    width: 80px;
+    color: #fff;
+    background: #0076FF;
+    text-align: center;
+    position: relative;
+    border-radius: 4px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.addFile{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    left: 50%;
+    top: 50%;
+    transform:translate(-50%,-50%);
+}
+.file input {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    height: 80px;
+    width: 80px;
 }
 .image{
     max-height: 80px;
@@ -285,100 +345,104 @@ canvas {
 .borderline{
     text-decoration: underline;
 }
-.cancledrawButton{
-    background: #f2f2f2;
-    color: #232323;
-    font-size: 14px;
-    width: 80px;
-    border-radius: 5px;
-    height: 28px;
+.lineBox{
+    height: 16px;
+    width:3px;
+    background: #0D76EE;
+    display: inline-block;
+    vertical-align: middle;
 }
-.drawButton{
-    margin-left: 40px;
-    background: #0076FF;
-    color: #fff;
-    font-size: 14px;
-    width: 80px;
-    border-radius: 5px;
-    height: 28px;
-}
-.font12{
-    font-size: 12px;
-}
-.font14{
-    font-size: 14px;
-}
-.font16{
-    font-size: 16px;
-}
-.font18{
-    font-size: 18px;
-}
-.font20{
-    font-size: 20px;
-}
-.font22{
-    font-size: 22px;
-}
-.marginleft12{
-    margin-left: 12px;
-}
-.colorBlue{
-    color: #3D89EB;
-    
-}
-.backBlue{
-    background: #3D89EB;
-}
+
 .radiobox {
     position: relative;
     border-radius: 100%;
-    margin: 0 15px;
-  }
+    padding: 0 10px;
+    margin: 0px 10px 5px;
+}
 
-  .radiobox input {
+.radiobox input {
     cursor: pointer;
     position: absolute;
-    width: 20px;
+    width: calc(100% + 6px);
     height: 20px;
     z-index: 100;
     opacity: 0;
-    left: -6px;
-    top: 8px;
-  }
-  .radiobox label {
+    left: -15px;
+    top: 0px;
+}
+
+.radiobox label {
     cursor: pointer;
     position: absolute;
-    top: 9px;
-    left: -7px;
+    top: 0px;
+    left: -15px;
     width: 20px;
     height: 20px;
     background: url('../images/noSelect.png') no-repeat center center;
     background-size: 100% 100%;
     z-index: 1;
     border-radius: 100%;
-  }
+}
 
-  .radiobox input[type="radio"]:checked+label {
+.radiobox input[type="radio"]:checked+label {
     background: url('../images/select.png') no-repeat center center;
     background-size: 100% 100%;
-  }
+}
 .radiobox input[type="checkbox"]:checked+label {
     background: url('../images/select.png') no-repeat center center;
     background-size: 100% 100%;
 }
-.zhegaiceng {
-    height: 100vh;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    background: rgba(0, 0, 0, 0.4);
+.showright{
+    flex-direction: row-reverse;
 }
-.zhegaiceng .lodingimg {
+.contentTitle{
+    text-align: center;
+    margin:10px auto;
+    font-weight: 600;
+    font-size:16px;
+}
+.inputText{
+    height: 30px;
+    border-bottom: 1px solid #bbb;
+    line-height: 30px;
+    text-indent: 6px;
+}
+.linebox {
+    position: relative;
+    margin-left: 10px;
+}
+.linebox:before {
+    content: '';
     position: absolute;
+    height: 18px;
+    width: 3px;
+    background: #0076FF;
+    left: -12px;
+    top: 2px;
+}
+
+.backgreen{
+    background: #08592D;
+}
+.backblue{
+    background: #E86415;
+}
+.titlename{
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+.margin10{
+    margin: 10px 0;
+}
+.chooseBox{
     height: 60px;
-    width: 60px;
-    left: 0;
-    right: 0;
-    margin: 30vh auto;
+    width: 28%;
+    padding: 0 3px;
+    margin-bottom: 6px;
+    margin-right: 8px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

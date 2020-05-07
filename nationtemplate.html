@@ -6,7 +6,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
-    <title>选择检查单类型</title>
+    <title>单位法定自查</title>
     <style>
     </style>
     <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
@@ -17,21 +17,15 @@
             padding: 20px;
         }
         .chooseBox{
-            background: #F99B16;
-            height: 60px;
-            width: 96px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 31%;
+            margin-right: 15px;
         }
     </style>
 </head>
 <body>
 <div id="home">
-    <div class="nationDefence">
-        <div onclick='gonationExamine()' class='chooseBox colorfff font14'>基础设施
-        </div>
+    <div class="titlename">请选择检查类别</div>
+    <div class="nationDefence flexWrap flexAround margin10">
     </div>
 </div>
 <div id="tanwin" class="tan" style="display:none;"></div>
@@ -42,43 +36,23 @@
 
 </body>
 <script>
-    function gonationExamine(){
-        window.location.href='./nationexamine.html'
-    }
-    function goInvoice(){
-        toast('即将开通，敬请期待')
-        // window.location.href='./inputCode.html'
-    }
-    function getDetail(){
-        localStorage.setItem('phone',phone)
-        var decodephone = encrypt(phone)
-        // localStorage.setItem('decodephone',decodephone)
-        $(".zhegaiceng").css({'display': 'block'})
-        var data = {
-            phone: decodephone
+    $(function(){
+        var applyNum = getUrlParms('applyNum');
+        localStorage.setItem('applyNum',applyNum)
+        var data1 = [{url:'',name:'安全服务类',color:'backgreen'},{url:'',name:'服务餐饮类',color: 'backgreen'},{url:'',name:'航空公司类',color: 'backgreen'},{url:'',name:'航空器服务类',color: 'backgreen'},{url:'',name:'航空食品类',color: 'backgreen'},{url:'',name:'货运安全',color: 'backgreen'},{url:'nationexamine.html',name:'基础设施类',color: 'backblue'},{url:'',name:'酒店类',color: 'backgreen'},{url:'',name:'一般类',color: 'backblue'},{url:'',name:'银行类',color: 'backgreen'}]
+        var str = '',str1 = '';
+        $.each(data1,(i,item)=>{
+            str+='<div onclick="goExamine(this)" data-url="'+item.url+'" class="chooseBox  colorfff font14 '+item.color+'" >' +item.name+
+                '</div>'
+        })
+        $(".nationDefence").append($(str))
+    })
+    function goExamine(ev){
+        var url = $(ev).attr('data-url');
+        if(url){
+            window.location.href='./'+url;
+
         }
-        data = JSON.stringify(data)
-        $.ajax({
-            url: ajaxUrl + 'officialcert/getUserRole',
-            timeout: timeDelay,
-            type: 'post',
-            contentType: 'application/json;charset=utf-8',
-            dataType: "json",
-            data: data,
-            success: function(response) {
-                $(".zhegaiceng").css({'display': 'none'})
-                if(response.rescode == 200){
-                }else{
-                    toast(response.resdes)
-                }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                $(".zhegaiceng").css({'display': 'none'})
-            },
-            complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
-                $(".zhegaiceng").css({'display': 'none'})
-            }
-        });
     }
 </script>
 </html>

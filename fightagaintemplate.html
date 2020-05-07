@@ -32,7 +32,7 @@
     $(function(){
         var applyNum = getUrlParms('applyNum');
         localStorage.setItem('applyNum',applyNum)
-        var data1 = [{url:'airexamine.html',name:'货办区空防安全检查单',color:'backblue'}]
+        var data1 = [{url:'fightexamine.html',name:'单位自查',color:'backblue'}]
         var str = '';
         $.each(data1,(i,item)=>{
             str+='<div onclick="goExamine(this)" data-url="'+item.url+'" class="chooseBox  colorfff font14 '+item.color+'" >' +item.name+

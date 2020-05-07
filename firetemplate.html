@@ -6,32 +6,34 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
-    <title>选择检查单类型</title>
+    <title>单位法定自查</title>
     <style>
     </style>
     <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
     <script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <style>
         #home{
-            padding: 20px;
+            padding: 20px 14px;
         }
-        .chooseBox{
-            background: #F99B16;
-            height: 60px;
-            width: 96px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+
+
+
     </style>
 </head>
 <body>
 <div id="home">
-    <div class="airDefence">
-        <div onclick='goExamine()' class='chooseBox colorfff font14'>公安派出所日常消防监督检查记录
+    <div class="titlename">请选择检查类别</div>
+    <div class="linebox  fon16">
+        定期检查
+    </div>
+    <div class="airDefence flexWrap flexAround margin10">
 
-        </div>
+    </div>
+    <div class="linebox  fon16">
+        其他
+    </div>
+    <div class="otherDefence flexWrap margin10">
+
     </div>
 </div>
 <div id="tanwin" class="tan" style="display:none;"></div>
@@ -40,8 +42,30 @@
 </div>
 </body>
 <script>
-    function goExamine(){
-        window.location.href='./fireexamine.html'
+    $(function(){
+        var applyNum = getUrlParms('applyNum');
+        localStorage.setItem('applyNum',applyNum)
+        var data2 = [{url:'',name:'自动喷水灭火系统',color:'backgreen'},{url:'',name:'其他',color:'backgreen'}]
+        var data1 = [{url:'fireexamine.html',name:'系统的每日检查和试验',color:'backblue'},{url:'',name:'系统的季度检查及试验',color: 'backgreen'},{url:'',name:'系统年度检查及试验',color: 'backgreen'},{url:'',name:'系统的半年检查',color: 'backgreen'},{url:'',name:'系统半月检查',color: 'backgreen'},{url:'',name:'系统的每周、月检查',color: 'backgreen'}]
+        var str = '',str1 = '';
+        $.each(data1,(i,item)=>{
+            str+='<div onclick="goExamine(this)" data-url="'+item.url+'" class="chooseBox  colorfff font14 '+item.color+'" >' +item.name+
+                '</div>'
+        })
+        $(".airDefence").append($(str))
+        $.each(data2,(i,item)=>{
+            console.log(item)
+            str1+='<div onclick="goExamine(this)" data-url="'+item.url+'" class="chooseBox  colorfff font14 '+item.color+'" >' +item.name+
+                '</div>'
+        })
+        $(".otherDefence").append($(str1))
+    })
+    function goExamine(ev){
+        var url = $(ev).attr('data-url');
+        if(url){
+            window.location.href='./'+url;
+
+        }
     }
 </script>
 </html>

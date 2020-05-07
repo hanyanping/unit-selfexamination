@@ -6,32 +6,35 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
-    <title>选择检查单类型</title>
+    <title>单位法定自查</title>
     <style>
     </style>
     <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
     <script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <style>
         #home{
-            padding: 20px;
+            padding: 20px 14px;
         }
         .chooseBox{
-            background: #F99B16;
-            height: 60px;
-            width: 96px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin-right: 15px;
+            width: 31%
         }
 
     </style>
 </head>
 <body>
 <div id="home">
-    <div class="securityDefence">
-        <div onclick='gosecurityexamine()' class='chooseBox colorfff font14'>首都机场公安局治安检查记录（通用版）
-        </div>
+    <div class="titlename">请选择检查类别</div>
+    <div class="linebox  fon16">
+        行业场所治安检查
+    </div>
+    <div class="airDefence flexWrap flexAround margin10">
+
+    </div>
+    <div class="linebox  fon16">
+        危险物品治安检查
+    </div>
+    <div class="otherDefence flexWrap margin10">
 
     </div>
 
@@ -45,9 +48,29 @@
 </body>
 <script>
     $(function(){
+        var applyNum = getUrlParms('applyNum');
+        localStorage.setItem('applyNum',applyNum)
+        var data2 = [{url:'',name:'枪支日常管理自查清单',color:'backblue'},{url:'',name:'危险物品储存场所自查清单',color:'backgreen'}]
+        var data1 = [{url:'securityexamine.html',name:'保安服务业自查条目',color:'backblue'},{url:'',name:'机动车修理业自查条目',color: 'backgreen'},{url:'',name:'快递企业自查条目',color: 'backgreen'},{url:'',name:'旅馆业自查条目',color: 'backgreen'},{url:'',name:'保安服务业自查条目',color: 'backgreen'},{url:'',name:'机动车修理业自查条目',color: 'backgreen'},{url:'',name:'洗浴和美容美发经营场所自查条目',color: 'backgreen'},{url:'',name:'娱乐场所自查条目',color: 'backgreen'}]
+        var str = '',str1 = '';
+        $.each(data1,(i,item)=>{
+            str+='<div onclick="goExamine(this)" data-url="'+item.url+'" class="chooseBox  colorfff font14 '+item.color+'" >' +item.name+
+                '</div>'
+        })
+        $(".airDefence").append($(str))
+        $.each(data2,(i,item)=>{
+            str1+='<div onclick="goExamine(this)" data-url="'+item.url+'" class="chooseBox  colorfff font14 '+item.color+'" >' +item.name+
+                '</div>'
+        })
+        $(".otherDefence").append($(str1))
     })
-    function gosecurityexamine(){
-        window.location.href='./securityexamine.html'
+    function goExamine(ev){
+        var url = $(ev).attr('data-url');
+        if(url){
+            window.location.href='./'+url;
+
+        }
     }
+
 </script>
 </html>
