@@ -118,6 +118,7 @@ function setinputValue(){
 
 
 function submit(){
+    var applyNum = localStorage.getItem('applyNum')
     if(localStorage.getItem('fireInput')){
         inputobj = JSON.parse(localStorage.getItem('fireInput'));
     }

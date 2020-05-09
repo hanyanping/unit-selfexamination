@@ -39,7 +39,7 @@
     $(function(){
         var applyNum = getUrlParms('applyNum');
         localStorage.setItem('applyNum',applyNum)
-        var data1 = [{url:'',name:'安全服务类',color:'backgreen'},{url:'',name:'服务餐饮类',color: 'backgreen'},{url:'',name:'航空公司类',color: 'backgreen'},{url:'',name:'航空器服务类',color: 'backgreen'},{url:'',name:'航空食品类',color: 'backgreen'},{url:'',name:'货运安全',color: 'backgreen'},{url:'nationexamine.html',name:'基础设施类',color: 'backblue'},{url:'',name:'酒店类',color: 'backgreen'},{url:'',name:'一般类',color: 'backblue'},{url:'',name:'银行类',color: 'backgreen'}]
+        var data1 = [{url:'',name:'安全服务类',color:'backgreen'},{url:'',name:'服务餐饮类',color: 'backgreen'},{url:'',name:'航空公司类',color: 'backgreen'},{url:'',name:'航空器服务类',color: 'backgreen'},{url:'',name:'航空食品类',color: 'backgreen'},{url:'',name:'货运安全',color: 'backgreen'},{url:'nationexamine.html',name:'基础设施类',color: 'backblue'},{url:'',name:'酒店类',color: 'backgreen'},{url:'nationexamineyb.html',name:'一般类',color: 'backblue'},{url:'',name:'银行类',color: 'backgreen'}]
         var str = '',str1 = '';
         $.each(data1,(i,item)=>{
             str+='<div onclick="goExamine(this)" data-url="'+item.url+'" class="chooseBox  colorfff font14 '+item.color+'" >' +item.name+

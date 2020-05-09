@@ -56,7 +56,7 @@ $(function(){
         })
         str+='<div class="radioList">'+
         '<div class="title">'+
-        '<span class="lineBox"></span>'+
+        '<span class="linebox"></span>'+
         '<span class="font14 titletext fontWeight">'+item.title+'</span>'+
         '</div>'+radioStr+
         '</div>' ;

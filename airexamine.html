@@ -33,24 +33,47 @@
 <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/airexamine.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    var obj = {
+        y1: '',
+        h2: '',
+        c3: '',
+        h4: '',
+        y5: ''
+    };
     $(function(){
         if(localStorage.getItem('airObj')){
            var  airObj = JSON.parse(localStorage.getItem('airObj'));
             $.each(airObj, function(key, val) {
                 if(airObj[key]){
                     $("input[name='"+key+"'][value='"+airObj[key]+"']").attr('checked','true');
+                    $("input[name='"+key+"'][value='"+airObj[key]+"']").data('waschecked', true);
                 }
             });
         }
+        $.each(obj, function(key, val) {
+            $("input:radio[name='"+key+"']").click(function () {
+                if(JSON.parse(localStorage.getItem('airObj'))){
+                    obj = JSON.parse(localStorage.getItem('airObj'))
+                }
+                var $radio = $(this);
+                // if this was previously checked
+                if ($radio.data('waschecked') == true){
+                    $radio.prop('checked', false);	                    
+                    $radio.data('waschecked', false);
+                } else {
+                    $radio.prop('checked', true);
+                    $radio.data('waschecked', true);
+                }
+                if($("input[name='"+key+"']:checked").val()){
+                    obj[key] = $("input[name='"+key+"']:checked").val();
+                }else{
+                    obj[key] = '';
+                }
+                localStorage.setItem('airObj',JSON.stringify(obj))
+            })
+        });
     })
     function goair(){
-        var obj = {
-            y1: '',
-            h2: '',
-            c3: '',
-            h4: '',
-            y5: ''
-        };
         $.each(obj, function(key, val) {
             if($("input[name='"+key+"']:checked").val()){
                 obj[key] = $("input[name='"+key+"']:checked").val()

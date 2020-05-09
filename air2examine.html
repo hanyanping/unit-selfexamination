@@ -35,22 +35,46 @@
 <script>
     window.onload = function() {
     }
+    var obj = {
+            j12: '',
+            h13: '',
+            y14: ''
+        };
     $(function(){
         if(localStorage.getItem('airObj2')){
             var  airObj = JSON.parse(localStorage.getItem('airObj2'));
             $.each(airObj, function(key, val) {
                 if(airObj[key]){
                     $("input[name='"+key+"'][value='"+airObj[key]+"']").attr('checked','true');
+                    $("input[name='"+key+"'][value='"+airObj[key]+"']").data('waschecked', true);
                 }
             });
         }
+        $.each(obj, function(key, val) {
+            $("input:radio[name='"+key+"']").click(function () {
+                if(JSON.parse(localStorage.getItem('airObj2'))){
+                    obj = JSON.parse(localStorage.getItem('airObj2'))
+                }
+                var $radio = $(this);
+                // if this was previously checked
+                if ($radio.data('waschecked') == true){
+                    $radio.prop('checked', false);	                    
+                    $radio.data('waschecked', false);
+                } else {
+                    $radio.prop('checked', true);
+                    $radio.data('waschecked', true);
+                }
+                if($("input[name='"+key+"']:checked").val()){
+                    obj[key] = $("input[name='"+key+"']:checked").val();
+                }else{
+                    obj[key] = '';
+                }
+                localStorage.setItem('airObj2',JSON.stringify(obj))
+            })
+        });
     })
     function goair(){
-        var obj = {
-            j12: '',
-            h13: '',
-            y14: ''
-        };
+       
         $.each(obj, function(key, val) {
             if($("input[name='"+key+"']:checked").val()){
                 obj[key] = $("input[name='"+key+"']:checked").val()
