@@ -22,9 +22,20 @@
 </head>
 <body style="background:#f9f9f9;">
 <div id="examine">
-    <div class="contentTitle">安全检查单（基础设施类）</div>
+    <div class="contentTitle">保安服务业自查条目</div>
     <div class="content">
+        <div class="contentBox"></div>
+        <div>
+            <p>（一）限制他人人身自由、搜查他人身体或者侮辱、殴打他人；</p>
+            <p>（二）扣押、没收他人证件、财物；</p>
+            <p>（三）阻碍依法执行公务；</p>
+            <p>（四）参与追索债务、采用暴力或者以暴力相威胁的手段处置纠纷；</p>
+            <p>（五）删改或者扩散保安服务中形成的监控影像资料、报警记录；</p>
+            <p>（六）侵犯个人隐私或者泄露在保安服务中获知的国家秘密、商业秘密以及客户单位明确要求保密的信息；</p>
+            <p>（七）违反法律、行政法规的其他行为。</p>
+        </div>
     </div>
+
     <div class="smallButton" onclick="submit()">提交</div>
 </div>
 <div id="tanwin" class="tan" style="display:none;"></div>
@@ -36,49 +47,49 @@
 <script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/nationexamine.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/baserverexamine.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var phone = '';
     window.onload = function() {
     }
     var obj = {
-            b1: '',
-            s2: '',
-            s3: '',
-            s4: '',
-            s5: '',
-            c6: '',
-            b7: '',
-            j8: '',
-            s9: '',
-            d11: '',
-            d12: '',
-            z13: '',
-            s14: '',
-            c15: '',
-            s16: '',
-            d17: '',
-            s19: '',
-            s20: '',
-            s21: '',
-            j22: '',
-            s23: '',
-            w24: '',
-            j25: '',
-            s26: '',
-            s27: '',
-            k28: ''
-        };
+        b1: '',
+        s2: '',
+        s3: '',
+        s4: '',
+        s5: '',
+        c6: '',
+        b7: '',
+        j8: '',
+        s9: '',
+        d11: '',
+        d12: '',
+        z13: '',
+        s14: '',
+        c15: '',
+        s16: '',
+        d17: '',
+        s19: '',
+        s20: '',
+        s21: '',
+        j22: '',
+        s23: '',
+        w24: '',
+        j25: '',
+        s26: '',
+        s27: '',
+        k28: ''
+    };
     function localData(){
         $.each(obj, function(key, val) {
             $("input:radio[name='"+key+"']").click(function () {
-                if(JSON.parse(localStorage.getItem('nationobj'))){
-                    obj = JSON.parse(localStorage.getItem('nationobj'))
+                if(JSON.parse(localStorage.getItem('baserverexamineobj'))){
+                    obj = JSON.parse(localStorage.getItem('baserverexamineobj'))
                 }
                 var $radio = $(this);
                 // if this was previously checked
                 if ($radio.data('waschecked') == true){
-                    $radio.prop('checked', false);	                    
+                    $radio.prop('checked', false);
                     $radio.data('waschecked', false);
                 } else {
                     $radio.prop('checked', true);
@@ -89,41 +100,15 @@
                 }else{
                     obj[key] = '';
                 }
-                localStorage.setItem('nationobj',JSON.stringify(obj))
+                localStorage.setItem('baserverexamineobj',JSON.stringify(obj))
             })
         });
-        var obj1 = {
-            j10: '',
-            j18: '',
-            j29: ''
-        }
-        $.each(obj1, function(key, val) {
-            $("."+key).change(function () {
-                if(JSON.parse(localStorage.getItem('textobj'))){
-                    obj1 = JSON.parse(localStorage.getItem('textobj'))
-                }
-                console.log( $(this).val())
-                if($(this).val()){
-                    obj1[key] = $(this).val();
-                }else{
-                    obj1[key] = '';
-                }
-                
-                localStorage.setItem('textobj',JSON.stringify(obj1))
-            })
-        })
+
     }
     $(function(){
-        if(localStorage.getItem('textobj')){
-            var  textObj = JSON.parse(localStorage.getItem('textobj'));
-            $.each(textObj, function(key, val) {
-                if(textObj[key]){
-                    $('.'+key).val(textObj[key])
-                }
-            });
-        }
-        if(localStorage.getItem('nationobj')){
-            var  nationObj = JSON.parse(localStorage.getItem('nationobj'));
+
+        if(localStorage.getItem('baserverexamineobj')){
+            var  nationObj = JSON.parse(localStorage.getItem('baserverexamineobj'));
             $.each(nationObj, function(key, val) {
                 if(nationObj[key]){
                     $("input[name='"+key+"'][value='"+nationObj[key]+"']").attr('checked','true');
@@ -137,15 +122,8 @@
     function submit(){
         var applyNum = localStorage.getItem('applyNum')
         var  textobj = {},nationobj = {};
-        if(!localStorage.getItem('textobj')){
-             textobj = {
-                j10: '',j18: '',j29: ''
-            }
 
-        }else{
-             textobj = JSON.parse(localStorage.getItem('textobj'));
-        }
-        if(!localStorage.getItem('nationobj')){
+        if(!localStorage.getItem('baserverexamineobj')){
             nationobj = {
                 b1: '',
                 s2: '',
@@ -175,14 +153,14 @@
                 k28: ''
             };
         }else{
-            nationobj = JSON.parse(localStorage.getItem('nationobj'));
+            nationobj = JSON.parse(localStorage.getItem('baserverexamineobj'));
         }
         var obj = {
             applyNum: applyNum
         }
-        var data = Object.assign(textobj,nationobj,obj);
+        var data = Object.assign(nationobj,obj);
         $(".zhegaiceng").css({'display': 'block'})
-       console.log(data)
+        console.log(data)
         data = JSON.stringify(data)
         $.ajax({
             url: ajaxUrl + 'supervisionTemplate/gbAqjcdCheckList',
@@ -194,8 +172,7 @@
             success: function(response) {
                 $(".zhegaiceng").css({'display': 'none'})
                 if(response.rescode == 200){
-                    localStorage.removeItem('nationobj')
-                    localStorage.removeItem('textobj')
+                    localStorage.removeItem('baserverexamineobj')
                     window.postMessage('success');//向app发送提交成功消息
                 }else{
                     toast(response.resdes)

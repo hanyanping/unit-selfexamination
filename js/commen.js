@@ -31,6 +31,7 @@ function encrypt(word) {
 var degree = 90,
     draw = null,
     signImage = null;
+    var sign = 1;
 var canvasBox = document.getElementById('canvasBox');
 function getHorizontalStyle() {
     var wrapper = document.getElementById("canvasBox");
@@ -66,9 +67,22 @@ function getHorizontalStyle() {
     wrapper.style.cssText = style;
 }
 function showsign(){
+    sign = 1;
     getHorizontalStyle();
     $('.container').removeClass('none');
-    $("#bodyBox").addClass('none')
+    $("#examine").addClass('none')
+}
+function showsign1(){
+    sign = 2;
+    getHorizontalStyle();
+    $('.container').removeClass('none');
+    $("#examine").addClass('none')
+}
+function showsign2(){
+    sign = 3;
+    getHorizontalStyle();
+    $('.container').removeClass('none');
+    $("#examine").addClass('none')
 }
 function cleardraw() {
     draw.clear();

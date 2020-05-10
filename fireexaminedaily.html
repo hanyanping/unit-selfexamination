@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/airexamine.css">
+    <title>单位法定自查</title>
+    <style>
+        .content{
+            padding: 12px 10px;
+            margin: 10px 8px 0;
+        }
+        .radioList{
+            margin-top:6px;
+        }
+
+        .textareaBox{
+            width:100%;
+            margin-top:6px;
+        }
+        .checkbox .radiobox{
+            width:50%;
+        }
+        .inputLable{
+            display: inline-block;
+            width: 160px;
+        }
+        .inputText{
+            width:170px;
+        }
+        .dayInput{
+            width: 60px;
+            height: 26px;
+            border: 1px solid #ccc;
+        }
+        .inputButton{
+            display: flex;
+            justify-content: center;
+        }
+        .inputButton input{
+            margin-right: 15px;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+        #canvasBox {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .greet {
+            padding: 12px;
+            font-size: 20px;
+            user-select: none;
+        }
+        .greet select {
+            font-size: 18px;
+        }
+        canvas {
+            flex: 1;
+            cursor: crosshair;
+            border:2px dashed lightgray;
+        }
+        .none{
+            display: none;
+        }
+        #pic,#pic1{
+            height: auto;
+            width: 100%;
+        }
+        .drawButton{
+            border: 1px solid #f9f9f9;
+            border-radius: 10px;
+            padding: 10px 16px;
+            background: #fff;
+            color: #232323;
+            font-size: 16px;
+            margin-left: 18px;
+        }
+        .radiobox1{
+            margin: 8px 10px;
+        }
+    </style>
+</head>
+<body style="background:#f9f9f9;">
+
+<div id="examine">
+    <div class="contentTitle">系统的每日检查和试验</div>
+    <div class="content">
+        <div class="radioList">
+    
+            <div class="inputBox">
+                <span class="font14 inputLable">被检查部门：</span>
+                <input  class="inputText font14 f1" onchange="changeValue('f1')" type='text' placeholder="被检查部门"/>
+            </div>
+            <div class="inputBox">
+                <span class="font14 inputLable">部门负责人：</span>
+                <input  class="inputText font14 d3" onchange="changeValue('d3')" type='text' placeholder="部门负责人"/>
+            </div>
+           
+            <div class="inputBox">
+                <span class="font14 inputLable">部门管理人：</span>
+                <input  class="inputText font14 s5" onchange="changeValue('s5')" type='text' placeholder="部门管理人"/>
+            </div>
+        </div>
+        <div class="contentBox"></div>
+    </div>
+   
+  
+    <div class="smallButton" onclick="submit()">提交</div>
+</div>
+<div id="tanwin" class="tan" style="display:none;"></div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="./images/loadingpop.gif">
+</div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/fireexaminedaily.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/draw.js" type="text/javascript" charset="utf-8"></script>
+</html>
+<script>
+    var obj = {
+            b1: '',
+            s2: '',
+            s3: '',
+            s4: '',
+            s5: '',
+            c6: '',
+            b7: '',
+            j8: '',
+            s9: '',
+            d11: '',
+            d12: '',
+            z13: '',
+            s14: '',
+            c15: '',
+            s16: '',
+            d17: '',
+            s19: '',
+            s20: '',
+            s21: '',
+            j22: '',
+            s23: '',
+            w24: '',
+            j25: '',
+            s26: '',
+            s27: '',
+            k28: ''
+        };
+    function localData(){
+        $.each(obj, function(key, val) {
+            $("input:radio[name='"+key+"']").click(function () {
+                if(JSON.parse(localStorage.getItem('firedailyobj'))){
+                    obj = JSON.parse(localStorage.getItem('firedailyobj'))
+                }
+                var $radio = $(this);
+                // if this was previously checked
+                if ($radio.data('waschecked') == true){
+                    $radio.prop('checked', false);	                    
+                    $radio.data('waschecked', false);
+                } else {
+                    $radio.prop('checked', true);
+                    $radio.data('waschecked', true);
+                }
+                if($("input[name='"+key+"']:checked").val()){
+                    obj[key] = $("input[name='"+key+"']:checked").val();
+                }else{
+                    obj[key] = '';
+                }
+                console.log($("input[name='"+key+"']:checked").val())
+                localStorage.setItem('firedailyobj',JSON.stringify(obj))
+            })
+        });
+        var obj1 = {
+            j10: '',
+            j18: '',
+            j29: ''
+        }
+        $.each(obj1, function(key, val) {
+            $("."+key).change(function () {
+                if(JSON.parse(localStorage.getItem('firedailyobjtextobj'))){
+                    obj1 = JSON.parse(localStorage.getItem('firedailyobjtextobj'))
+                }
+                console.log( $(this).val())
+                if($(this).val()){
+                    obj1[key] = $(this).val();
+                }else{
+                    obj1[key] = '';
+                }
+                
+                localStorage.setItem('firedailyobjtextobj',JSON.stringify(obj1))
+            })
+        })
+    }
+    $(function(){
+        if(localStorage.getItem('firedailyobjtextobj')){
+            var  textObj = JSON.parse(localStorage.getItem('firedailyobjtextobj'));
+            $.each(textObj, function(key, val) {
+                if(textObj[key]){
+                    $('.'+key).val(textObj[key])
+                }
+            });
+        }
+        if(localStorage.getItem('firedailyobj')){
+            var  nationObj = JSON.parse(localStorage.getItem('firedailyobj'));
+            $.each(nationObj, function(key, val) {
+                if(nationObj[key]){
+                    $("input[name='"+key+"'][value='"+nationObj[key]+"']").attr('checked','true');
+                    $("input[name='"+key+"'][value='"+nationObj[key]+"']").data('waschecked', true);
+                }
+            });
+        }
+        localData();
+    })
+</script>
+</html>

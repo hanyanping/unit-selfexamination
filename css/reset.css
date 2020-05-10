@@ -136,7 +136,9 @@ table {
     display: flex;
     justify-content: space-around;
 }
-
+.none{
+    display: none;
+}
 .border-none {
     border: 0;
 }
@@ -289,6 +291,7 @@ select {
     display: flex;
     flex-wrap: wrap;
 }
+
 .file {
     display: inline-block;
     height: 35px;
@@ -345,13 +348,13 @@ select {
 .borderline{
     text-decoration: underline;
 }
-.lineBox{
+/* .lineBox{
     height: 16px;
     width:3px;
     background: #0D76EE;
     display: inline-block;
     vertical-align: middle;
-}
+} */
 
 .radiobox {
     position: relative;
@@ -417,8 +420,8 @@ select {
     height: 18px;
     width: 3px;
     background: #0076FF;
-    left: -12px;
-    top: 2px;
+    left: -8px;
+    top: 4px;
 }
 
 .backgreen{

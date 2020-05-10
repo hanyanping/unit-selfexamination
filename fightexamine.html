@@ -22,7 +22,7 @@
 </head>
 <body style="background:#f9f9f9;">
 <div id="examine">
-    <div class="contentTitle">安全检查单（基础设施类）</div>
+    <div class="contentTitle">单位自查</div>
     <div class="content">
     </div>
     <div class="smallButton" onclick="submit()">提交</div>
@@ -36,7 +36,7 @@
 <script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/nationexamine.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/fightexamine.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var phone = '';
     window.onload = function() {
@@ -72,8 +72,8 @@
     function localData(){
         $.each(obj, function(key, val) {
             $("input:radio[name='"+key+"']").click(function () {
-                if(JSON.parse(localStorage.getItem('nationobj'))){
-                    obj = JSON.parse(localStorage.getItem('nationobj'))
+                if(JSON.parse(localStorage.getItem('fightexamineobj'))){
+                    obj = JSON.parse(localStorage.getItem('fightexamineobj'))
                 }
                 var $radio = $(this);
                 // if this was previously checked
@@ -89,41 +89,15 @@
                 }else{
                     obj[key] = '';
                 }
-                localStorage.setItem('nationobj',JSON.stringify(obj))
+                localStorage.setItem('fightexamineobj',JSON.stringify(obj))
             })
         });
-        var obj1 = {
-            j10: '',
-            j18: '',
-            j29: ''
-        }
-        $.each(obj1, function(key, val) {
-            $("."+key).change(function () {
-                if(JSON.parse(localStorage.getItem('textobj'))){
-                    obj1 = JSON.parse(localStorage.getItem('textobj'))
-                }
-                console.log( $(this).val())
-                if($(this).val()){
-                    obj1[key] = $(this).val();
-                }else{
-                    obj1[key] = '';
-                }
-                
-                localStorage.setItem('textobj',JSON.stringify(obj1))
-            })
-        })
+     
     }
     $(function(){
-        if(localStorage.getItem('textobj')){
-            var  textObj = JSON.parse(localStorage.getItem('textobj'));
-            $.each(textObj, function(key, val) {
-                if(textObj[key]){
-                    $('.'+key).val(textObj[key])
-                }
-            });
-        }
-        if(localStorage.getItem('nationobj')){
-            var  nationObj = JSON.parse(localStorage.getItem('nationobj'));
+      
+        if(localStorage.getItem('fightexamineobj')){
+            var  nationObj = JSON.parse(localStorage.getItem('fightexamineobj'));
             $.each(nationObj, function(key, val) {
                 if(nationObj[key]){
                     $("input[name='"+key+"'][value='"+nationObj[key]+"']").attr('checked','true');
@@ -137,15 +111,8 @@
     function submit(){
         var applyNum = localStorage.getItem('applyNum')
         var  textobj = {},nationobj = {};
-        if(!localStorage.getItem('textobj')){
-             textobj = {
-                j10: '',j18: '',j29: ''
-            }
-
-        }else{
-             textobj = JSON.parse(localStorage.getItem('textobj'));
-        }
-        if(!localStorage.getItem('nationobj')){
+       
+        if(!localStorage.getItem('fightexamineobj')){
             nationobj = {
                 b1: '',
                 s2: '',
@@ -175,12 +142,12 @@
                 k28: ''
             };
         }else{
-            nationobj = JSON.parse(localStorage.getItem('nationobj'));
+            nationobj = JSON.parse(localStorage.getItem('fightexamineobj'));
         }
         var obj = {
             applyNum: applyNum
         }
-        var data = Object.assign(textobj,nationobj,obj);
+        var data = Object.assign(nationobj,obj);
         $(".zhegaiceng").css({'display': 'block'})
        console.log(data)
         data = JSON.stringify(data)
@@ -194,8 +161,7 @@
             success: function(response) {
                 $(".zhegaiceng").css({'display': 'none'})
                 if(response.rescode == 200){
-                    localStorage.removeItem('nationobj')
-                    localStorage.removeItem('textobj')
+                    localStorage.removeItem('fightexamineobj')
                     window.postMessage('success');//向app发送提交成功消息
                 }else{
                     toast(response.resdes)
