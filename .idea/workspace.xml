@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9459bf21-df41-42f2-8355-e9df1d582ea3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/fightagaintemplate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/airtemplate.html" beforeDir="false" afterPath="$PROJECT_DIR$/airtemplate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firetemplate.html" beforeDir="false" afterPath="$PROJECT_DIR$/firetemplate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nationtemplate.html" beforeDir="false" afterPath="$PROJECT_DIR$/nationtemplate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/securitytemplate.html" beforeDir="false" afterPath="$PROJECT_DIR$/securitytemplate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selectCategories.html" beforeDir="false" afterPath="$PROJECT_DIR$/selectCategories.html" afterDir="false" />
-    </list>
+    <list default="true" id="9459bf21-df41-42f2-8355-e9df1d582ea3" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -44,8 +35,8 @@
       <file leaf-file-name="firetemplate.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/firetemplate.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="48" column="78" selection-start-line="48" selection-start-column="70" selection-end-line="48" selection-end-column="78" />
+            <state relative-caret-position="191">
+              <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="68" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -71,8 +62,8 @@
       <file leaf-file-name="nationtemplate.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nationtemplate.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+            <state relative-caret-position="475">
+              <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -275,12 +266,12 @@
       <workItem from="1564968459169" duration="584000" />
       <workItem from="1583942025467" duration="980000" />
       <workItem from="1588773032877" duration="5651000" />
-      <workItem from="1588858593097" duration="6462000" />
+      <workItem from="1588858593097" duration="6846000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128834000" />
+    <option name="totallyTimeSpent" value="129218000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
@@ -525,13 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/firetemplate.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="48" column="78" selection-start-line="48" selection-start-column="70" selection-end-line="48" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/securitytemplate.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -539,10 +523,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/firetemplate.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="68" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nationtemplate.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+        <state relative-caret-position="475">
+          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
         </state>
       </provider>
     </entry>
