@@ -26,18 +26,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-.signButton{
-    height:40px;
-    width: 150px;
-    line-height: 40px;
-    text-align: center;
-    background: #8BC34A;
-}
-.signBox{
-    margin: 0px 20px;
-    padding: 12px 0;
-    line-height: 40px;
-}
+
 #pic{
     height: auto;
     width: 100%;

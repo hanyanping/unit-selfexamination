@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link  href="./css/viewer.css" rel="stylesheet">
+    <title>公务用车审批</title>
+    <style>
+        .infoDetail {
+            background: #f9f9f9;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+
+        .backline:before {
+            content: '';
+            position: absolute;
+            height: 18px;
+            width: 3px;
+            background: #0076FF;
+            left: -12px;
+            top: 2px;
+        }
+
+        .detailTitle {
+            margin-bottom: 6px;
+        }
+
+        .verticalMiddle {
+            position: relative;
+            margin-left: 10px;
+        }
+
+        .detailBox {
+            padding: 16px;
+        }
+
+        .margnleft {
+            margin-left: 5px;
+        }
+
+        .infoDetailBox {
+            background: #fff;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            margin: 0px 0 16px;
+        }
+
+        .lableText {
+            display: inline-block;
+            max-width: 120px;
+            min-width: 98px;
+        }
+
+        .areaspan {
+            margin-right: 12px;
+        }
+
+        .sureBox {
+            position: absolute;
+            bottom: 0px;
+            left: 50%;
+            margin-left: -70px;
+        }
+
+        .zhegaicengone {
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .searchContent {
+            background: #fff;
+            height: 340px;
+            width: 280px;
+            top: 50%;
+            left: 50%;
+            margin-left: -140px;
+            margin-top: -170px;
+            position: absolute;
+            border-radius: 5px;
+        }
+
+        .searchInfo {
+            overflow: auto;
+            max-height: 240px;
+            min-height: 200px;
+            margin: 20px;
+            border-radius: 5px;
+            padding: 10px
+        }
+
+        .tableBox {
+            margin: 10px auto;
+        }
+
+        .tableBox tr td {
+            border: 1px solid #bbb;
+            padding: 6px 16px;
+        }
+
+        .fgxLine {
+            border-top: 1px solid #eee;
+            padding-bottom: 16px;
+        }
+
+        .hide {
+            display: none;
+        }
+        .signBox{
+            margin: 0;
+            padding: 0px 0 8px;
+        }
+        .marginright{
+            margin-right: 10px;
+        }
+        .textareaBox {
+            height: 100px;
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+    #img {
+      width: 95px;
+      height: 125px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    #imgBox {
+        flex-wrap: wrap;
+        margin-left: 14px;
+    }
+    .borderBox{
+        line-height: 80px;
+    }
+    .image {
+        max-height: 80px;
+        max-width: 80px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container none" >
+        <div id="canvasBox" >
+            <div class="greet">
+                <span>请在下方空白处签名</span>
+                <input type="button" class="drawButton" value="清除" ontouchstart="cleardraw()" onmousedown="cleardraw()"/>
+                <input type="button" class="drawButton" value="确定" ontouchstart="savePNG()" onmousedown="savePNG()"/>
+            </div>
+            <canvas></canvas>
+        </div>
+    </div>
+ 
+     
+ 
+
+       
+    <div class="detailBox" id="examine">
+        <div class="infoDetailBox flex">
+            <div class="font14 marginright">是否流转给领导审批：</div>
+            <div class="radiobox font14">
+                <input type="radio" name="liuzhuanFlag" value="1" ><label></label><span class="font14">是</span>
+            </div>
+            <div class="radiobox font14">
+                <input type="radio" name="liuzhuanFlag" value="2" ><label></label><span class="font14">否</span>
+            </div>
+        </div>
+        <div class="infoDetailBox flex">
+            <div class="font14 marginright">是否有安全隐患：</div>
+            <div class="radiobox font14">
+                <input type="radio" name="yinhuanFlag" value="1" ><label></label><span class="font14">是</span>
+            </div>
+            <div class="radiobox font14">
+                <input type="radio" name="yinhuanFlag" value="2" ><label></label><span class="font14">否</span>
+            </div>
+        </div>
+        <div class="infoDetailBox flex none" id="zhenggaiFlag">
+            <div class="font14 marginright">是否现场整改完成：</div>
+            <div class="radiobox font14">
+                <input type="radio" name="zhenggaiFlag" value="1" ><label></label><span class="font14">是</span>
+            </div>
+            <div class="radiobox font14">
+                <input type="radio" name="zhenggaiFlag" value="2" ><label></label><span class="font14">否</span>
+            </div>
+        </div>
+        
+        <div class="radioContent infoDetailBox flex none" id="zhenggaiContent">
+            <div class="font14">整改措施内容：</div>
+            <textarea class="textareaBox font14 zhenggaiContent" placeholder="整改措施内容"></textarea>
+        </div>
+        <div class="infoDetailBox">
+            <span class="font14">照片 :</span>
+            <span class="file" style="margin-left: 10px;" onclick="postFile()">上传照片 </span>
+          </div>
+          <div class="flexWrap flex">
+            <div id="imgBox" class="flex">
+            </div>
+        </div>
+        <div class="infoDetailBox">
+            <div class="flexBetween signBox">
+                <div class="font14">检查员签字：</div>
+                <div  class="signButton checkbutton" onclick="showsign()">请手写签名</div>
+            </div>
+            <div class="applyDay">
+                <img id="pic" class="signUrl" />
+            </div>
+        </div>
+    </div>
+        
+    </div>
+    <div class="ptrBox zhegaicengone" style="display: none;">
+        <div class='searchContent'>
+            <div class='searchInfo'>
+                <table class="tableBox font14">
+
+                </table>
+            </div>
+            <div class='smallButton sureBox' onclick='closeBox()'>知道了</div>
+        </div>
+    </div>
+    <div id="tanwin" class="tan" style="display:none;"></div>
+    <div class="zhegaicengone zhegaiceng" style="display: none;">
+        <img class='lodingimg' src="./images/loadingpop.gif">
+    </div>
+</body>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/viewer.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/draw.js" type="text/javascript" charset="utf-8"></script>
+</html>
+<script>
+    function savePNG() {
+        signImage = draw.getPNGImage();
+        $('.container').addClass('none');
+        $("#examine").removeClass('none');
+        $("#pic").attr("src",signImage)
+    }
+    document.addEventListener('message', function (msg) { //获取客户端返回数据数据
+  $(".zhegaiceng").css({
+    'display': 'none'
+  })
+  var data = JSON.parse(msg.data)
+  if (data) {
+    if (data.hasOwnProperty('photograph')) {
+      addPhoto(data.photograph);
+    }
+  } else {
+    tanwin("上传照片")
+  }
+});
+function deleteImg(ev){
+    $(ev).parent().remove()
+}
+var view = null;
+function addPhoto(photograph) {
+    if(view){
+        view.destroy();
+    }
+  var fileBase64 = 'data:image/jpeg;base64,' + photograph;
+  var str = '<div class="borderBox"><img data-src=' + photograph + '  class="image" src=' + fileBase64 + '><img class="deleteIconindex" src="./images/deleteIcon.png" onclick="deleteImg(this)"</div>';
+  $("#imgBox").append($(str))
+//   view = new Viewer(document.getElementById('imgBox'));
+}
+//照片
+function postFile() {
+  var photo = [];
+  if ($(".image")) {
+    $('.image').each(function () {
+      var obj = {};
+      obj.photoData = $(this).attr('data-src')
+      photo.push(obj);
+    })
+  }
+  if (photo.length >= 10) {
+    tanwin('照片不得超过10张');
+    return;
+  }
+  window.postMessage('photograph'); //发送获取照片消息
+}
+    $(function(){
+        $("input[name='liuzhuanFlag'][value='1']").attr('checked','true')
+        $("input[name='yinhuanFlag'][value='2']").attr('checked','true');
+        $("input[name='zhenggaiFlag'][value='1']").attr('checked','true');
+        
+        $("input[name='yinhuanFlag']").change(function(){
+            if($(this).val() == '1'){
+                $("#zhenggaiFlag").css({'display':'flex'});
+                $("#zhenggaiContent").css({'display':'flex'})
+            }else{
+                $("#zhenggaiFlag").css({'display':'none'});
+                $("#zhenggaiContent").css({'display':'none'})
+            }
+        })
+    })
+</script>
