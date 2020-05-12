@@ -262,7 +262,7 @@
         var data = Object.assign(airObj,airObj1,airObj2,airObj3,airObj4,obj)
         data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'supervisionTemplate/kfHyqkfaqCheckList',
+            url: ajaxUrl + 'companycheckTemplate/kfHbqkfaqCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',
@@ -278,8 +278,7 @@
                     localStorage.removeItem('airObj4')
                     localStorage.removeItem('air48')
                     localStorage.removeItem('air51')
-
-                    window.postMessage('success');//向app发送提交成功消息
+                    window.location.href = './circulation.html'
                 }else{
                     toast(response.resdes)
                 }

@@ -1,5 +1,12 @@
 var phone = localStorage.getItem('phone');
+var source = '';
+$(function(){
+    source = getUrlParms('source');
     getUserCompanyAirDept()
+    
+})
+    
+
 
 function getUserCompanyAirDept(){
     $(".zhegaiceng").css({
@@ -85,47 +92,57 @@ function gotemplate(){
         tanwin('请选择类别')
         return;
     }
-    var data = {
-        phone: encrypt(phone),
-        airportNum: airportNum,
-        deptNum: deptNum
-    };
-    data = JSON.stringify(data)
-    $.ajax({
-        url: ajaxUrl + 'companycheck/insertRichangCheckNext',
-        timeout: timeDelay,
-        type: 'post',
-        contentType: 'application/json;charset=utf-8',
-        dataType: "json",
-        data: data,
-        success: function(response) {
-            $(".zhegaiceng").css({'display': 'none'})
-            if(response.rescode == 200){
-                window.location.href = response.checkUrl+'?applyNum='+response.applyNum;
-
-            }else{
-                toast(response.resdes)
+    if(source == 'richang'){
+        var data = {
+            phone: encrypt(phone),
+            airportNum: airportNum,
+            deptNum: deptNum
+        };
+        data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'companycheck/insertRichangCheckNext',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function(response) {
+                $(".zhegaiceng").css({'display': 'none'})
+                if(response.rescode == 200){
+                    window.location.href = response.checkUrl+'?applyNum='+response.applyNum;
+    
+                }else{
+                    toast(response.resdes)
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({'display': 'none'})
+                //消防
+                // window.location.href = './firetemplate.html?applyNum=1111'
+            //    空防
+                // window.location.href = './airtemplate.html?applyNum=1111'
+    
+            //    反恐
+                // window.location.href = './fightagaintemplate.html?applyNum=1111'
+                //    治安
+                window.location.href = './securitytemplate.html?applyNum=1111'
+                //国保
+                // window.location.href = './nationtemplate.html?applyNum=1111'
+            },
+    
+    
+            complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                $(".zhegaiceng").css({'display': 'none'})
             }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            $(".zhegaiceng").css({'display': 'none'})
-            //消防
-            // window.location.href = './firetemplate.html?applyNum=1111'
-        //    空防
-            // window.location.href = './airtemplate.html?applyNum=1111'
-
-        //    反恐
-        //     window.location.href = './fightagaintemplate.html?applyNum=1111'
-            //    治安
-            window.location.href = './securitytemplate.html?applyNum=1111'
-            //国保
-            // window.location.href = './nationtemplate.html?applyNum=1111'
-        },
-
-
-        complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
-            $(".zhegaiceng").css({'display': 'none'})
+        });
+    }else if(source == 'zidingyi'){
+        var obj = {
+            airportNum: airportNum,
+            deptNum: deptNum
         }
-    });
+        localStorage.setItem('customInfo',JSON.stringify(obj))
+        window.location.href = 'customexamination.html'
+    }
+    
 
 }

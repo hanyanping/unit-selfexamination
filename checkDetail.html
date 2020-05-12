@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link  href="./css/viewer.css" rel="stylesheet">
+    <title>单位法定自查</title>
+    <style>
+   
+    .checkDetail{
+        margin: 15px;
+    }
+    .infoBox{
+        margin: 15px 0;
+    }
+    .linebox{
+        margin-bottom: 6px;
+    }
+   
+    .ptext{
+        margin-top: 6px;
+    }
+    #img {
+      width: 95px;
+      height: 125px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    #imgBox,#imgBox1 {
+        flex-wrap: wrap;
+        margin-left: 14px;
+    }
+    .borderBox{
+        line-height: 80px;
+    }
+    .image {
+        max-height: 80px;
+        max-width: 80px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .marginleft{
+        margin-left: 8px;
+    }
+    .linebox:before {
+        content: '';
+        position: absolute;
+        height: 18px;
+        width: 3px;
+        background: #0076FF;
+        left: -8px;
+        top: 2px;
+    }
+  
+    </style>
+</head>
+<body >
+    <div class="checkDetail font14">
+        <div class="infoBox baseUrl" >
+            <div class="linebox">基本信息</div>
+            <div class="borderline colorBlue marginleft" onclick="gobaseUrl()">查看基本信息</div>
+        </div> 
+        <div class="infoBox" >
+            <div class="linebox">审批流转选择</div>
+            <p class="ptext marginleft" >是否流转：<span class="liuzhuanFlag"></span></p>
+            <p class="ptext marginleft" >是否有隐患：<span class="yinhuanFlag"></span></p>
+            <p class="ptext marginleft" >是否整改完成：<span class="zhenggaiFlag"></span></p>
+            <p class="ptext marginleft" >隐患内容或者整改措施：<span class="zhenggaiContent"></span></p>
+            <div class="  marginleft ptext">
+               <div> 现场照片：</div>
+                <div id="imgBox" class="flexWrap">
+                </div>
+            </div>
+        </div> 
+        <div class="infoBox updateBox none" >
+            <div class="linebox">整改内容</div>
+            <p class="ptext marginleft" >整改内容：<span class="updateContent"></span></p>
+            <p class="ptext marginleft" >提交人：<span class="name"></span></p>
+            <p class="ptext marginleft" >提交时间：<span class="submitTime"></span></p>
+            <div class="  marginleft ptext">
+               <div> 整改完成照片：</div>
+                <div id="imgBox1" class="flexWrap">
+                </div>
+            </div>
+        </div> 
+        <div class="infoBox comBox none" >
+            <div class="linebox">单位领导审核</div>
+            <p class="ptext marginleft" >审核时间：<span class="comTime"></span></p>
+            <p class="ptext marginleft" >审核人：<span class="comName"></span></p>
+            <p class="ptext marginleft" >审核结果：<span class="comResult"></span></p>
+            <p class="ptext marginleft comFailReason none" >审核不通过原因：<span class="comFailReason"></span></p>
+            
+        </div> 
+        <div class="infoBox policeBox none" >
+            <div class="linebox">民警审核</div>
+            <p class="ptext marginleft" >审核时间：<span class="policeTime"></span></p>
+            <p class="ptext marginleft" >审核人：<span class="policeName"></span></p>
+            <p class="ptext marginleft" >审核结果：<span class="policeResult"></span></p>
+            <p class="ptext marginleft policeFailReason none" >审核不通过原因：<span class="policeFailReason"></span></p>
+            
+        </div> 
+       
+    
+    </div>
+    <div class="nodata none" >
+        <img src="./images/noIcon.png" class="nodataIcon">
+        <p class="nodataText font14">暂无数据</p>
+    </div>
+    <div id="tanwin" class="tan" style="display:none;"></div>
+    <div class="zhegaicengone zhegaiceng" style="display: none;">
+        <img class="lodingimg" src="./images/loadingpop.gif">
+    </div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/viewer.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/checkDetail.js" type="text/javascript" charset="utf-8"></script>
+<script>
+   
+</script>
+</html>

@@ -185,7 +185,7 @@
        console.log(data)
         data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'supervisionTemplate/gbAqjcdCheckList',
+            url: ajaxUrl + 'companycheckTemplate/gbAqjcdJcsslCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',
@@ -195,8 +195,8 @@
                 $(".zhegaiceng").css({'display': 'none'})
                 if(response.rescode == 200){
                     localStorage.removeItem('nationobj')
-                    localStorage.removeItem('textobj')
-                    window.postMessage('success');//向app发送提交成功消息
+                    localStorage.removeItem('textobj');
+                    window.location.href = './circulation.html'
                 }else{
                     toast(response.resdes)
                 }

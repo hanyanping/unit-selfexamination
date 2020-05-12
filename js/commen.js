@@ -1,5 +1,11 @@
 var ajaxUrl = 'http://holer65239.wdom.net/general-auth-service/taxiforh5/';
 var timeDelay = '30000';
+var applyNum = '';
+$(function(){
+    if(localStorage.getItem('applyNum')){
+        applyNum = localStorage.getItem('applyNum')
+    }
+})
 function tanwin(text) {
     $("#tanwin").text(text).attr('style', '');
     var clea = setInterval(function () {

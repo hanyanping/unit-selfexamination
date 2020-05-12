@@ -239,6 +239,10 @@ select {
 .colorRed{
     color: #E51C23;
 }
+.colorOrange{
+    color: #FF9800;
+}
+
 .font12{
     font-size: 12px;
 }

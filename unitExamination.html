@@ -254,34 +254,34 @@
     </div> -->
    
     <div class="examinationListBox">
-        <div class="examinationList" onclick="goselectCategories()">
+        <div class="examinationList" onclick="goselectCategories('richang')">
             <div class="examinationIconBox">
-                <img class='examinationIcon' src="./images/richang.png"/>
+                <img class='examinationIcon' src="./images/daily.png"/>
             </div>
             <span class='examinationText'>日常检查</span>
         </div>
-        <div class="examinationList">
+        <div class="examinationList" onclick="goselectCategories('zidingyi')">
             <div class="examinationIconBox">
-                <img class='examinationIcon' src="./images/richang.png"/>
+                <img class='examinationIcon' src="./images/zdyjiancha.png"/>
             </div>
             <span class='examinationText'>自定义检查</span>
         </div>
-        <div class="examinationList">
+        <div class="examinationList" onclick="gozx()">
             <div class="examinationIconBox">
-                <img class='examinationIcon' src="./images/zhuanxiang.png"/>
+                <img class='examinationIcon' src="./images/zxjiancha.png"/>
             </div>
             <span class='examinationText'>专项检查</span>
         </div>
-        <div class="examinationList">
+        <div class="examinationList" onclick="gochecklist()">
             <div class="examinationIconBox">
-                <img class='examinationIcon' src="./images/lishi.png"/>
+                <img class='examinationIcon' src="./images/listicon.png"/>
             </div>
             <span class='examinationText'>历史检查记录</span>
         </div>
       
         <div class="examinationList">
             <div class="examinationIconBox">
-                <img class='examinationIcon' src="./images/daishenhe.png"/>
+                <img class='examinationIcon' src="./images/checkicon.png"/>
             </div>
             <span class='examinationText'>审核</span>
         </div>
@@ -358,13 +358,13 @@
         },2000)
     })
     function gostatics(){
-        // window.location.href = './statics.html'
-        window.location.href = './circulation.html'
-        
+        window.location.href = './statics.html'
     }
-    function goselectCategories(){
-        window.location.href = './selectCategories.html'
-    
+    function goselectCategories(source){
+        window.location.href = './selectCategories.html?source='+source;
+    }
+    function gozx(){
+        tanwin("暂未开通") 
     }
     function getUserRole(){
         $(".zhegaiceng").css({
@@ -395,7 +395,7 @@
                     $(".imgbox").append($(str))
 
                 }else{
-                    toast(response.resdes)
+                    tanwin(response.resdes)
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -440,6 +440,9 @@
         time = 6;
         $(".nosure").html(time+'s')
         t = setInterval(countDown,1000);
+    }
+    function gochecklist(){
+        window.location.href = './checkList.html'
     }
     function  countDown(){
         time--;

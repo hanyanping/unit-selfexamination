@@ -162,12 +162,20 @@
             <canvas></canvas>
         </div>
     </div>
- 
-     
- 
-
-       
     <div class="detailBox" id="examine">
+        <div class="radioContent infoDetailBox flex" >
+            <div class="font14">检查内容：</div>
+            <textarea class="textareaBox font14 checkContent" placeholder="检查内容"></textarea>
+        </div>
+        <div class="radioContent infoDetailBox flex">
+            <div class="font14">检查结果：</div>
+            <textarea class="textareaBox font14 checkResult" placeholder="检查结果"></textarea>
+        </div>
+        <div class="radioContent infoDetailBox flex" >
+            <div class="font14">其他说明：</div>
+            <textarea class="textareaBox font14 checkRemark" placeholder="其他说明"></textarea>
+        </div>
+       
         <div class="infoDetailBox flex">
             <div class="font14 marginright">是否流转给领导审批：</div>
             <div class="radiobox font14">
@@ -244,6 +252,8 @@
 </html>
 <script>
     var signPhoto = '';
+    var phone = '';
+    var airportNum = '',deptNum = '';
     function savePNG() {
         signImage = draw.getPNGImage();
         $('.container').addClass('none');
@@ -253,18 +263,38 @@
         signPhoto = signImage.substring(index+1);
     }
     document.addEventListener('message', function (msg) { //获取客户端返回数据数据
-  $(".zhegaiceng").css({
-    'display': 'none'
-  })
-  var data = JSON.parse(msg.data)
-  if (data) {
-    if (data.hasOwnProperty('photograph')) {
-      addPhoto(data.photograph);
-    }
-  } else {
-    tanwin("上传照片")
-  }
-});
+        $(".zhegaiceng").css({
+            'display': 'none'
+        })
+        var data = JSON.parse(msg.data)
+        if (data) {
+            if (data.hasOwnProperty('photograph')) {
+            addPhoto(data.photograph);
+            }
+        } else {
+            tanwin("上传照片")
+        }
+    });
+    $(function(){
+        airportNum = $()
+        var customInfo = JSON.parse(localStorage.getItem('customInfo'));
+        var airportNum = customInfo.airportNum;
+        var deptNum = customInfo.deptNum;
+        phone = localStorage.getItem('phone');
+        $("input[name='liuzhuanFlag'][value='1']").attr('checked','true')
+        $("input[name='yinhuanFlag'][value='2']").attr('checked','true');
+        $("input[name='zhenggaiFlag'][value='1']").attr('checked','true');
+        
+        $("input[name='yinhuanFlag']").change(function(){
+            if($(this).val() == '1'){
+                $("#zhenggaiFlag").css({'display':'flex'});
+                $("#zhenggaiContent").css({'display':'flex'})
+            }else{
+                $("#zhenggaiFlag").css({'display':'none'});                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+                $("#zhenggaiContent").css({'display':'none'})
+            }
+        })
+    })
 function deleteImg(ev){
     $(ev).parent().remove()
 }
@@ -300,11 +330,13 @@ function sunbmit(){
     var liuzhuanFlag = $("input[name='liuzhuanFlag']:checked").val()
     var yinhuanFlag = $("input[name='yinhuanFlag']:checked").val()
     var zhenggaiFlag = '',zhenggaiContent = '';
+    var checkContent = $(".checkContent").val();
+    var checkResult = $(".checkResult").val();
+    var checkRemark = $(".checkRemark").val();
     if(yinhuanFlag == '1'){
         zhenggaiFlag = $("input[name='zhenggaiFlag']:checked").val();
         zhenggaiContent = $(".zhenggaiContent").val()
     }
-    console.log(signPhoto)
     if(!signPhoto){
         tanwin('请手写签名')
         return;
@@ -318,7 +350,12 @@ function sunbmit(){
         });
     })
     var data = {
-        applyNum: applyNum,
+        phone: encrypt(phone),
+        airportNum: airportNum,
+        deptNum: deptNum,
+        checkContent: checkContent,
+        checkResult: checkResult,
+        checkRemark:checkRemark,
         liuzhuanFlag: liuzhuanFlag,
         yinhuanFlag: yinhuanFlag,
         zhenggaiFlag: zhenggaiFlag,
@@ -331,7 +368,7 @@ function sunbmit(){
     'display': 'block'
   });
   $.ajax({
-    url: ajaxUrl + 'companycheck/insertRichangCheckSubmit',
+    url: ajaxUrl + 'companycheck/insertZidingyiCheckSubmit',
     timeout: timeDelay,
     type: 'post',
     contentType: 'application/json;charset=utf-8',
@@ -364,19 +401,5 @@ function sunbmit(){
   });
 
 }
-    $(function(){
-        $("input[name='liuzhuanFlag'][value='1']").attr('checked','true')
-        $("input[name='yinhuanFlag'][value='2']").attr('checked','true');
-        $("input[name='zhenggaiFlag'][value='1']").attr('checked','true');
-        
-        $("input[name='yinhuanFlag']").change(function(){
-            if($(this).val() == '1'){
-                $("#zhenggaiFlag").css({'display':'flex'});
-                $("#zhenggaiContent").css({'display':'flex'})
-            }else{
-                $("#zhenggaiFlag").css({'display':'none'});
-                $("#zhenggaiContent").css({'display':'none'})
-            }
-        })
-    })
+   
 </script>

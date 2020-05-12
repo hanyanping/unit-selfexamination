@@ -95,16 +95,16 @@
     
             <div class="inputBox">
                 <span class="font14 inputLable">被检查部门：</span>
-                <input  class="inputText font14 f1" onchange="changeValue('f1')" type='text' placeholder="被检查部门"/>
+                <input  class="inputText font14 b1" onchange="changeValue('b1')" type='text' placeholder="被检查部门"/>
             </div>
             <div class="inputBox">
                 <span class="font14 inputLable">部门负责人：</span>
-                <input  class="inputText font14 d3" onchange="changeValue('d3')" type='text' placeholder="部门负责人"/>
+                <input  class="inputText font14 b2" onchange="changeValue('b2')" type='text' placeholder="部门负责人"/>
             </div>
            
             <div class="inputBox">
                 <span class="font14 inputLable">部门管理人：</span>
-                <input  class="inputText font14 s5" onchange="changeValue('s5')" type='text' placeholder="部门管理人"/>
+                <input  class="inputText font14 b3" onchange="changeValue('b3')" type='text' placeholder="部门管理人"/>
             </div>
         </div>
         <div class="contentBox"></div>
@@ -126,33 +126,110 @@
 </html>
 <script>
     var obj = {
+        k4: '',
+        x5: '',
+        f6: '',
+        g7: '',
+        h8: '',
+        b9: '',
+        d10: '',
+        p11: '',
+        c12: '',
+        y13: '',
+        c14: '',
+        z15: '',
+        c16: '',
+        s17: '',
+        c18: '',
+        c19: '',
+        c20: '',
+        c21: '',
+        c22: '',
+        c23: '',
+        c24: '',
+        c25: '',
+        p26: '',
+        p27: '',
+        p28: '',
+        p29: '',
+        p30: '',
+        b31: '',
+        p32: '',
+        c33: '',
+        m34: '',
+        c35: '',
+        c36: '',
+        c37: '',
+        c38: '',
+        y39: '',
+        f40: '',
+        c41: '',
+        x42: '',
+        p43: '',
+        c44: '',
+        p45: '',
+        x46: '',
+        y47: '',
+        f48: '',
+        s49: '',
+        n50: '',
+        c51: '',
+        k52: '',
+        f53: '',
+        s54: '',
+        c55: '',
+        c56: '',
+        c57: '',
+        c58: ''};
+        var obj1 = {
             b1: '',
-            s2: '',
-            s3: '',
-            s4: '',
-            s5: '',
-            c6: '',
-            b7: '',
-            j8: '',
-            s9: '',
-            d11: '',
-            d12: '',
-            z13: '',
-            s14: '',
-            c15: '',
-            s16: '',
-            d17: '',
-            s19: '',
-            s20: '',
-            s21: '',
-            j22: '',
-            s23: '',
-            w24: '',
-            j25: '',
-            s26: '',
-            s27: '',
-            k28: ''
-        };
+            b2: '',
+            b3: ''
+        }
+    function submit(){
+        var firedailyobj = null,firedailyobjtextobj = null;;
+            if(!localStorage.getItem('firedailyobj')){
+                firedailyobj = obj;
+            }else{
+                firedailyobj = JSON.parse(localStorage.getItem('firedailyobj'))
+            }
+            if(!localStorage.getItem('firedailyobjtextobj')){
+                firedailyobjtextobj = obj1;
+            }else{
+                firedailyobjtextobj = JSON.parse(localStorage.getItem('firedailyobjtextobj'))
+            }
+            var applyNumobj = {
+                applyNum: applyNum,
+            };
+            var data = Object.assign(firedailyobjtextobj,firedailyobj,applyNumobj)
+             data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'companycheckTemplate/xfXtmrjcAndSyCheckList',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function(response) {
+                $(".zhegaiceng").css({'display': 'none'})
+                if(response.rescode == 200){
+                    localStorage.removeItem('firedailyobjtextobj')
+                    localStorage.removeItem('firedailyobj')
+                    window.location.href = './circulation.html'
+                }else{
+                    toast(response.resdes)
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({'display': 'none'})
+            },
+            complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                $(".zhegaiceng").css({'display': 'none'})
+            }
+        });
+
+            
+    }
     function localData(){
         $.each(obj, function(key, val) {
             $("input:radio[name='"+key+"']").click(function () {
@@ -173,27 +250,20 @@
                 }else{
                     obj[key] = '';
                 }
-                console.log($("input[name='"+key+"']:checked").val())
                 localStorage.setItem('firedailyobj',JSON.stringify(obj))
             })
         });
-        var obj1 = {
-            j10: '',
-            j18: '',
-            j29: ''
-        }
+      
         $.each(obj1, function(key, val) {
             $("."+key).change(function () {
                 if(JSON.parse(localStorage.getItem('firedailyobjtextobj'))){
                     obj1 = JSON.parse(localStorage.getItem('firedailyobjtextobj'))
                 }
-                console.log( $(this).val())
                 if($(this).val()){
                     obj1[key] = $(this).val();
                 }else{
                     obj1[key] = '';
                 }
-                
                 localStorage.setItem('firedailyobjtextobj',JSON.stringify(obj1))
             })
         })

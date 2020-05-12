@@ -42,32 +42,26 @@
     window.onload = function() {
     }
     var obj = {
-            b1: '',
-            s2: '',
-            s3: '',
-            s4: '',
-            s5: '',
-            c6: '',
-            b7: '',
-            j8: '',
-            s9: '',
-            d11: '',
-            d12: '',
-            z13: '',
-            s14: '',
-            c15: '',
-            s16: '',
-            d17: '',
-            s19: '',
-            s20: '',
-            s21: '',
-            j22: '',
-            s23: '',
-            w24: '',
-            j25: '',
-            s26: '',
-            s27: '',
-            k28: ''
+        y1: '',
+        z2: '',
+        z3: '',
+        j4: '',
+        s5: '',
+        c6: '',
+        w7: '',
+        w8: '',
+        b9: '',
+        f10: '',
+        f11: '',
+        f12: '',
+        f13: '',
+        w14: '',
+        w15: '',
+        a16: '',
+        x17: '',
+        f18: '',
+        f19: '',
+        g20: ''
         };
     function localData(){
         $.each(obj, function(key, val) {
@@ -113,34 +107,7 @@
         var  textobj = {},nationobj = {};
        
         if(!localStorage.getItem('fightexamineobj')){
-            nationobj = {
-                b1: '',
-                s2: '',
-                s3: '',
-                s4: '',
-                s5: '',
-                c6: '',
-                b7: '',
-                j8: '',
-                s9: '',
-                d11: '',
-                d12: '',
-                z13: '',
-                s14: '',
-                c15: '',
-                s16: '',
-                d17: '',
-                s19: '',
-                s20: '',
-                s21: '',
-                j22: '',
-                s23: '',
-                w24: '',
-                j25: '',
-                s26: '',
-                s27: '',
-                k28: ''
-            };
+            nationobj = obj;
         }else{
             nationobj = JSON.parse(localStorage.getItem('fightexamineobj'));
         }
@@ -152,7 +119,7 @@
        console.log(data)
         data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'supervisionTemplate/gbAqjcdCheckList',
+            url: ajaxUrl + 'companycheckTemplate/fkDwzcCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',
@@ -162,7 +129,7 @@
                 $(".zhegaiceng").css({'display': 'none'})
                 if(response.rescode == 200){
                     localStorage.removeItem('fightexamineobj')
-                    window.postMessage('success');//向app发送提交成功消息
+                    window.location.href = './circulation.html'
                 }else{
                     toast(response.resdes)
                 }

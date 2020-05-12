@@ -32,28 +32,28 @@
             <p>  （三）枪支被盗、被抢或者丢失的，立即报告公安机关。 </p>
         </div>
         <div class="flex showright">
-            <div class="radiobox font14"><input type="radio" name="h2" value="2"><label></label><span class="font14">否</span></div>
-            <div class="radiobox font14"><input type="radio" name="h2" value="1"><label></label><span class="font14">是</span></div>
+            <div class="radiobox font14"><input type="radio" name="p4" value="2"><label></label><span class="font14">否</span></div>
+            <div class="radiobox font14"><input type="radio" name="p4" value="1"><label></label><span class="font14">是</span></div>
         </div>
         <div class="radioContent">
             <p class="radioTitle font14">5.配置民用枪支的单位和个人不再符合持枪条件时，是否及时将枪支连同持枪证件上缴核发持枪证件的公安机关</p>
             <div class="flex showright">
-                <div class="radiobox font14"><input type="radio" name="h2" value="2"><label></label><span class="font14">否</span></div>
-                <div class="radiobox font14"><input type="radio" name="h2" value="1"><label></label><span class="font14">是</span></div>
+                <div class="radiobox font14"><input type="radio" name="p5" value="2"><label></label><span class="font14">否</span></div>
+                <div class="radiobox font14"><input type="radio" name="p5" value="1"><label></label><span class="font14">是</span></div>
             </div>
          </div>
         <div class="radioContent">
             <p class="radioTitle font14">6.不符合国家技术标准、不能安全使用的枪支，是否报废。配备、持有枪支的单位和个人是否将报废的枪支连同持枪证件上缴核发持枪证件的公安机关</p>
             <div class="flex showright">
-                <div class="radiobox font14"><input type="radio" name="h2" value="2"><label></label><span class="font14">否</span></div>
-                <div class="radiobox font14"><input type="radio" name="h2" value="1"><label></label><span class="font14">是</span></div>
+                <div class="radiobox font14"><input type="radio" name="b6" value="2"><label></label><span class="font14">否</span></div>
+                <div class="radiobox font14"><input type="radio" name="b6" value="1"><label></label><span class="font14">是</span></div>
             </div>
         </div>
         <div class="radioContent">
             <p class="radioTitle font14">7.持有枪支的单位和个人，是否在公安机关指定的时间、地点接受查验</p>
             <div class="flex showright">
-                <div class="radiobox font14"><input type="radio" name="h2" value="2"><label></label><span class="font14">否</span></div>
-                <div class="radiobox font14"><input type="radio" name="h2" value="1"><label></label><span class="font14">是</span></div>
+                <div class="radiobox font14"><input type="radio" name="c7" value="2"><label></label><span class="font14">否</span></div>
+                <div class="radiobox font14"><input type="radio" name="c7" value="1"><label></label><span class="font14">是</span></div>
             </div>
         </div>
 
@@ -71,37 +71,18 @@
 <script>
     var phone = '';
     var firstList = [
-        {'title':'',radioData:[{radioName:'b1',radioTitle: '1.配备、配置枪支的单位，是否明确枪支管理责任，是否指定专人负责，是否有牢固的专用保管设施，枪支、弹药是否分开存放。对交由个人使用的枪支，是否建立严格的枪支登记、交接、检查、保养等管理制度，使用完毕，及时收回',radioValue:'0'},{radioName:'h2',radioTitle: '2.配备、配置给个人使用的枪支，是否采取有效措施，严防被盗、被抢、丢失或者发生其他事故',radioValue:'0'},{radioName:'b1',radioTitle: '3.使用枪支的人员，是否掌握枪支的性能，是否遵守使用枪支的有关规定，保证枪支的合法、安全使用。使用公务用枪的人员，是否经过专门培训',radioValue:'0'}]},
+        {'title':'',radioData:[{radioName:'p1',radioTitle: '1.配备、配置枪支的单位，是否明确枪支管理责任，是否指定专人负责，是否有牢固的专用保管设施，枪支、弹药是否分开存放。对交由个人使用的枪支，是否建立严格的枪支登记、交接、检查、保养等管理制度，使用完毕，及时收回',radioValue:'0'},{radioName:'p2',radioTitle: '2.配备、配置给个人使用的枪支，是否采取有效措施，严防被盗、被抢、丢失或者发生其他事故',radioValue:'0'},{radioName:'s3',radioTitle: '3.使用枪支的人员，是否掌握枪支的性能，是否遵守使用枪支的有关规定，保证枪支的合法、安全使用。使用公务用枪的人员，是否经过专门培训',radioValue:'0'}]},
     ];
     window.onload = function() {
     }
     var obj = {
-        b1: '',
-        s2: '',
+        p1: '',
+        p2: '',
         s3: '',
-        s4: '',
-        s5: '',
-        c6: '',
-        b7: '',
-        j8: '',
-        s9: '',
-        d11: '',
-        d12: '',
-        z13: '',
-        s14: '',
-        c15: '',
-        s16: '',
-        d17: '',
-        s19: '',
-        s20: '',
-        s21: '',
-        j22: '',
-        s23: '',
-        w24: '',
-        j25: '',
-        s26: '',
-        s27: '',
-        k28: ''
+        p4: '',
+        p5: '',
+        b6: '',
+        c7: ''
     };
     function localData(){
         $.each(obj, function(key, val) {
@@ -129,9 +110,6 @@
 
     }
     $(function(){
-
-
-
         var radioList = [];
         var str = '';
         radioList = firstList;
@@ -174,32 +152,13 @@
 
         if(!localStorage.getItem('baserverexamineobj')){
             nationobj = {
-                b1: '',
-                s2: '',
+                p1: '',
+                p2: '',
                 s3: '',
-                s4: '',
-                s5: '',
-                c6: '',
-                b7: '',
-                j8: '',
-                s9: '',
-                d11: '',
-                d12: '',
-                z13: '',
-                s14: '',
-                c15: '',
-                s16: '',
-                d17: '',
-                s19: '',
-                s20: '',
-                s21: '',
-                j22: '',
-                s23: '',
-                w24: '',
-                j25: '',
-                s26: '',
-                s27: '',
-                k28: ''
+                p4: '',
+                p5: '',
+                b6: '',
+                c7: ''
             };
         }else{
             nationobj = JSON.parse(localStorage.getItem('baserverexamineobj'));
@@ -212,7 +171,7 @@
         console.log(data)
         data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'supervisionTemplate/gbAqjcdCheckList',
+            url: ajaxUrl + 'companycheckTemplate/zaQzrcglzcqdCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',
@@ -222,7 +181,7 @@
                 $(".zhegaiceng").css({'display': 'none'})
                 if(response.rescode == 200){
                     localStorage.removeItem('baserverexamineobj')
-                    window.postMessage('success');//向app发送提交成功消息
+                    window.location.href = './circulation.html'
                 }else{
                     toast(response.resdes)
                 }
