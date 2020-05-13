@@ -136,7 +136,7 @@
         }
         
        .userBox{
-           margin-bottom: 8px;
+           margin-bottom: 0px;
            font-size: 13px;
            color: #fff;
            padding: 6px;
@@ -203,7 +203,7 @@
         .underline{
             text-decoration: underline;
             position: absolute;
-            right: 8px;
+            right: 0px;
         }
         .levelinfo{
             color: #fff;
@@ -229,7 +229,7 @@
         </div>
         <div class=" flex userinfoBox">
             <div class="userLogo">
-                <img class="headIcon" src="./images/icon.jpg">
+                <img class="headIcon" src="./images/headIcon.png">
             </div>
             <div class="userInfo">
                 <p class="userBox">
@@ -279,7 +279,7 @@
             <span class='examinationText'>历史检查记录</span>
         </div>
       
-        <div class="examinationList" onclick="goauditCheckList()">
+        <div class="examinationList checkBox none" onclick="goauditCheckList()">
             <div class="examinationIconBox">
                 <img class='examinationIcon' src="./images/checkicon.png"/>
             </div>
@@ -297,36 +297,11 @@
 <div class="zhegaicengone zhegaiceng" style="display: none;">
     <img class="lodingimg" src="./images/loadingpop.gif">
 </div>
-<div class="dialog" style="display:none;">
-    <div class=" zhegaiContenttwo zhegaiContent">
-        <div class="warmtitle">
-            <span class="chengnuo">温馨提示</span>
-            <img  class='closeIcon' src="../images/close.png" onClick="closedia()" >
-        </div>
 
-        <p class="chengnuoText one" style="margin-bottom:5px;">
-            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
-        </p>
-        <p class="chengnuoText two" style="margin-bottom:5px;">
-            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
-        </p>
-        <p class="chengnuoText three" style="margin-bottom:5px;">
-            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
-            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
-            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
-        </p>
-        <p class="chengnuoText four" style="margin-bottom:5px;">
-            温馨提示：每个用户每天最多可进行5次认证，请您仔细输入正确的信息
-        </p>
-        <div class="sureBox">
-            <span class="sure" onClick="closeDialog()" style="display:none;">确认</span>
-            <span class="nosure">6s</span>
-        </div>
-    </div>
-</div>
 </body>
 <script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var phone = '',zhinanUrl = '';
      window.onload = function () {
@@ -335,27 +310,13 @@
             if (data.hasOwnProperty('phoneNum')) {
                 phone = data.phoneNum;
                 if (phone) {
-                    // getUserRole();
+                    getUserRole();
                 }
             }
         })
     }
     $(function(){
         // getUserRole();
-        // gouserinfo();
-
-        var arrData = [{"name":"见看得见看看得见看得见",icon:'../images/tongzhi.png'},{"name":"见看得见看看得见看得见",icon:'../images/tongzhi.png'}];
-        var str = '';
-        for(let i in arrData){
-            str+= '<li>' +
-                '<div class="imgBox"><img src="'+arrData[i].icon+'"></div>' +
-                '<span class="nameBox">'+arrData[i].name+'</span>' +
-                '</li>'
-        }
-        $(".listUl").append($(str));
-        setTimeout(function(){
-            // setInterval(autoScroll,1000);
-        },2000)
     })
     function gozhinan(){
         window.location.href = zhinanUrl;
@@ -373,6 +334,7 @@
         tanwin("暂未开通") 
     }
     function getUserRole(){
+         localStorage.setItem('phone',phone)
         $(".zhegaiceng").css({
             'display': 'block'
         });
@@ -391,6 +353,11 @@
                 $(".zhegaiceng").css({'display': 'none'})
                 if(response.rescode == 200){
                     zhinanUrl = response.zhinanUrl;
+                    if(response.roleNum == "92"){
+                        $(".checkBox").addClass("none")
+                    }else{
+                        $(".checkBox").removeClass("none")
+                    }
                     $(".roleName").html(response.roleName)
                     $(".companyName").html(response.companyName)
                     $(".name").html(response.name)
@@ -413,52 +380,10 @@
             }
         });
     }
-    function autoScroll(){//分享图动画效果
-        $("#news").find('ul li').css({
-            opacity: 1
-        });
-        $("#news").find('ul li:first').animate({
-            opacity: 1
-        },1000);
-        setTimeout(function(){
-            $("#news").find('ul').animate({
-                marginTop: '-50px',
-            },1000,function(){
-                $(this).css({marginTop : "0px"});
-                var li  =$("#news").find('ul').children().first().clone();
-                $("#news").find('ul li:last').after(li );
-                $("#news").find('ul li').eq(1).animate({
-                    opacity: 0
-                },1000);
-                $("#news").find("ul li:first").remove();
-            })
-        },1000)
-    }
-    function closeDialog(){
-        $('.dialog').css({'display':'none'})
-        window.location.href = './userinfo.html'
-    }
-    function closedia(){
-        $('.dialog').css({'display':'none'})
-        clearInterval(t)
-    }
-    function gouserinfo(){
-        $(".dialog").css({"display":'block'})
-        time = 6;
-        $(".nosure").html(time+'s')
-        t = setInterval(countDown,1000);
-    }
+
     function gochecklist(){
         window.location.href = './checkList.html'
     }
-    function  countDown(){
-        time--;
-        $(".nosure").html(time+'s')
-        if(time == 0){
-            clearInterval(t)
-            $(".nosure").css({"display":'none'})
-            $(".sure").css({"display":'inline-block'})
-        }
-    };
+
 </script>
 </html>

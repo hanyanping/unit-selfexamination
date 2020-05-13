@@ -48,7 +48,7 @@ function getDataList(){
     };
     data = JSON.stringify(data)
     $.ajax({
-        url: ajaxUrl + 'companycheck/getUserRole',
+        url: ajaxUrl + 'companycheck/getUserTaskCounts',
         timeout: timeDelay,
         type: 'post',
         contentType: 'application/json;charset=utf-8',
@@ -67,10 +67,6 @@ function getDataList(){
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             $(".zhegaiceng").css({'display': 'none'})
-            dxAirportList = [{deptName:'12',tjSize:'124',rwSize:'24',dwcSize: '43',zxjcSize: '455',yhSize: '3',dzgSize: '44'},{deptName:'你4好1',tjSize:'412',rwSize:'24',dwcSize: '3',zxjcSize: '455',yhSize: '3',dzgSize: '44'}]
-             
-            sdAirportList = [{deptName:'你好12',tjSize:'12',rwSize:'2',dwcSize: '3',zxjcSize: '455',yhSize: '3',dzgSize: '44'},{deptName:'你好1',tjSize:'12',rwSize:'2',dwcSize: '3',zxjcSize: '455',yhSize: '3',dzgSize: '44'}]
-            showData(sdAirportList);
         },
         complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
             $(".zhegaiceng").css({'display': 'none'})

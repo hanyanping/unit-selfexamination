@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
     <link  href="./css/viewer.css" rel="stylesheet">
-    <title>公务用车审批</title>
+    <title>单位法定自查</title>
     <style>
         .infoDetail {
             background: #f9f9f9;
@@ -243,6 +243,7 @@
 <script src="./js/draw.js" type="text/javascript" charset="utf-8"></script>
 </html>
 <script>
+    var phone = '';
     var signPhoto = '';
     function savePNG() {
         signImage = draw.getPNGImage();
@@ -318,6 +319,7 @@ function sunbmit(){
         });
     })
     var data = {
+        phone: encrypt(phone),
         applyNum: applyNum,
         liuzhuanFlag: liuzhuanFlag,
         yinhuanFlag: yinhuanFlag,
@@ -365,6 +367,7 @@ function sunbmit(){
 
 }
     $(function(){
+        phone = localStorage.getItem('phone');
         $("input[name='liuzhuanFlag'][value='1']").attr('checked','true')
         $("input[name='yinhuanFlag'][value='2']").attr('checked','true');
         $("input[name='zhenggaiFlag'][value='1']").attr('checked','true');

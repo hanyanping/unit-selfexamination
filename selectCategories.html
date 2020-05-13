@@ -90,10 +90,10 @@ function postFile() {
       photo.push(obj);
     })
   }
-  if (photo.length >= 10) {
-    tanwin('照片不得超过10张');
-    return;
-  }
+  // if (photo.length >= 10) {
+  //   tanwin('照片不得超过10张');
+  //   return;
+  // }
   window.postMessage('photograph'); //发送获取照片消息
 }
   

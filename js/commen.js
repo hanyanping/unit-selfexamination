@@ -1,4 +1,4 @@
-var ajaxUrl = 'http://holer65239.wdom.net/general-auth-service/taxiforh5/';
+var ajaxUrl = 'http://holer65448.wdom.net/company-check-service/';
 var timeDelay = '30000';
 var applyNum = '';
 $(function(){

@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
     <link  href="./css/viewer.css" rel="stylesheet">
-    <title>公务用车审批</title>
+    <title>单位法定自查</title>
     <style>
         .infoDetail {
             background: #f9f9f9;
@@ -276,10 +276,9 @@
         }
     });
     $(function(){
-        airportNum = $()
         var customInfo = JSON.parse(localStorage.getItem('customInfo'));
-        var airportNum = customInfo.airportNum;
-        var deptNum = customInfo.deptNum;
+         airportNum = customInfo.airportNum;
+         deptNum = customInfo.deptNum;
         phone = localStorage.getItem('phone');
         $("input[name='liuzhuanFlag'][value='1']").attr('checked','true')
         $("input[name='yinhuanFlag'][value='2']").attr('checked','true');
