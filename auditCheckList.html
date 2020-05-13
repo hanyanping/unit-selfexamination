@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <title>单位法定自查</title>
+    <style>
+    .checkBox{
+        border-radius: 10px;
+        background: #fff;
+        margin: 15px  10px;
+        padding: 12px;
+    }
+    .rightIcon{
+        height: 25px;
+        width: 15px;
+    }
+    .checkTop{
+        padding-bottom: 6px;
+        border-bottom: 1px solid #bbb;
+        
+    }
+    .checkbottom{
+        align-items: center;
+    }
+    .ptext{
+        margin-top: 6px;
+    }
+    .tabBox {
+        background: #fff;
+        padding: 16px;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .selectTabBox {
+        border-bottom: 2px solid #3D89EB;
+        color: #3D89EB;
+    }
+  
+    </style>
+</head>
+<body style="background: #f4f4f4;">
+    <div class="tabBox flexAround">
+        <div class="tabItem selectTabBox" data-id="1">待审核</div>
+        <div class="tabItem"  data-id="2">已完成</div>
+    </div>
+    <div class="checkList">
+    
+    </div>
+    <div class="nodata none" >
+        <img src="./images/noIcon.png" class="nodataIcon">
+        <p class="nodataText font14">暂无数据</p>
+    </div>
+    <div id="tanwin" class="tan" style="display:none;"></div>
+    <div class="zhegaicengone zhegaiceng" style="display: none;">
+        <img class="lodingimg" src="./images/loadingpop.gif">
+    </div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/auditCheckList.js" type="text/javascript" charset="utf-8"></script>
+<script>
+   
+</script>
+</html>

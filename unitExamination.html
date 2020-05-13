@@ -279,13 +279,13 @@
             <span class='examinationText'>历史检查记录</span>
         </div>
       
-        <div class="examinationList">
+        <div class="examinationList" onclick="goauditCheckList()">
             <div class="examinationIconBox">
                 <img class='examinationIcon' src="./images/checkicon.png"/>
             </div>
             <span class='examinationText'>审核</span>
         </div>
-        <div class="examinationList">
+        <div class="examinationList" onclick="gozhinan()">
             <div class="examinationIconBox">
                 <img class='examinationIcon' src="./images/zhinan.png"/>
             </div>
@@ -328,7 +328,7 @@
 <script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    var phone = '';
+    var phone = '',zhinanUrl = '';
      window.onload = function () {
         document.addEventListener('message', function (msg) {
             var data = JSON.parse(msg.data);
@@ -357,11 +357,17 @@
             // setInterval(autoScroll,1000);
         },2000)
     })
+    function gozhinan(){
+        window.location.href = zhinanUrl;
+    }
     function gostatics(){
         window.location.href = './statics.html'
     }
     function goselectCategories(source){
         window.location.href = './selectCategories.html?source='+source;
+    }
+    function goauditCheckList(){
+        window.location.href = './auditCheckList.html';
     }
     function gozx(){
         tanwin("暂未开通") 
@@ -384,6 +390,7 @@
             success: function(response) {
                 $(".zhegaiceng").css({'display': 'none'})
                 if(response.rescode == 200){
+                    zhinanUrl = response.zhinanUrl;
                     $(".roleName").html(response.roleName)
                     $(".companyName").html(response.companyName)
                     $(".name").html(response.name)

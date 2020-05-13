@@ -60,6 +60,19 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+        .radiobox input{
+            left: 2px;
+        }
+        .radiobox label{
+            left: 2px;
+        }
+        #noResultText{
+            height: 30px;
+            width: 80%;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            text-indent: 6px;
+        }
   
     </style>
 </head>
@@ -81,22 +94,6 @@
                 </div>
             </div>
         </div> 
-        <div class="infoBox updatecontentBox none" >
-            <div class="linebox">整改内容</div>
-            <div class="ptext marginleft flex" >
-                <div class="font14"><span class="colorRed">*</span>整改措施内容：</div>
-                <textarea class="textareaBox font14 subupdateContent" placeholder="整改措施内容"></textarea>
-            </div>
-            <div class="ptext marginleft">
-                <span class="font14">照片 :</span>
-                <span class="file" style="margin-left: 10px;" onclick="postFile()">上传照片 </span>
-              </div>
-              <div class="flexWrap flex">
-                <div id="imgBox2" class="flex">
-                </div>
-            </div>
-            <div class="smallButton" onclick="sunbmit()">提交</div>
-        </div>
         <div class="infoBox updateBox none" >
             <div class="linebox">整改内容</div>
             <p class="ptext marginleft" >整改内容：<span class="updateContent"></span></p>
@@ -114,7 +111,6 @@
             <p class="ptext marginleft" >审核人：<span class="comName"></span></p>
             <p class="ptext marginleft" >审核结果：<span class="comResult"></span></p>
             <p class="ptext marginleft comFailReason none" >审核不通过原因：<span class="comFailReason"></span></p>
-            
         </div> 
         <div class="infoBox policeBox none" >
             <div class="linebox">民警审核</div>
@@ -124,8 +120,22 @@
             <p class="ptext marginleft policeFailReason none" >审核不通过原因：<span class="policeFailReason"></span></p>
             
         </div> 
-       
-    
+        <div class="infoBox passBox none" >
+            <div class="linebox">单位领导审核</div>
+            <div id="waitSelect" class="flex ptext">
+                <div class="radiobox font14">
+                    <input type="radio" name="auditStatus" value="4"/><label></label><span>通过</span>
+                </div>
+                <div class="radiobox font14">
+                    <input type="radio"  name="auditStatus" value="3"/><label></label><span>不通过</span>
+                </div>
+            </div>
+            <div class="ptext none marginleft noResult" >
+                <input class="inputTextArea" id="noResultText" placeholder="请输入不通过原因" />
+            </div>
+            <div class="smallButton" onclick='sunbmit()'>提交</div>
+            
+        </div>
     </div>
     <div class="nodata none" >
         <img src="./images/noIcon.png" class="nodataIcon">
@@ -141,7 +151,7 @@
 <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/viewer.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/checkDetail.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/auditCheckdetail.js" type="text/javascript" charset="utf-8"></script>
 <script>
    
 </script>

@@ -48,35 +48,27 @@ document.addEventListener('message', function (msg) { //获取客户端返回数
   }
 //提交
 function sunbmit(){
-    var subupdateContent = '';
-        subupdateContent = $(".subupdateContent").val();
-        if(!subupdateContent){
-            tanwin('请输入整改内容')
-            return;
+    var auditStatus = $("input[name='auditStatus']:checked").val()
+    var failReason = $("#noResultText").val()
+        if(auditStatus == 3){
+            if(!failReason){
+                tanwin('请输入不通过原因')
+                return;
+            }
+           
         }
-   
-    var updatePhotoList1 = [];
-    var imgs = $("#imgBox .image1");
-    if(imgs){
-        imgs.each(function(index, item) {
-            var itemSrc = $(item).attr('data-src');
-            updatePhotoList1.push({
-                updatePhoto: itemSrc,
-            });
-        })
-    }
     var data = {
         phone: encrypt(phone),
         applyNum: applyNum1,
-        updatePhotoList: updatePhotoList1,
-        updateContent: subupdateContent
+        auditStatus: auditStatus,
+        failReason: failReason
     }
     data = JSON.stringify(data);
     $(".zhegaiceng").css({
     'display': 'block'
     });
     $.ajax({
-        url: ajaxUrl + 'companycheck/updateZgCheckSubmit',
+        url: ajaxUrl + 'companycheck/updateAuditCheckInfo',
         timeout: timeDelay,
         type: 'post',
         contentType: 'application/json;charset=utf-8',
@@ -89,14 +81,14 @@ function sunbmit(){
         if (response.rescode == 200) {
                 tanwin('提交成功');
             setTimeout(function () {
-            window.location.href = './checkList.html';
+            window.location.href = './auditcheckList.html';
             }, 2000);
         } else {
             tanwin(response.resdes);
         }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            window.location.href = './checkList.html';
+            window.location.href = './auditcheckList.html';
         $(".zhegaiceng").css({
             'display': 'none'
         })
@@ -207,10 +199,20 @@ function getDetail(){
                     $(".comBox").removeClass('none')
                     resetData(response)
                 }else{
-                    $(".comBox").addClass('none')
+                    $(".passBox").removeClass('none')
+                    $(".comBox").addClass('none');
+                    $("input[name='auditStatus'][value='4']").attr('checked','true')
+                    $("input[name='auditStatus']").change(function(){
+                        if($(this).val() == '3'){
+                            $(".noResult").removeClass('none')
+                        }else{
+                            $(".noResult").addClass('none')
+                        }
+                    })
                 }
             }else{
                 $(".updatecontentBox").removeClass('none')
+               
                 $(".updateBox").addClass('none')
                 $(".comBox").addClass('none')
             }
