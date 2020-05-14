@@ -8,19 +8,19 @@ $(function(){
 function gobaseUrl(){
     window.location.href = gobaseUrl
 }
-document.addEventListener('message', function (msg) { //获取客户端返回数据数据
-    $(".zhegaiceng").css({
-      'display': 'none'
-    })
-    var data = JSON.parse(msg.data)
-    if (data) {
-      if (data.hasOwnProperty('photograph')) {
-        addPhoto1(data.photograph);
-      }
-    } else {
-      tanwin("上传照片")
-    }
-  });
+// document.addEventListener('message', function (msg) { //获取客户端返回数据数据
+//     $(".zhegaiceng").css({
+//       'display': 'none'
+//     })
+//     var data = JSON.parse(msg.data)
+//     if (data) {
+//       if (data.hasOwnProperty('photograph')) {
+//         addPhoto1(data.photograph);
+//       }
+//     } else {
+//       tanwin("上传照片")
+//     }
+//   });
   function deleteImg(ev){
       $(ev).parent().remove()
   }
@@ -127,16 +127,46 @@ function getDetail(){
                 }else{
                     $(".baseUrl").addClass("none")
                 }
-                $(".liuzhuanFlag").html(response.liuzhuanFlag)
-                $(".yinhuanFlag").html(response.yinhuanFlag)
-                $(".zhenggaiFlag").html(response.zhenggaiFlag)
-                $(".zhenggaiContent").html(response.zhenggaiContent)
+                var liuzhuanFlag = '';
+                if(response.liuzhuanFlag == 1){
+                    liuzhuanFlag = '是'
+                }else if(response.liuzhuanFlag ==2){
+                    liuzhuanFlag = '否'
+                }
+                $(".liuzhuanFlag").html(liuzhuanFlag)
+                var yinhuanFlag = '';
+                if(response.yinhuanFlag == 1){
+                    yinhuanFlag = '是'
+                }else if(response.yinhuanFlag ==2){
+                    yinhuanFlag = '否'
+                }
+                $(".yinhuanFlag").html(yinhuanFlag)
+                var zhenggaiFlag = '';
+                if(response.zhenggaiFlag == 1){
+                    zhenggaiFlag = '是'
+                }else if(response.zhenggaiFlag ==2){
+                    zhenggaiFlag = '否'
+                }else if(response.zhenggaiFlag == 0){
+                    zhenggaiFlag = ''
+                }
+                
+                if(zhenggaiFlag){
+                    $(".zhenggaiFlag").html(zhenggaiFlag);
+                    $(".zhenggaiContent").html(response.zhenggaiContent)
+                }else{
+                    $("#zhenggaiFlag").addClass('none')
+                    $("#zhenggaiContent").addClass('none')
+                }
                 if(response.xcPhotoList.length != 0){
                     addPhoto(response.xcPhotoList)
                 }
                 if(response.checkStatusNum != 1){
                     $(".updatecontentBox").addClass('none')
-                    $(".updateBox").removeClass('none')
+                    if(!response.updateContent && !response.name && !response.submitTime && response.updatePhotoList.length == 0){
+                        $(".updateBox").addClass('none')
+                    }else{
+                        $(".updateBox").removeClass('none')
+                    }
                     if(response.updatePhotoList.length != 0){
                         addPhoto1(response.updatePhotoList)
                     }
@@ -147,10 +177,20 @@ function getDetail(){
                         $(".comBox").removeClass('none')
                         resetData(response)
                     }else{
-                        $(".comBox").addClass('none')
+                        $(".passBox").removeClass('none')
+                        $(".comBox").addClass('none');
+                        $("input[name='auditStatus'][value='4']").attr('checked','true')
+                        $("input[name='auditStatus']").change(function(){
+                            if($(this).val() == '3'){
+                                $(".noResult").removeClass('none')
+                            }else{
+                                $(".noResult").addClass('none')
+                            }
+                        })
                     }
                 }else{
                     $(".updatecontentBox").removeClass('none')
+                   
                     $(".updateBox").addClass('none')
                     $(".comBox").addClass('none')
                 }
@@ -227,20 +267,20 @@ function resetData(data){
     $(".comName").html(data.comName)
     $(".comResult").html(data.comResult)
     if(data.checkStatusNum == '3'){
-        $(".comFailReason").removeClass('none')
+        $(".comFailReason1").removeClass('none')
         $(".comFailReason").html(data.comFailReason)
     }else{
-        $(".comFailReason").addClass('none');
+        $(".comFailReason1").addClass('none');
         if(data.checkStatusNum != '4'){
             $(".policeBox").removeClass('none')
             $(".policeTime").html(data.policeTime)
             $(".policeName").html(data.policeName)
             $(".policeResult").html(data.policeResult)
             if(data.checkStatusNum == '5'){
-                $(".policeFailReason").removeClass('none')
+                $(".policeFailReason1").removeClass('none')
                 $(".policeFailReason").html(data.comFailReason)
             }else{
-                $(".policeFailReason").addClass('none')
+                $(".policeFailReason1").addClass('none')
             }
         }else{
             $(".policeBox").addClass('none')
