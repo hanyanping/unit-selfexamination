@@ -24,28 +24,19 @@ function getList(){
             $(".zhegaiceng").css({'display': 'none'})
             if(response.rescode == 200){
                 checkList = response.checkList;
-                resetData()
+                if(checkList.length == 0){
+                    $(".nodata").removeClass('none')
+                }else{
+                    resetData()
+                    $(".nodata").addClass('none')
+                }
             }else{
                 tanwin(response.resdes)
+                $(".nodata").removeClass('none')
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             $(".zhegaiceng").css({'display': 'none'})
-            checkList = [
-                {applyNum:1,submitTime: "1020-021-12",name:"大地大地",companyName: '毕竟大地顶顶顶顶 反反复复付',airportName:'首都机场',deptName:'空防',checkType:'1',checkTypeName:'日常检查',checkStatusNum:'1',checkStatusName:'民警审核不通过'},
-                {applyNum:1,submitTime: "1020-021-12",name:"大地大地",companyName: '毕竟大地顶顶顶顶 反反复复付',airportName:'首都机场',deptName:'空防',checkType:'1',checkTypeName:'自定义',checkStatusNum:'2',checkStatusName:'民警审核不通过'},
-                {applyNum:1,submitTime: "1020-021-12",name:"大地大地",companyName: '毕竟大地顶顶顶顶 反反复复付',airportName:'首都机场',deptName:'空防',checkType:'1',checkTypeName:'日常检查',checkStatusNum:'3',checkStatusName:'民警审核不通过'},
-                {applyNum:1,submitTime: "1020-021-12",name:"大地大地",companyName: '毕竟大地顶顶顶顶 反反复复付',airportName:'首都机场',deptName:'空防',checkType:'1',checkTypeName:'日常检查',checkStatusNum:'4',checkStatusName:'民警审核不通过'},
-                {applyNum:1,submitTime: "1020-021-12",name:"大地大地",companyName: '毕竟大地顶顶顶顶 反反复复付',airportName:'首都机场',deptName:'空防',checkType:'1',checkTypeName:'日常检查',checkStatusNum:'5',checkStatusName:'民警审核不通过'},
-                {applyNum:1,submitTime: "1020-021-12",name:"大地大地",companyName: '毕竟大地顶顶顶顶 反反复复付',airportName:'首都机场',deptName:'空防',checkType:'1',checkTypeName:'日常检查',checkStatusNum:'6',checkStatusName:'已完成'}
-            ]
-            if(checkList.length == 0){
-                $(".nodata").removeClass('none')
-            }else{
-                resetData()
-                $(".nodata").addClass('none')
-            }
-           
         },
         complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
             $(".zhegaiceng").css({'display': 'none'})
@@ -64,7 +55,7 @@ function resetData(){
             className = 'colorRed'
         }
         str+='<div class="checkBox font14" data-applyNum="'+item.applyNum+'" onclick="goDeatail(this)">'+
-        ' <div class="checkTop flexBetween"><span>2010-120-11</span><span class="colorRed">'+item.checkTypeName+'</span><span class="'+className+'">'+item.checkStatusName+'</span></div>'+
+        ' <div class="checkTop flexBetween"><span>'+item.submitTime+'</span><span class="colorRed">'+item.checkTypeName+'</span><span class="'+className+'">'+item.checkStatusName+'</span></div>'+
         '<div class="flexBetween checkbottom">'+
         '<div>'+
         '<p class="ptext">提交人姓名：'+item.name+'</p>'+
