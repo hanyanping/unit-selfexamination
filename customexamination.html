@@ -205,11 +205,11 @@
         </div>
         
         <div class="radioContent infoDetailBox flex none" id="zhenggaiContent">
-            <div class="font14">整改措施内容：</div>
-            <textarea class="textareaBox font14 zhenggaiContent" placeholder="整改措施内容"></textarea>
+            <div class="font14">隐患内容或者整改措施：</div>
+            <textarea class="textareaBox font14 zhenggaiContent" placeholder="隐患内容或者整改措施"></textarea>
         </div>
         <div class="infoDetailBox">
-            <span class="font14">照片 :</span>
+            <span class="font14">现场照片：</span>
             <span class="file" style="margin-left: 10px;" onclick="postFile()">上传照片 </span>
           </div>
           <div class="flexWrap flex">
@@ -225,8 +225,9 @@
                 <img id="pic" class="signUrl" />
             </div>
         </div>
+        <div class="smallButton" onclick="sunbmit()">提交</div>
     </div>
-    <div class="smallButton" onclick="sunbmit()">提交</div>
+    
     </div>
     <div class="ptrBox zhegaicengone" style="display: none;">
         <div class='searchContent'>
@@ -280,9 +281,9 @@
          airportNum = customInfo.airportNum;
          deptNum = customInfo.deptNum;
         phone = localStorage.getItem('phone');
-        $("input[name='liuzhuanFlag'][value='1']").attr('checked','true')
-        $("input[name='yinhuanFlag'][value='2']").attr('checked','true');
-        $("input[name='zhenggaiFlag'][value='1']").attr('checked','true');
+        // $("input[name='liuzhuanFlag'][value='1']").attr('checked','true')
+        // $("input[name='yinhuanFlag'][value='2']").attr('checked','true');
+        // $("input[name='zhenggaiFlag'][value='1']").attr('checked','true');
         
         $("input[name='yinhuanFlag']").change(function(){
             if($(this).val() == '1'){
@@ -318,23 +319,37 @@ function postFile() {
       photo.push(obj);
     })
   }
-  if (photo.length >= 10) {
-    tanwin('照片不得超过10张');
-    return;
-  }
+//   if (photo.length >= 10) {
+//     tanwin('照片不得超过10张');
+//     return;
+//   }
   window.postMessage('photograph'); //发送获取照片消息
 }
 //提交
 function sunbmit(){
-    var liuzhuanFlag = $("input[name='liuzhuanFlag']:checked").val()
-    var yinhuanFlag = $("input[name='yinhuanFlag']:checked").val()
+    var liuzhuanFlag = $("input[name='liuzhuanFlag']:checked").val();
+    var yinhuanFlag = $("input[name='yinhuanFlag']:checked").val();
+   
+    if(!liuzhuanFlag){
+        tanwin('请勾选是否流转给领导审批')
+        return;
+    }
+    if(!yinhuanFlag){
+        tanwin('请勾选是否有安全隐患')
+        return;
+    }
     var zhenggaiFlag = '',zhenggaiContent = '';
     var checkContent = $(".checkContent").val();
     var checkResult = $(".checkResult").val();
     var checkRemark = $(".checkRemark").val();
     if(yinhuanFlag == '1'){
         zhenggaiFlag = $("input[name='zhenggaiFlag']:checked").val();
-        zhenggaiContent = $(".zhenggaiContent").val()
+        if(!zhenggaiFlag){
+            tanwin('请勾选是否现场整改完成')
+            return;
+        }else{
+            zhenggaiContent = $(".zhenggaiContent").val()
+        }
     }
     if(!signPhoto){
         tanwin('请手写签名')

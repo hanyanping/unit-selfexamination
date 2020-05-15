@@ -111,10 +111,10 @@
         }else{
             nationobj = JSON.parse(localStorage.getItem('fightexamineobj'));
         }
-        var obj = {
+        var obj1 = {
             applyNum: applyNum
         }
-        var data = Object.assign(nationobj,obj);
+        var data = Object.assign(nationobj,obj1);
         $(".zhegaiceng").css({'display': 'block'})
        console.log(data)
         data = JSON.stringify(data)
@@ -131,7 +131,7 @@
                     localStorage.removeItem('fightexamineobj')
                     window.location.href = './circulation.html'
                 }else{
-                    toast(response.resdes)
+                    tanwin(response.resdes)
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
