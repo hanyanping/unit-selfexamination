@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9459bf21-df41-42f2-8355-e9df1d582ea3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/air4examine.html" beforeDir="false" afterPath="$PROJECT_DIR$/air4examine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auditCheckdetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/auditCheckdetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/checkDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/circulation.html" beforeDir="false" afterPath="$PROJECT_DIR$/circulation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/auditCheckList.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/auditCheckList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/auditCheckdetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/auditCheckdetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/checkDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/checkDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/checkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/checkList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/nationexamine.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/nationexamine.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nationexamine.html" beforeDir="false" afterPath="$PROJECT_DIR$/nationexamine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nationtemplate.html" beforeDir="false" afterPath="$PROJECT_DIR$/nationtemplate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitExamination.html" beforeDir="false" afterPath="$PROJECT_DIR$/unitExamination.html" afterDir="false" />
-    </list>
+    <list default="true" id="9459bf21-df41-42f2-8355-e9df1d582ea3" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -37,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="unitExamination.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="unitExamination.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/unitExamination.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="319" column="6" lean-forward="true" selection-start-line="319" selection-start-column="6" selection-end-line="319" selection-end-column="6" />
+            <state relative-caret-position="150">
+              <caret line="306" column="34" lean-forward="true" selection-start-line="306" selection-start-column="34" selection-end-line="306" selection-end-column="34" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -58,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="checkDetail.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="checkDetail.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/checkDetail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="62" column="5" lean-forward="true" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
+            <state relative-caret-position="175">
+              <caret line="7" selection-start-line="7" selection-end-line="9" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -96,7 +82,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>headerImage</find>
       <find>getFile</find>
       <find>imgOne</find>
       <find>imgIcon</find>
@@ -126,6 +111,7 @@
       <find>sunbmit</find>
       <find>imgBox2</find>
       <find>zhenggaiFlag</find>
+      <find>gobaseUrl</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -182,7 +168,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-1" />
     <option name="y" value="1" />
     <option name="width" value="1363" />
@@ -221,7 +207,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../unit-selfexaminationpc" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -296,12 +282,12 @@
       <workItem from="1588858593097" duration="6846000" />
       <workItem from="1589093346756" duration="3769000" />
       <workItem from="1589380944500" duration="5610000" />
-      <workItem from="1589467792242" duration="1715000" />
+      <workItem from="1589467792242" duration="3020000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140312000" />
+    <option name="totallyTimeSpent" value="141617000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
@@ -566,13 +552,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/checkDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="62" column="5" lean-forward="true" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/auditCheckdetail.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
@@ -596,11 +575,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/unitExamination.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="319" column="6" lean-forward="true" selection-start-line="319" selection-start-column="6" selection-end-line="319" selection-end-column="6" />
+        <state relative-caret-position="150">
+          <caret line="306" column="34" lean-forward="true" selection-start-line="306" selection-start-column="34" selection-end-line="306" selection-end-column="34" />
           <folding>
             <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/checkDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" selection-start-line="7" selection-end-line="9" selection-end-column="1" />
         </state>
       </provider>
     </entry>
