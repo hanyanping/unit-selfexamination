@@ -1,4 +1,4 @@
-var phone = '',applyNum1 = '',gobaseUrl = '';
+var phone = '',applyNum1 = '',baseUrl = '';
      
 $(function(){
     phone = localStorage.getItem('phone')
@@ -6,7 +6,7 @@ $(function(){
     getDetail()
 })
 function gobaseUrl(){
-    window.location.href = gobaseUrl
+    window.location.href = baseUrl
 }
 document.addEventListener('message', function (msg) { //获取客户端返回数据数据
     $(".zhegaiceng").css({
@@ -125,7 +125,7 @@ function getDetail(){
             $(".zhegaiceng").css({'display': 'none'})
             if(response.rescode == 200){
                 if(response.baseUrl){
-                    gobaseUrl = response.baseUrl;
+                    baseUrl = response.baseUrl;
                     $(".baseUrl").removeClass("none")
     
                 }else{

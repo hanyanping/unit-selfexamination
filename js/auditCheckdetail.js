@@ -1,4 +1,4 @@
-var phone = '',applyNum1 = '',gobaseUrl = '';
+var phone = '',applyNum1 = '',baseUrl = '';
      
 $(function(){
     phone = localStorage.getItem('phone')
@@ -6,7 +6,7 @@ $(function(){
     getDetail()
 })
 function gobaseUrl(){
-    window.location.href = gobaseUrl
+    window.location.href = baseUrl
 }
 // document.addEventListener('message', function (msg) { //获取客户端返回数据数据
 //     $(".zhegaiceng").css({
@@ -80,18 +80,20 @@ function sunbmit(){
         });
         if (response.rescode == 200) {
                 tanwin('提交成功');
-            setTimeout(function () {
-            window.location.href = './auditCheckList.html';
-            }, 2000);
+                setTimeout(function () {
+                    window.location.href = './unitExamination.html';
+                  }, 3000);
         } else {
             tanwin(response.resdes);
         }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            window.location.href = './auditcheckList.html';
-        $(".zhegaiceng").css({
-            'display': 'none'
-        })
+            setTimeout(function () {
+                window.location.href = './unitExamination.html';
+              }, 3000);
+            $(".zhegaiceng").css({
+                'display': 'none'
+            })
         },
         complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
         $(".zhegaiceng").css({
@@ -121,7 +123,7 @@ function getDetail(){
             $(".zhegaiceng").css({'display': 'none'})
             if(response.rescode == 200){
                 if(response.baseUrl){
-                    gobaseUrl = response.baseUrl;
+                    baseUrl = response.baseUrl;
                     $(".baseUrl").removeClass("none")
     
                 }else{
@@ -201,61 +203,7 @@ function getDetail(){
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             $(".zhegaiceng").css({'display': 'none'})
-             var response = {xcPhotoList: [
-                {checkPhoto:'http://img4.imgtn.bdimg.com/it/u=2115530608,426850530&fm=26&gp=0.jpg'},
-                {checkPhoto:'http://img4.imgtn.bdimg.com/it/u=2115530608,426850530&fm=26&gp=0.jpg'},
-                 {checkPhoto:'http://img4.imgtn.bdimg.com/it/u=2115530608,426850530&fm=26&gp=0.jpg'},{checkPhoto:'http://img4.imgtn.bdimg.com/it/u=2115530608,426850530&fm=26&gp=0.jpg'}]
-                , updatePhotoList:[
-                    {updatePhoto:'http://img4.imgtn.bdimg.com/it/u=2115530608,426850530&fm=26&gp=0.jpg'},
-                    {updatePhoto:'http://img4.imgtn.bdimg.com/it/u=2115530608,426850530&fm=26&gp=0.jpg'},
-                 ],
-                 checkStatusNum: 2,
-                 baseUrl: ''
-            }
-            if(response.baseUrl){
-                gobaseUrl = response.baseUrl;
-                $(".baseUrl").removeClass("none")
-
-            }else{
-                $(".baseUrl").addClass("none")
-            }
-            $(".liuzhuanFlag").html(response.liuzhuanFlag)
-            $(".yinhuanFlag").html(response.yinhuanFlag)
-            $(".zhenggaiFlag").html(response.zhenggaiFlag)
-            $(".zhenggaiContent").html(response.zhenggaiContent)
-            if(response.xcPhotoList.length != 0){
-                addPhoto(response.xcPhotoList)
-            }
-            if(response.checkStatusNum != 1){
-                $(".updatecontentBox").addClass('none')
-                $(".updateBox").removeClass('none')
-                if(response.updatePhotoList.length != 0){
-                    addPhoto1(response.updatePhotoList)
-                }
-                $(".updateContent").html(response.updateContent)
-                $(".name").html(response.name)
-                $(".submitTime").html(response.submitTime)
-                if(response.checkStatusNum != '2'){
-                    $(".comBox").removeClass('none')
-                    resetData(response)
-                }else{
-                    $(".passBox").removeClass('none')
-                    $(".comBox").addClass('none');
-                    $("input[name='auditStatus'][value='4']").attr('checked','true')
-                    $("input[name='auditStatus']").change(function(){
-                        if($(this).val() == '3'){
-                            $(".noResult").removeClass('none')
-                        }else{
-                            $(".noResult").addClass('none')
-                        }
-                    })
-                }
-            }else{
-                $(".updatecontentBox").removeClass('none')
-               
-                $(".updateBox").addClass('none')
-                $(".comBox").addClass('none')
-            }
+           
         },
         complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
             $(".zhegaiceng").css({'display': 'none'})

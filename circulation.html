@@ -197,11 +197,11 @@
         </div>
         
         <div class="radioContent infoDetailBox flex none" id="zhenggaiContent">
-            <div class="font14">整改措施内容：</div>
-            <textarea class="textareaBox font14 zhenggaiContent" placeholder="整改措施内容"></textarea>
+            <div class="font14">隐患内容或者整改措施：</div>
+            <textarea class="textareaBox font14 zhenggaiContent" placeholder="隐患内容或者整改措施"></textarea>
         </div>
         <div class="infoDetailBox">
-            <span class="font14">照片 :</span>
+            <span class="font14">现场照片 :</span>
             <span class="file" style="margin-left: 10px;" onclick="postFile()">上传照片 </span>
           </div>
           <div class="flexWrap flex">
@@ -359,14 +359,14 @@ function sunbmit(){
       if (response.rescode == 200) {
         tanwin('提交成功');
         setTimeout(function () {
-          window.location.href = './success.html';
-        }, 2000);
+          window.location.href = './unitExamination.html';
+        }, 3000);
       } else {
         tanwin(response.resdes);
       }
     },
     error: function (XMLHttpRequest, textStatus, errorThrown) {
-        window.location.href = './success.html';
+        window.location.href = './unitExamination.html';
       $(".zhegaiceng").css({
         'display': 'none'
       })
