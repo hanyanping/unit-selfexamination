@@ -306,7 +306,7 @@
 <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    var phone = '15322222222',zhinanUrl = '';
+    var phone = '',zhinanUrl = '';
      window.onload = function () {
         document.addEventListener('message', function (msg) {
             var data = JSON.parse(msg.data);
@@ -319,7 +319,7 @@
         })
     }
     $(function(){
-        getUserRole();
+        // getUserRole();
     })
     function gozhinan(){
         window.location.href = zhinanUrl;
