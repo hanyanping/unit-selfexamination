@@ -148,6 +148,20 @@
         display: inline-block;
         vertical-align: middle;
     }
+        .selectInfo{
+            height: 35px;
+            border-radius: 5px;
+            border: 1px solid #f6f6f6;
+            width: 60%;
+            text-align: left;
+            color: #232323;
+            direction: ltr;
+            text-indent: 10px;
+            font-size: 14px;
+        }
+        .signButton{
+            margin-left: 20px;
+        }
 
     </style>
 </head>
@@ -210,13 +224,19 @@
             </div>
         </div>
         <div class="infoDetailBox">
-            <div class="flexBetween signBox">
+            <div class="flex signBox">
                 <div class="font14">检查员签字：</div>
                 <div  class="signButton checkbutton" onclick="showsign()">请手写签名</div>
             </div>
             <div class="applyDay">
                 <img id="pic" class="signUrl" />
             </div>
+        </div>
+        <div class="infoDetailBox  flexWrap aligncenter">
+            <div>流传审核部门：</div>
+            <select class="selectInfo">
+
+            </select>
         </div>
     </div>
     <div class="smallButton" onclick="sunbmit()">提交</div>
@@ -295,16 +315,17 @@ function postFile() {
     tanwin('照片不得超过10张');
     return;
   }
-  window.postMessage('photograph'); //发送获取照片消息
+    //photographLibrary 仅相册
+     //仅拍照
+    window.postMessage('photographCamera');
+    //发送获取照片消息（相机，相册）
+    // window.postMessage('photograph');
 }
 //提交
 function sunbmit(){
     var liuzhuanFlag = $("input[name='liuzhuanFlag']:checked").val()
     var yinhuanFlag = $("input[name='yinhuanFlag']:checked").val();
-    if(!liuzhuanFlag){
-        tanwin('请勾选是否流转给领导审批')
-        return;
-    }
+
     if(!yinhuanFlag){
         tanwin('请勾选是否有安全隐患')
         return;
@@ -320,8 +341,17 @@ function sunbmit(){
             zhenggaiContent = $(".zhenggaiContent").val()
         }
     }
+    if(!liuzhuanFlag){
+        tanwin('请勾选是否流转给领导审批')
+        return;
+    }
     if(!signPhoto){
         tanwin('请手写签名')
+        return;
+    }
+    var policeDeptNum = $('.selectInfo').val();
+    if(!policeDeptNum){
+        tanwin('请选择流传审核部门')
         return;
     }
     var xcPhotoList = [];
@@ -340,7 +370,8 @@ function sunbmit(){
         zhenggaiFlag: zhenggaiFlag,
         zhenggaiContent: zhenggaiContent,
         xcPhotoList: xcPhotoList,
-        signPhoto: signPhoto
+        signPhoto: signPhoto,
+        policeDeptNum: policeDeptNum,
     }
     data = JSON.stringify(data);
     $(".zhegaiceng").css({
@@ -395,5 +426,52 @@ function sunbmit(){
                 $("#zhenggaiContent").css({'display':'none'})
             }
         })
+        getGuishuPoliceDeptList()
+
     })
+
+    function getGuishuPoliceDeptList(){
+        $(".zhegaiceng").css({
+            'display': 'block'
+        });
+        var data = {
+            phone: encrypt(phone),
+        };
+        data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'companycheck/getGuishuPoliceDeptList',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function(response) {
+                $(".zhegaiceng").css({'display': 'none'})
+                if(response.rescode == 200){
+
+                    $(".selectInfo").html('');
+                    var policeDeptList = response.policeDeptList;
+                    if(policeDeptList.length != 0){
+                        $(".deptListbox").removeClass('none')
+                        var str = '<option>请选择流传审核部门</option>';
+                        for(let i in policeDeptList){
+                            str+='<option value="'+policeDeptList[i].policeDeptNum+'">'+policeDeptList[i].policeDeptName+'</option>'
+                        }
+                        $(".selectInfo").html($(str))
+                    }else{
+                        $(".deptListbox").addClass('none')
+                    }
+
+                }else{
+                    tanwin(response.resdes)
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({'display': 'none'})
+            },
+            complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                $(".zhegaiceng").css({'display': 'none'})
+            }
+        });
+    }
 </script>

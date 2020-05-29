@@ -3,11 +3,55 @@ var source = '';
 var deptList = [],airportList = [],showairportList = [];
 $(function(){
     source = getUrlParms('source');
-    getUserCompanyAirDept()
+    getUserCompanyAirDept();
+    getCompanyDeptList()
     
 })
     
+function getCompanyDeptList(){
+    $(".zhegaiceng").css({
+        'display': 'block'
+    });
+    var data = {
+        phone: encrypt(phone),
+    };
+    data = JSON.stringify(data)
+    $.ajax({
+        url: ajaxUrl + 'companycheck/getCompanyDeptList',
+        timeout: timeDelay,
+        type: 'post',
+        contentType: 'application/json;charset=utf-8',
+        dataType: "json",
+        data: data,
+        success: function(response) {
+            $(".zhegaiceng").css({'display': 'none'})
+            if(response.rescode == 200){
 
+                $(".selectInfo").html('');
+                var companyDeptList = response.companyDeptList;
+                if(companyDeptList.length != 0){
+                    $(".deptListbox").removeClass('none')
+                    var str = '<option>请选择部门</option>';
+                    for(let i in companyDeptList){
+                        str+='<option value="'+companyDeptList[i].companyDeptNum+'">'+companyDeptList[i].companyDeptName+'</option>'
+                    }
+                    $(".selectInfo").html($(str))
+                }else{
+                    $(".deptListbox").addClass('none')
+                }
+
+            }else{
+                tanwin(response.resdes)
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            $(".zhegaiceng").css({'display': 'none'})
+        },
+        complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+            $(".zhegaiceng").css({'display': 'none'})
+        }
+    });
+}
 function resetdep(){
     $(".deptBox").html('');
     var str1 = '';
@@ -84,6 +128,8 @@ function gotemplate(){
     });
     var airportNum = $("input[name='airportName']:checked").val();
     var deptNum = $("input[name='deptName']:checked").val();
+    var companyDeptNum = $(".selectInfo").val();
+    console.log(companyDeptNum)
     if(!airportNum){
         tanwin('请选择机场')
         return;
@@ -96,7 +142,8 @@ function gotemplate(){
         var data = {
             phone: encrypt(phone),
             airportNum: airportNum,
-            deptNum: deptNum
+            deptNum: deptNum,
+            companyDeptNum: companyDeptNum
         };
         data = JSON.stringify(data)
         $.ajax({
@@ -137,7 +184,8 @@ function gotemplate(){
     }else if(source == 'zidingyi'){
         var obj = {
             airportNum: airportNum,
-            deptNum: deptNum
+            deptNum: deptNum,
+            companyDeptNum: companyDeptNum
         }
         localStorage.setItem('customInfo',JSON.stringify(obj))
         window.location.href = 'customexamination.html'

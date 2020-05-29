@@ -11,6 +11,7 @@
         .selectCategories {
             background: #fff;
             padding: 16px;
+            font-size: 14px;
         }
         .radiobox label{
             left: -24px;
@@ -32,18 +33,35 @@
         .minwidth{
             margin-bottom: 8px;
         }
+        .selectInfo{
+            height: 35px;
+            border-radius: 5px;
+            border: 1px solid #f6f6f6;
+            width: 60%;
+            text-align: left;
+            color: #232323;
+            direction: ltr;
+            text-indent: 10px;
+            font-size: 14px;
+        }
+        .deptListbox{
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
 <div class="selectCategories">
     <!-- <div onclick="postFile()">照片</div> -->
+    <div class="deptListbox flexWrap aligncenter">
+        <div>单位部门：</div>
+        <select class="selectInfo">
+
+        </select>
+    </div>
     <div class="airportList flexWrap aligncenter">
         <div class="minwidth">选择机场：</div>
         <div class="airportBox flexWrap">
-
-
         </div>
-
     </div>
     <div class="deptList margintop flexWrap">
         <div class="minwidth">选择类别：</div>

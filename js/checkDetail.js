@@ -40,7 +40,11 @@ document.addEventListener('message', function (msg) { //获取客户端返回数
         photo.push(obj);
       })
     }
-    window.postMessage('photograph'); //发送获取照片消息
+      //photographLibrary 仅相册
+      //仅拍照
+      window.postMessage('photographCamera');
+      //发送获取照片消息（相机，相册）
+      // window.postMessage('photograph');
   }
 //提交
 function sunbmit(){
