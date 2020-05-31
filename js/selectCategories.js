@@ -26,16 +26,16 @@ function getCompanyDeptList(){
         success: function(response) {
             $(".zhegaiceng").css({'display': 'none'})
             if(response.rescode == 200){
-
                 $(".selectInfo").html('');
                 var companyDeptList = response.companyDeptList;
                 if(companyDeptList.length != 0){
                     $(".deptListbox").removeClass('none')
-                    var str = '<option>请选择部门</option>';
+                    var str = '<option value="">请选择部门</option>';
                     for(let i in companyDeptList){
                         str+='<option value="'+companyDeptList[i].companyDeptNum+'">'+companyDeptList[i].companyDeptName+'</option>'
                     }
                     $(".selectInfo").html($(str))
+                    // $(".deptListbox").addClass('none')
                 }else{
                     $(".deptListbox").addClass('none')
                 }
