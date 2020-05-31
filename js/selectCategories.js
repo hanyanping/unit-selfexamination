@@ -129,7 +129,6 @@ function gotemplate(){
     var airportNum = $("input[name='airportName']:checked").val();
     var deptNum = $("input[name='deptName']:checked").val();
     var companyDeptNum = $(".selectInfo").val();
-    console.log(companyDeptNum)
     if(!airportNum){
         tanwin('请选择机场')
         return;

@@ -10,8 +10,12 @@
     <style >
         .selectCategories {
             background: #fff;
-            padding: 16px;
             font-size: 14px;
+            width: 100%;
+        }
+        .margin16{
+            margin: 16px;
+
         }
         .radiobox label{
             left: -24px;
@@ -52,24 +56,27 @@
 <body>
 <div class="selectCategories">
     <!-- <div onclick="postFile()">照片</div> -->
-    <div class="deptListbox flexWrap aligncenter">
-        <div>单位部门：</div>
-        <select class="selectInfo">
+    <div class="margin16">
+        <div class="deptListbox flexWrap aligncenter">
+            <div>单位部门：</div>
+            <select class="selectInfo">
 
-        </select>
-    </div>
-    <div class="airportList flexWrap aligncenter">
-        <div class="minwidth">选择机场：</div>
-        <div class="airportBox flexWrap">
+            </select>
         </div>
-    </div>
-    <div class="deptList margintop flexWrap">
-        <div class="minwidth">选择类别：</div>
-        <div class="deptBox flexWrap">
+        <div class="airportList flexWrap aligncenter">
+            <div class="minwidth">选择机场：</div>
+            <div class="airportBox flexWrap">
+            </div>
+        </div>
+        <div class="deptList margintop flexWrap">
+            <div class="minwidth">选择类别：</div>
+            <div class="deptBox flexWrap">
 
+            </div>
         </div>
+        <div class="smallButton" onclick="gotemplate()">下一步</div>
+
     </div>
-    <div class="smallButton" onclick="gotemplate()">下一步</div>
     <div id="tanwin" class="tan" style="display:none;"></div>
     <div class="zhegaicengone zhegaiceng" style="display: none;">
         <img class="lodingimg" src="./images/loadingpop.gif">
