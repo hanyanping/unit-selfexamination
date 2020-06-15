@@ -18,22 +18,16 @@
             width:100%;
             margin-top:6px;
         }
-        .linebox:before {
-            content: '';
-            position: absolute;
-            height: 18px;
-            width: 3px;
-            background: #0076FF;
-            left: -8px;
-            top: 2px;
-        }
     </style>
 </head>
 <body style="background:#f9f9f9;">
 <div id="examine">
-    <div class="contentTitle">安全检查单（基础设施类）</div>
+    <div class="contentTitle">危险物品储存场所自查清单</div>
     <div class="content">
+        <div class="contentBox"></div>
+        
     </div>
+
     <div class="smallButton" onclick="submit()">提交</div>
 </div>
 <div id="tanwin" class="tan" style="display:none;"></div>
@@ -45,49 +39,37 @@
 <script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/nationexamine.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/baserverexamine.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var phone = '';
     window.onload = function() {
     }
     var obj = {
-            b1: '',
-            s2: '',
-            s3: '',
-            s4: '',
-            s5: '',
-            c6: '',
-            b7: '',
-            j8: '',
-            s9: '',
-            d11: '',
-            d12: '',
-            z13: '',
-            s14: '',
-            c15: '',
-            s16: '',
-            d17: '',
-            s19: '',
-            s20: '',
-            s21: '',
-            j22: '',
-            s23: '',
-            w24: '',
-            j25: '',
-            s26: '',
-            s27: '',
-            k28: ''
-        };
+        k1: '',
+        k2: '',
+        k3: '',
+        k4: '',
+        c5: '',
+        k6: '',
+        k7: '',
+        k8: '',
+        k9: '',
+        k10: '',
+        k11: '',
+        y12: '',
+        s13: '',
+        k14: ''
+    };
     function localData(){
         $.each(obj, function(key, val) {
             $("input:radio[name='"+key+"']").click(function () {
-                if(JSON.parse(localStorage.getItem('nationobj'))){
-                    obj = JSON.parse(localStorage.getItem('nationobj'))
+                if(JSON.parse(localStorage.getItem('securitywxobj'))){
+                    obj = JSON.parse(localStorage.getItem('securitywxobj'))
                 }
                 var $radio = $(this);
                 // if this was previously checked
                 if ($radio.data('waschecked') == true){
-                    $radio.prop('checked', false);	                    
+                    $radio.prop('checked', false);
                     $radio.data('waschecked', false);
                 } else {
                     $radio.prop('checked', true);
@@ -98,41 +80,15 @@
                 }else{
                     obj[key] = '';
                 }
-                localStorage.setItem('nationobj',JSON.stringify(obj))
+                localStorage.setItem('securitywxobj',JSON.stringify(obj))
             })
         });
-        var obj1 = {
-            j10: '',
-            j18: '',
-            j29: ''
-        }
-        $.each(obj1, function(key, val) {
-            $("."+key).change(function () {
-                if(JSON.parse(localStorage.getItem('textobj'))){
-                    obj1 = JSON.parse(localStorage.getItem('textobj'))
-                }
-                console.log( $(this).val())
-                if($(this).val()){
-                    obj1[key] = $(this).val();
-                }else{
-                    obj1[key] = '';
-                }
-                
-                localStorage.setItem('textobj',JSON.stringify(obj1))
-            })
-        })
+
     }
     $(function(){
-        if(localStorage.getItem('textobj')){
-            var  textObj = JSON.parse(localStorage.getItem('textobj'));
-            $.each(textObj, function(key, val) {
-                if(textObj[key]){
-                    $('.'+key).val(textObj[key])
-                }
-            });
-        }
-        if(localStorage.getItem('nationobj')){
-            var  nationObj = JSON.parse(localStorage.getItem('nationobj'));
+
+        if(localStorage.getItem('securitywxobj')){
+            var  nationObj = JSON.parse(localStorage.getItem('securitywxobj'));
             $.each(nationObj, function(key, val) {
                 if(nationObj[key]){
                     $("input[name='"+key+"'][value='"+nationObj[key]+"']").attr('checked','true');
@@ -145,56 +101,31 @@
 
     function submit(){
         var applyNum = localStorage.getItem('applyNum')
-        var  textobj = {},nationobj = {};
-        if(!localStorage.getItem('textobj')){
-             textobj = {
-                j10: '',j18: '',j29: ''
-            }
+        var  nationobj = {};
 
-        }else{
-             textobj = JSON.parse(localStorage.getItem('textobj'));
-        }
-        if(!localStorage.getItem('nationobj')){
+        if(!localStorage.getItem('securitywxobj')){
             nationobj = {
-                b1: '',
+                s1: '',
                 s2: '',
                 s3: '',
                 s4: '',
-                s5: '',
-                c6: '',
+                b5: '',
+                b6: '',
                 b7: '',
-                j8: '',
-                s9: '',
-                d11: '',
-                d12: '',
-                z13: '',
-                s14: '',
-                c15: '',
-                s16: '',
-                d17: '',
-                s19: '',
-                s20: '',
-                s21: '',
-                j22: '',
-                s23: '',
-                w24: '',
-                j25: '',
-                s26: '',
-                s27: '',
-                k28: ''
+                b8: ''
             };
         }else{
-            nationobj = JSON.parse(localStorage.getItem('nationobj'));
+            nationobj = JSON.parse(localStorage.getItem('securitywxobj'));
         }
-        var obj11 = {
+        var obj12 = {
             applyNum: applyNum
         }
-        var data = Object.assign(textobj,nationobj,obj11);
+        var data = Object.assign(nationobj,obj12);
         $(".zhegaiceng").css({'display': 'block'})
-       console.log(data)
+        console.log(data)
         data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'companycheckTemplate/gbAqjcdJcsslCheckList',
+            url: ajaxUrl + 'companycheckTemplate/zaBafwyzctmCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',
@@ -203,8 +134,7 @@
             success: function(response) {
                 $(".zhegaiceng").css({'display': 'none'})
                 if(response.rescode == 200){
-                    localStorage.removeItem('nationobj')
-                    localStorage.removeItem('textobj');
+                    localStorage.removeItem('securitywxobj')
                     window.location.href = './circulation.html'
                 }else{
                     tanwin(response.resdes)

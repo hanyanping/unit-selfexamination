@@ -146,7 +146,7 @@ function submit(){
                 localStorage.removeItem('fireInput')
                 window.postMessage('success');//向app发送提交成功消息
             }else{
-                toast(response.resdes)
+                tanwin(response.resdes)
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

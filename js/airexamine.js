@@ -83,7 +83,7 @@ function getDetail(){
             $(".zhegaiceng").css({'display': 'none'})
             if(response.rescode == 200){
             }else{
-                toast(response.resdes)
+                tanwin(response.resdes)
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

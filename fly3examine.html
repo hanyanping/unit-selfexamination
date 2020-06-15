@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/airexamine.css">
+    <title>飞行器活动区空防安全检查项
+    </title>
+    <style>
+    </style>
+    
+    <style>
+        
+    </style>
+</head>
+<body style="background:#f9f9f9;">
+    
+<div id="examine">
+    <div class="content">
+    </div>
+    <div class="flex">
+        <div class="smallButton" onclick="goback()">上一步</div>
+        <div class="smallButton" onclick="gofly()">下一步</div>
+    </div>
+</div>
+<div id="tanwin" class="tan" style="display:none;"></div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="./images/loadingpop.gif">
+</div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/flyexamine.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var aireobj = {
+            s22: '',
+            x23: '',
+            j24: '',
+            j25: '',
+            s26: '',
+            s27: '',
+            s28: '',
+            y29: '',
+            s30: '',
+            k31: '',
+            s32: '',
+            y33: '',
+            s34: '',
+            s35: '',
+            s36: '',
+            s37: '',
+            s38: '',
+            s39: ''
+        };
+    $(function(){
+        if(localStorage.getItem('unitflyObj3')){
+            var  airObj = JSON.parse(localStorage.getItem('unitflyObj3'));
+            $.each(airObj, function(key, val) {
+                if(airObj[key]){
+                    $("input[name='"+key+"'][value='"+airObj[key]+"']").attr('checked','true');
+                    $("input[name='"+key+"'][value='"+airObj[key]+"']").data('waschecked', true);
+                }
+            });
+        }
+        changeRadio()
+    })
+        //监听radio
+function changeRadio(){
+    $.each(aireobj, function(key, val) {
+        $("input:radio[name='"+key+"']").click(function () {
+            if(JSON.parse(localStorage.getItem('unitflyObj3'))){
+                aireobj = JSON.parse(localStorage.getItem('unitflyObj3'))
+            }
+            var $radio = $(this);
+            // if this was previously checked
+            if ($radio.data('waschecked') == true){
+                $radio.prop('checked', false);	                    
+                $radio.data('waschecked', false);
+            } else {
+                $radio.prop('checked', true);
+                $radio.data('waschecked', true);
+            }
+            if($("input[name='"+key+"']:checked").val()){
+                aireobj[key] = $("input[name='"+key+"']:checked").val();
+            }else{
+                aireobj[key] = '';
+            }
+            localStorage.setItem('unitflyObj3',JSON.stringify(aireobj))
+        })
+    });
+}
+    function gofly(){
+        var obj = aireobj;
+        $.each(obj, function(key, val) {
+            if($("input[name='"+key+"']:checked").val()){
+                obj[key] = $("input[name='"+key+"']:checked").val()
+            }
+        });
+        obj = JSON.stringify(obj);
+        localStorage.setItem('unitflyObj3',obj)
+        window.location.href = './fly4examine.html'
+    }
+
+</script>
+</html>

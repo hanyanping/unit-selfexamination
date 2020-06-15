@@ -89,7 +89,7 @@
 <body style="background:#f9f9f9;">
 
 <div id="examine">
-    <div class="contentTitle">系统的每日检查和试验</div>
+    <div class="contentTitle">系统的季度检查及实验</div>
     <div class="content">
         <div class="radioList">
     
@@ -125,87 +125,40 @@
 </html>
 <script>
     var obj = {
-        k4: '',
-        x5: '',
-        f6: '',
-        g7: '',
+        t4: '',
+        h5: '',
+        s6: '',
+        h7: '',
         h8: '',
-        b9: '',
-        d10: '',
-        p11: '',
-        c12: '',
+        x9: '',
+        x10: '',
+        x11: '',
+        x12: '',
         y13: '',
-        c14: '',
-        z15: '',
-        c16: '',
-        s17: '',
-        c18: '',
-        c19: '',
-        c20: '',
-        c21: '',
-        c22: '',
-        c23: '',
-        c24: '',
-        c25: '',
-        p26: '',
-        p27: '',
-        p28: '',
-        p29: '',
-        p30: '',
-        b31: '',
-        p32: '',
-        c33: '',
-        m34: '',
-        c35: '',
-        c36: '',
-        c37: '',
-        c38: '',
-        y39: '',
-        f40: '',
-        c41: '',
-        x42: '',
-        p43: '',
-        c44: '',
-        p45: '',
-        x46: '',
-        y47: '',
-        f48: '',
-        s49: '',
-        n50: '',
-        c51: '',
-        k52: '',
-        f53: '',
-        s54: '',
-        c55: '',
-        c56: '',
-        c57: '',
-        c58: ''};
+        d14: ''
+      };
         var obj1 = {
             b1: '',
             b2: '',
             b3: '',
-            z59: '',
-            z60: '',
-            z61: '',
-            z62: '',
-            z63: ''
+            z15: ''
         }
     function submit(){
-        var firedailyobj = null,firedailyobjtextobj = null;;
-            if(!localStorage.getItem('firedailyobj')){
-                firedailyobj = obj;
+        var firequaterobj = null,firequaterobjtextobj = null;;
+            if(!localStorage.getItem('firequaterobj')){
+                firequaterobj = obj;
             }else{
-                firedailyobj = JSON.parse(localStorage.getItem('firedailyobj'))
+                firequaterobj = JSON.parse(localStorage.getItem('firequaterobj'))
             }
-            if(!localStorage.getItem('firedailyobjtextobj')){
-                firedailyobjtextobj = obj1;
+            if(!localStorage.getItem('firequaterobjtextobj')){
+                firequaterobjtextobj = obj1;
             }else{
-                firedailyobjtextobj = JSON.parse(localStorage.getItem('firedailyobjtextobj'))
+                firequaterobjtextobj = JSON.parse(localStorage.getItem('firequaterobjtextobj'))
             }
             var applyNumobj = {
                 applyNum: applyNum,
             };
-            var data = Object.assign(firedailyobjtextobj,firedailyobj,applyNumobj)
+            var data = Object.assign(firequaterobjtextobj,firequaterobj,applyNumobj)
              data = JSON.stringify(data)
         $.ajax({
             url: ajaxUrl + 'companycheckTemplate/xfXtmrjcAndSyCheckList',
@@ -217,8 +170,8 @@
             success: function(response) {
                 $(".zhegaiceng").css({'display': 'none'})
                 if(response.rescode == 200){
-                    localStorage.removeItem('firedailyobjtextobj')
-                    localStorage.removeItem('firedailyobj')
+                    localStorage.removeItem('firequaterobjtextobj')
+                    localStorage.removeItem('firequaterobj')
                     window.location.href = './circulation.html'
                 }else{
                     tanwin(response.resdes)
@@ -237,8 +190,8 @@
     function localData(){
         $.each(obj, function(key, val) {
             $("input:radio[name='"+key+"']").click(function () {
-                if(JSON.parse(localStorage.getItem('firedailyobj'))){
-                    obj = JSON.parse(localStorage.getItem('firedailyobj'))
+                if(JSON.parse(localStorage.getItem('firequaterobj'))){
+                    obj = JSON.parse(localStorage.getItem('firequaterobj'))
                 }
                 var $radio = $(this);
                 // if this was previously checked
@@ -254,35 +207,35 @@
                 }else{
                     obj[key] = '';
                 }
-                localStorage.setItem('firedailyobj',JSON.stringify(obj))
+                localStorage.setItem('firequaterobj',JSON.stringify(obj))
             })
         });
       
         $.each(obj1, function(key, val) {
             $("."+key).change(function () {
-                if(JSON.parse(localStorage.getItem('firedailyobjtextobj'))){
-                    obj1 = JSON.parse(localStorage.getItem('firedailyobjtextobj'))
+                if(JSON.parse(localStorage.getItem('firequaterobjtextobj'))){
+                    obj1 = JSON.parse(localStorage.getItem('firequaterobjtextobj'))
                 }
                 if($(this).val()){
                     obj1[key] = $(this).val();
                 }else{
                     obj1[key] = '';
                 }
-                localStorage.setItem('firedailyobjtextobj',JSON.stringify(obj1))
+                localStorage.setItem('firequaterobjtextobj',JSON.stringify(obj1))
             })
         })
     }
     $(function(){
-        if(localStorage.getItem('firedailyobjtextobj')){
-            var  textObj = JSON.parse(localStorage.getItem('firedailyobjtextobj'));
+        if(localStorage.getItem('firequaterobjtextobj')){
+            var  textObj = JSON.parse(localStorage.getItem('firequaterobjtextobj'));
             $.each(textObj, function(key, val) {
                 if(textObj[key]){
                     $('.'+key).val(textObj[key])
                 }
             });
         }
-        if(localStorage.getItem('firedailyobj')){
-            var  nationObj = JSON.parse(localStorage.getItem('firedailyobj'));
+        if(localStorage.getItem('firequaterobj')){
+            var  nationObj = JSON.parse(localStorage.getItem('firequaterobj'));
             $.each(nationObj, function(key, val) {
                 if(nationObj[key]){
                     $("input[name='"+key+"'][value='"+nationObj[key]+"']").attr('checked','true');

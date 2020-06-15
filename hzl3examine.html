@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/airexamine.css">
+    <title>航站区空防安全监管事项
+    </title>
+    <style>
+        .inputButton{
+            display: flex;
+            justify-content: center;
+        }
+        .inputButton input{
+            margin-right: 15px;
+        }
+      
+        .smallButton{
+            margin-top: 45px;
+        }
+        .radioContent{
+            margin-top: 12px;
+        }
+    </style>
+
+</head>
+<body style="background:#f9f9f9;">
+
+<div id="examine">
+    <div class="content">
+    </div>
+    <div class="flex">
+        <div class="smallButton" onclick="gofly()">下一步</div>
+    </div>
+</div>
+<div id="tanwin" class="tan" style="display:none;"></div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="./images/loadingpop.gif">
+</div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/hzlexamine.js" type="text/javascript" charset="utf-8"></script>
+</html>
+<script>
+   
+   var flyobj = {
+            s36: '',
+            k37: '',
+            s38: '',
+            y39: '',
+            s40: '',
+            s41: '',
+            s42: '',
+            s43: '',
+            s44: '',
+            s45: '',
+            z46: '',
+            z47: '',
+            z48: '',
+            s49: '',
+            z50: '',
+            z51: '',
+            f52: '',
+            y53: '',
+            j54: '',
+            x55: '',
+            b56: '',
+            s57: '',
+            y58: '',
+            s59: '',
+            b60: '',
+            p61: ''
+        };
+    $(function(){
+        if(localStorage.getItem('unithzlObj3')){
+            var  airObj = JSON.parse(localStorage.getItem('unithzlObj3'));
+            $.each(airObj, function(key, val) {
+                if(airObj[key]){
+                    $("input[name='"+key+"'][value='"+airObj[key]+"']").attr('checked','true');
+                    $("input[name='"+key+"'][value='"+airObj[key]+"']").data('waschecked', true);
+                }
+            });
+        }
+        changeRadio()
+    })
+        //监听radio
+function changeRadio(){
+    $.each(flyobj, function(key, val) {
+        $("input:radio[name='"+key+"']").click(function () {
+            if(JSON.parse(localStorage.getItem('unithzlObj3'))){
+                flyobj = JSON.parse(localStorage.getItem('unithzlObj3'))
+            }
+            var $radio = $(this);
+            // if this was previously checked
+            if ($radio.data('waschecked') == true){
+                $radio.prop('checked', false);	                    
+                $radio.data('waschecked', false);
+            } else {
+                $radio.prop('checked', true);
+                $radio.data('waschecked', true);
+            }
+            if($("input[name='"+key+"']:checked").val()){
+                flyobj[key] = $("input[name='"+key+"']:checked").val();
+            }else{
+                flyobj[key] = '';
+            }
+            localStorage.setItem('unithzlObj3',JSON.stringify(flyobj))
+        })
+    });
+}
+    function gofly(){
+        var obj = {
+            s36: '',
+            k37: '',
+            s38: '',
+            y39: '',
+            s40: '',
+            s41: '',
+            s42: '',
+            s43: '',
+            s44: '',
+            s45: '',
+            z46: '',
+            z47: '',
+            z48: '',
+            s49: '',
+            z50: '',
+            z51: '',
+            f52: '',
+            y53: '',
+            j54: '',
+            x55: '',
+            b56: '',
+            s57: '',
+            y58: '',
+            s59: '',
+            b60: '',
+            p61: ''
+        };
+        $.each(obj, function(key, val) {
+            if($("input[name='"+key+"']:checked").val()){
+                obj[key] = $("input[name='"+key+"']:checked").val()
+            }
+        });
+        obj = JSON.stringify(obj);
+        localStorage.setItem('unithzlObj3',obj)
+        window.location.href = './hzl4examine.html'
+    }
+</script>

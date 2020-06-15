@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/airexamine.css">
+    <title>航站区空防安全监管事项
+    </title>
+    <style>
+        .inputButton{
+            display: flex;
+            justify-content: center;
+        }
+        .inputButton input{
+            margin-right: 15px;
+        }
+        .sigincheck,.sigincheck1{
+            margin-bottom: 10px;
+            display: none;
+        }
+        .smallButton{
+            margin-top: 45px;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+        .none{
+            display: none;
+        }
+        .radioContent{
+            margin-top: 12px;
+        }
+    </style>
+
+</head>
+<body style="background:#f9f9f9;">
+<div id="examine">
+    <div class="content">
+    </div>
+    <div class="contentOne" style="margin-bottom: 0;">
+        <div class="radioContent flex">
+            <div class="font14">隐患情况：</div>
+            <textarea class="textareaBox font14 y69" placeholder="多行输入"></textarea>
+        </div>
+        <div class="radioContent flex">
+            <div class="font14">整改要求：<br>(时限)</div>
+            <textarea  class="textareaBox font14 z70" placeholder="多行输入"></textarea>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="smallButton" onclick="goback()">上一步</div>
+        <div class="smallButton" onclick="sunbmit()">提交</div>
+    </div>
+
+
+</div>
+<div id="tanwin" class="tan" style="display:none;"></div>
+<div class="zhegaicengone zhegaiceng" style="display: none;">
+    <img class='lodingimg' src="./images/loadingpop.gif">
+</div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/hzlexamine.js" type="text/javascript" charset="utf-8"></script>
+</html>
+<script>
+    var obj = {
+            s62: '',
+            j63: '',
+            s64: '',
+            s65: '',
+            s66: '',
+            s67: '',
+            s68: ''
+        };
+    $(function(){
+        if(localStorage.getItem('hzly69')){
+            $('.y69').val(localStorage.getItem('hzly69'))
+        }
+        if(localStorage.getItem('hzlz70')){
+            $('.z70').val(localStorage.getItem('hzlz70'))
+        }
+
+        if(localStorage.getItem('unithzlObj4')){
+            var  airObj = JSON.parse(localStorage.getItem('unithzlObj4'));
+            $.each(airObj, function(key, val) {
+                if(airObj[key]){
+                    $("input[name='"+key+"'][value='"+airObj[key]+"']").attr('checked','true');
+                    $("input[name='"+key+"'][value='"+airObj[key]+"']").data('waschecked', true);
+                }
+            });
+        }
+        
+        $.each(obj, function(key, val) {
+            $("input:radio[name='"+key+"']").click(function () {
+                if(JSON.parse(localStorage.getItem('unithzlObj4'))){
+                    obj = JSON.parse(localStorage.getItem('unithzlObj4'))
+                }
+                var $radio = $(this);
+                // if this was previously checked
+                if ($radio.data('waschecked') == true){
+                    $radio.prop('checked', false);	                    
+                    $radio.data('waschecked', false);
+                } else {
+                    $radio.prop('checked', true);
+                    $radio.data('waschecked', true);
+                }
+                obj[key] = $("input[name='"+key+"']:checked").val();
+                localStorage.setItem('unithzlObj4',JSON.stringify(obj))
+            })
+        });
+        $(".y63").change(function () {
+            localStorage.setItem('hzly69',$(this).val())
+        })
+        $(".z64").change(function () {
+            localStorage.setItem('hzlz70',$(this).val())
+        })
+
+
+    })
+    function sunbmit(){
+        var flyObj = JSON.parse(localStorage.getItem('unithzlObj'));
+        var flyObj1 = JSON.parse(localStorage.getItem('unithzlObj1'));
+        var flyObj2 = JSON.parse(localStorage.getItem('unithzlObj2'));
+        var flyObj3 = JSON.parse(localStorage.getItem('unithzlObj3'));
+        var flyObj4 = {};
+        if(!localStorage.getItem('unithzlObj4')){
+            flyObj4 = {
+                s62: '',
+                j63: '',
+                s64: '',
+                s65: '',
+                s66: '',
+                s67: '',
+                s68: ''
+            };
+        }else{
+            flyObj4 = JSON.parse(localStorage.getItem('unithzlObj4'))
+        }
+
+        $.each(flyObj4, function(key, val) {
+            $("input:radio[name='"+key+"']").change(function () {
+                if(JSON.parse(localStorage.getItem('unithzlObj4'))){
+                    flyObj5 = JSON.parse(localStorage.getItem('unithzlObj4'))
+                }
+                flyObj4[key] = $("input[name='"+key+"']:checked").val();
+                localStorage.setItem('unithzlObj4',JSON.stringify(flyObj4))
+            })
+        });
+        var obj = {
+            applyNum: applyNum,
+            y69: '',
+            z70: '',
+            
+        }
+        if($('.y69').val()){
+            obj.y69 = $('.y69').val();
+        }
+        if($('.z70').val()){
+            obj.z70 = $('.z70').val();
+        }
+
+        var data = Object.assign(flyObj,flyObj1,flyObj2,flyObj3,flyObj4,obj)
+        console.log(data)
+        return
+        data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'supervisionTemplate/kfHyqkfaqCheckList',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function(response) {
+                $(".zhegaiceng").css({'display': 'none'})
+                if(response.rescode == 200){
+                    localStorage.removeItem('unithzlObj')
+                    localStorage.removeItem('unithzlObj1')
+                    localStorage.removeItem('unithzlObj2')
+                    localStorage.removeItem('unithzlObj3')
+                    localStorage.removeItem('unithzlObj4')
+                    localStorage.removeItem('hzly69')
+                    localStorage.removeItem('hzlz70')
+                    window.postMessage('success');//向app发送提交成功消息
+                }else{
+                    tanwin(response.resdes)
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({'display': 'none'})
+            },
+            complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                $(".zhegaiceng").css({'display': 'none'})
+            }
+        });
+    }
+</script>

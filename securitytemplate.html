@@ -54,8 +54,8 @@
     $(function(){
         var applyNum = getUrlParms('applyNum');
         localStorage.setItem('applyNum',applyNum)
-        var data2 = [{url:'gunsexamine.html',name:'枪支日常管理自查清单',color:'backblue'},{url:'',name:'危险物品储存场所自查清单',color:'backgreen none'}]
-        var data1 = [{url:'baserverexamine.html',name:'保安服务业自查条目',color:'backblue'},{url:'',name:'机动车修理业自查条目',color: 'backgreen none'},{url:'',name:'快递企业自查条目',color: 'backgreen none'},{url:'',name:'旅馆业自查条目',color: 'backgreen none'},{url:'',name:'保安服务业自查条目',color: 'backgreen none'},{url:'',name:'机动车修理业自查条目',color: 'backgreen none'},{url:'',name:'洗浴和美容美发经营场所自查条目',color: 'backgreen none'},{url:'',name:'娱乐场所自查条目',color: 'backgreen none'}]
+        var data2 = [{url:'gunsexamine.html',name:'枪支日常管理自查清单',color:'backblue'},{url:'securitywxexamin.html',name:'危险物品储存场所自查清单',color:'backblue'}]
+        var data1 = [{url:'baserverexamine.html',name:'保安服务业自查条目',color:'backblue'},{url:'',name:'机动车修理业自查条目',color: 'backgreen none'},{url:'securitykdexamin.html',name:'快递企业自查条目',color: 'backblue'},{url:'',name:'旅馆业自查条目',color: 'backgreen none'},{url:'',name:'保安服务业自查条目',color: 'backgreen none'},{url:'',name:'机动车修理业自查条目',color: 'backgreen none'},{url:'',name:'洗浴和美容美发经营场所自查条目',color: 'backgreen none'},{url:'',name:'娱乐场所自查条目',color: 'backgreen none'}]
         var str = '',str1 = '';
         $.each(data1,(i,item)=>{
             str+='<div onclick="goExamine(this)" data-url="'+item.url+'" class="chooseBox  colorfff font14 '+item.color+'" >' +item.name+
