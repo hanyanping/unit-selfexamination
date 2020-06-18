@@ -23,7 +23,9 @@ function getUrlParms(name) {
         return unescape(r[2]);
     return null;
 }
-
+function goback(){
+    window.history.back(-1);
+}
 function encrypt(word) {
     var key = CryptoJS.enc.Utf8.parse("99JzcsTwRa3tgfNC");
     var srcs = CryptoJS.enc.Utf8.parse(word);

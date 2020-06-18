@@ -38,11 +38,11 @@
 <script src="./js/flyexamine.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var aireobj = {
-            w6: '',
             w7: '',
-            j8: '',
+            w8: '',
             j9: '',
-            g10: ''
+            j10: '',
+            g11: '',
         };
     $(function(){
         if(localStorage.getItem('unitflyObj1')){
@@ -83,11 +83,11 @@
     }
     function gofly(){
         var obj = {
-            w6: '',
             w7: '',
-            j8: '',
+            w8: '',
             j9: '',
-            g10: ''
+            j10: '',
+            g11: '',
         };
         $.each(obj, function(key, val) {
             if($("input[name='"+key+"']:checked").val()){

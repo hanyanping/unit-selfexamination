@@ -44,11 +44,11 @@
     <div class="contentOne" style="margin-bottom: 0;">
         <div class="radioContent flex">
             <div class="font14">隐患情况：</div>
-            <textarea class="textareaBox font14 y63" placeholder="多行输入"></textarea>
+            <textarea class="textareaBox font14 y64" placeholder="多行输入"></textarea>
         </div>
         <div class="radioContent flex">
             <div class="font14">整改要求：<br>(时限)</div>
-            <textarea  class="textareaBox font14 z64" placeholder="多行输入"></textarea>
+            <textarea  class="textareaBox font14 z65" placeholder="多行输入"></textarea>
         </div>
     </div>
     <div class="flex">
@@ -70,20 +70,20 @@
 </html>
 <script>
     var obj = {
-            s56: '',
-            j57: '',
-            s58: '',
-            s59: '',
-            s60: '',
-            s61: '',
-            s62: ''
+                s57: '',
+                j58: '',
+                s59: '',
+                s60: '',
+                s61: '',
+                s62: '',
+                s63: ''
         };
     $(function(){
-        if(localStorage.getItem('flyy63')){
-            $('.y63').val(localStorage.getItem('flyy63'))
+        if(localStorage.getItem('flyy64')){
+            $('.y64').val(localStorage.getItem('flyy64'))
         }
-        if(localStorage.getItem('flyz64')){
-            $('.z64').val(localStorage.getItem('flyz64'))
+        if(localStorage.getItem('flyz65')){
+            $('.z65').val(localStorage.getItem('flyz65'))
         }
 
         if(localStorage.getItem('unitflyObj5')){
@@ -114,11 +114,11 @@
                 localStorage.setItem('unitflyObj5',JSON.stringify(obj))
             })
         });
-        $(".y63").change(function () {
-            localStorage.setItem('flyy63',$(this).val())
+        $(".y64").change(function () {
+            localStorage.setItem('flyy64',$(this).val())
         })
-        $(".z64").change(function () {
-            localStorage.setItem('flyz64',$(this).val())
+        $(".z65").change(function () {
+            localStorage.setItem('flyz65',$(this).val())
         })
 
 
@@ -132,13 +132,13 @@
         var unitflyObj5 = {};
         if(!localStorage.getItem('unitflyObj5')){
              unitflyObj5 = {
-                s56: '',
-                j57: '',
-                s58: '',
+                s57: '',
+                j58: '',
                 s59: '',
                 s60: '',
                 s61: '',
-                s62: ''
+                s62: '',
+                s63: ''
             };
         }else{
             unitflyObj5 = JSON.parse(localStorage.getItem('unitflyObj5'))
@@ -155,15 +155,15 @@
         });
         var obj = {
             applyNum: applyNum,
-            y63: '',
-            z64: '',
+            y64: '',
+            z65: '',
             
         }
-        if($('.y63').val()){
-            obj.y63 = $('.y63').val();
+        if($('.y64').val()){
+            obj.y64 = $('.y64').val();
         }
-        if($('.z64').val()){
-            obj.z64 = $('.z64').val();
+        if($('.z65').val()){
+            obj.z65 = $('.z65').val();
         }
 
         var data = Object.assign(flyObj,flyObj1,flyObj2,flyObj3,flyObj4,unitflyObj5,obj)
@@ -186,8 +186,8 @@
                     localStorage.removeItem('unitflyObj3')
                     localStorage.removeItem('unitflyObj4')
                     localStorage.removeItem('unitflyObj5')
-                    localStorage.removeItem('flyy63')
-                    localStorage.removeItem('flyz64')
+                    localStorage.removeItem('flyy64')
+                    localStorage.removeItem('flyz65')
                     window.postMessage('success');//向app发送提交成功消息
                 }else{
                     tanwin(response.resdes)
