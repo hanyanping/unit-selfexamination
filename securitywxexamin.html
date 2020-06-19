@@ -42,23 +42,13 @@
 <script src="./js/baserverexamine.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var phone = '';
-    window.onload = function() {
-    }
     var obj = {
-        k1: '',
-        k2: '',
-        k3: '',
-        k4: '',
+        s1: '',
+        j2: '',
+        c3: '',
+        c4: '',
         c5: '',
-        k6: '',
-        k7: '',
-        k8: '',
-        k9: '',
-        k10: '',
-        k11: '',
-        y12: '',
-        s13: '',
-        k14: ''
+        w6: ''
     };
     function localData(){
         $.each(obj, function(key, val) {
@@ -106,13 +96,11 @@
         if(!localStorage.getItem('securitywxobj')){
             nationobj = {
                 s1: '',
-                s2: '',
-                s3: '',
-                s4: '',
-                b5: '',
-                b6: '',
-                b7: '',
-                b8: ''
+                j2: '',
+                c3: '',
+                c4: '',
+                c5: '',
+                w6: ''
             };
         }else{
             nationobj = JSON.parse(localStorage.getItem('securitywxobj'));
@@ -122,10 +110,9 @@
         }
         var data = Object.assign(nationobj,obj12);
         $(".zhegaiceng").css({'display': 'block'})
-        console.log(data)
         data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'companycheckTemplate/zaBafwyzctmCheckList',
+            url: ajaxUrl + 'companycheckTemplate/zaWeixianwpcccszcqdCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',

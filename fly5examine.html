@@ -124,6 +124,7 @@
 
     })
     function sunbmit(){
+        var applyNum = localStorage.getItem('applyNum')
         var flyObj = JSON.parse(localStorage.getItem('unitflyObj'));
         var flyObj1 = JSON.parse(localStorage.getItem('unitflyObj1'));
         var flyObj2 = JSON.parse(localStorage.getItem('unitflyObj2'));
@@ -167,11 +168,9 @@
         }
 
         var data = Object.assign(flyObj,flyObj1,flyObj2,flyObj3,flyObj4,unitflyObj5,obj)
-        console.log(data)
-        return
         data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'supervisionTemplate/kfHyqkfaqCheckList',
+            url: ajaxUrl + 'companycheckTemplate/kfFeixingqhdqCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',
@@ -188,7 +187,7 @@
                     localStorage.removeItem('unitflyObj5')
                     localStorage.removeItem('flyy64')
                     localStorage.removeItem('flyz65')
-                    window.postMessage('success');//向app发送提交成功消息
+                    window.location.href = './circulation.html'
                 }else{
                     tanwin(response.resdes)
                 }

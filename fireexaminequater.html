@@ -144,6 +144,7 @@
             z15: ''
         }
     function submit(){
+        var applyNum = localStorage.getItem('applyNum')
         var firequaterobj = null,firequaterobjtextobj = null;;
             if(!localStorage.getItem('firequaterobj')){
                 firequaterobj = obj;
@@ -161,7 +162,7 @@
             var data = Object.assign(firequaterobjtextobj,firequaterobj,applyNumobj)
              data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'companycheckTemplate/xfXtmrjcAndSyCheckList',
+            url: ajaxUrl + 'companycheckTemplate/xfXitongjdjcjsyjgCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',

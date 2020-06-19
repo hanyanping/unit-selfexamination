@@ -130,30 +130,31 @@
         d6: '',
         q7: '',
         d8: '',
-        x9: '',
         x10: '',
-        b11: '',
-        d12: '',
-        f13: '',
-        g14: '',
-        x15: '',
-        b16: '',
-        k17: '',
-        x18: '',
-        b19: '',
-        x20: '',
-        f21: '',
-        x22: '',
+        x11: '',
+        b12: '',
+        d13: '',
+        f14: '',
+        g15: '',
+        x16: '',
+        b17: '',
+        k18: '',
+        x19: '',
+        b20: '',
+        x21: '',
+        f22: '',
         x23: '',
+        x24: '',
       };
         var obj1 = {
             b1: '',
             b2: '',
             b3: '',
             z9: '',
-            z24: ''
+            z25: ''
         }
     function submit(){
+        var applyNum = localStorage.getItem('applyNum')
         var fireyearobj = null,fireyearobjtextobj = null;;
             if(!localStorage.getItem('fireyearobj')){
                 fireyearobj = obj;
@@ -171,7 +172,7 @@
             var data = Object.assign(fireyearobjtextobj,fireyearobj,applyNumobj)
              data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'companycheckTemplate/xfXtmrjcAndSyCheckList',
+            url: ajaxUrl + 'companycheckTemplate/xfXitongndjcjsyjgCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',
