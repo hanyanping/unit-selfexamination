@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
     <link  href="./css/viewer.css" rel="stylesheet">
-    <title>单位法定自查</title>
+    <title>诚信自查</title>
     <style>
         .infoDetail {
             background: #f9f9f9;
@@ -391,10 +391,10 @@ function addPhoto(photograph) {
 //   }
         //photographLibrary 仅相册
         //仅拍照
-        window.postMessage('photographCamera');
+        // window.postMessage('photographCamera');
         //发送获取照片消息（相机，相册）
         // window.postMessage('photograph');
-  // window.postMessage('photograph'); //发送获取照片消息
+  window.postMessage('photograph'); //发送获取照片消息
 }
 //提交
 function sunbmit(){
