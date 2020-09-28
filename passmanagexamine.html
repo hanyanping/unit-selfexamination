@@ -261,9 +261,7 @@
         d35: ''
     };
     $(function () {
-        // if (localStorage.getItem('checkBoxValue')) {
-        //     setTheCheckBoxValue()
-        // }
+      
         if (localStorage.getItem('unitpassmanageinput')) {
             setinputValue()
         }
@@ -272,7 +270,6 @@
         }
         changeRadio();
         // $('input:checkbox').click(function () {
-        //     getTheCheckBoxValue();
         // });
     })
     //监听radio
@@ -327,29 +324,8 @@
             $("." + key).val(inputVal[key])
         })
     }
-    //回显多选框的值
-    function setTheCheckBoxValue() {
-        var checkBoxValue = localStorage.getItem('checkBoxValue')
-        var checkBoxArray = checkBoxValue.split(",");
-        for (var i = 0; i < checkBoxArray.length; i++) {
-            $("input[name='j1']").each(function () {
-                if ($(this).val() == checkBoxArray[i]) {
-                    $(this).attr("checked", "checked");
-                }
-            })
-        }
-    }
-    //多选框取值存储
-    function getTheCheckBoxValue() {
-        var test = $("input[name='j1']:checked");
-        var checkBoxValue = "";
-        test.each(function () {
-            checkBoxValue += $(this).val() + ',';
-        })
-        checkBoxValue = checkBoxValue.substring(0, checkBoxValue.length - 1);
-        console.log(checkBoxValue)
-        localStorage.setItem('checkBoxValue', checkBoxValue);
-    }
+   
+  
     function submit() {
         if (localStorage.getItem('unitpassmanageinput')) {
             inputobj = JSON.parse(localStorage.getItem('unitpassmanageinput'));
@@ -376,8 +352,7 @@
                 if (response.rescode == 200) {
                     localStorage.removeItem('unitpassmanageradio')
                     localStorage.removeItem('unitpassmanageinput')
-                    localStorage.removeItem('checkBoxValue')
-                    window.postMessage('success');//向app发送提交成功消息
+                    window.location.href = './circulation.html'
                 } else {
                     toast(response.resdes)
                 }

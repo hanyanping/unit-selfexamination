@@ -129,11 +129,11 @@
         <div class="content">
            
             <div class="radioList">
-                <div class="inputBox">
+                <!-- <div class="inputBox">
                     <span class="font14 inputLable">被检查人：</span>
                     <input class="inputText font14 b1" onchange="changeValue('b1')" type='text'
                         placeholder="被检查人" />
-                </div>
+                </div> -->
                 <div class="inputBox">
                     <span class="font14  inputLable">检查场所：</span>
                     <input class="inputText font14 j2" onchange="changeValue('j2')" type='text' placeholder="检查场所" />
@@ -212,7 +212,6 @@
 </html>
 <script>
     var inputobj = {
-        b1: '',
         j2: '',
         f14: '',
         q15: '',
@@ -232,27 +231,23 @@
         d13: ''
     };
     $(function () {
-        // if (localStorage.getItem('checkBoxValue')) {
-        //     setTheCheckBoxValue()
-        // }
-        if (localStorage.getItem('passunitinput')) {
+      
+        if (localStorage.getItem('unitpassunitinput')) {
             setinputValue()
         }
-        if (localStorage.getItem('passunitradio')) {
+        if (localStorage.getItem('unitpassunitradio')) {
             setradioValue()
         }
         changeRadio();
-        // $('input:checkbox').click(function () {
-        //     getTheCheckBoxValue();
-        // });
+      
     })
     //监听radio
     function changeRadio() {
         $.each(radioobj, function (key, val) {
            
             $("input:radio[name='" + key + "']").click(function () {
-                if (JSON.parse(localStorage.getItem('passunitradio'))) {
-                    radioobj = JSON.parse(localStorage.getItem('passunitradio'))
+                if (JSON.parse(localStorage.getItem('unitpassunitradio'))) {
+                    radioobj = JSON.parse(localStorage.getItem('unitpassunitradio'))
                 }
                 var $radio = $(this);
                 // if this was previously checked
@@ -269,64 +264,42 @@
                     radioobj[key] = '';
                 }
               
-                localStorage.setItem('passunitradio', JSON.stringify(radioobj))
+                localStorage.setItem('unitpassunitradio', JSON.stringify(radioobj))
             })
         });
     }
     //回显radio
     function setradioValue() {
-        var passunitradio = JSON.parse(localStorage.getItem('passunitradio'));
-        $.each(passunitradio, function (key, val) {
-            if (passunitradio[key]) {
-                $("input[name='" + key + "'][value='" + passunitradio[key] + "']").attr('checked', 'true');
-                $("input[name='" + key + "'][value='" + passunitradio[key] + "']").data('waschecked', true);
+        var unitpassunitradio = JSON.parse(localStorage.getItem('unitpassunitradio'));
+        $.each(unitpassunitradio, function (key, val) {
+            if (unitpassunitradio[key]) {
+                $("input[name='" + key + "'][value='" + unitpassunitradio[key] + "']").attr('checked', 'true');
+                $("input[name='" + key + "'][value='" + unitpassunitradio[key] + "']").data('waschecked', true);
             }
         });
     }
     //监听存input text
     function changeValue(k) {
-        if (localStorage.getItem('passunitinput')) {
-            inputobj = JSON.parse(localStorage.getItem('passunitinput'));
+        if (localStorage.getItem('unitpassunitinput')) {
+            inputobj = JSON.parse(localStorage.getItem('unitpassunitinput'));
         }
         inputobj[k] = $("." + k).val();
-        localStorage.setItem('passunitinput', JSON.stringify(inputobj))
+        localStorage.setItem('unitpassunitinput', JSON.stringify(inputobj))
     }
     //回显input text
     function setinputValue() {
-        var inputVal = JSON.parse(localStorage.getItem('passunitinput'));
+        var inputVal = JSON.parse(localStorage.getItem('unitpassunitinput'));
         $.each(inputVal, function (key, val) {
             $("." + key).val(inputVal[key])
         })
     }
-    //回显多选框的值
-    function setTheCheckBoxValue() {
-        var checkBoxValue = localStorage.getItem('checkBoxValue')
-        var checkBoxArray = checkBoxValue.split(",");
-        for (var i = 0; i < checkBoxArray.length; i++) {
-            $("input[name='j1']").each(function () {
-                if ($(this).val() == checkBoxArray[i]) {
-                    $(this).attr("checked", "checked");
-                }
-            })
-        }
-    }
-    //多选框取值存储
-    function getTheCheckBoxValue() {
-        var test = $("input[name='j1']:checked");
-        var checkBoxValue = "";
-        test.each(function () {
-            checkBoxValue += $(this).val() + ',';
-        })
-        checkBoxValue = checkBoxValue.substring(0, checkBoxValue.length - 1);
-        console.log(checkBoxValue)
-        localStorage.setItem('checkBoxValue', checkBoxValue);
-    }
+ 
     function submit() {
-        if (localStorage.getItem('passunitinput')) {
-            inputobj = JSON.parse(localStorage.getItem('passunitinput'));
+        if (localStorage.getItem('unitpassunitinput')) {
+            inputobj = JSON.parse(localStorage.getItem('unitpassunitinput'));
         }
-        if (localStorage.getItem('passunitradio')) {
-            radioobj = JSON.parse(localStorage.getItem('passunitradio'));
+        if (localStorage.getItem('unitpassunitradio')) {
+            radioobj = JSON.parse(localStorage.getItem('unitpassunitradio'));
         }
         var obj = {
             applyNum: applyNum
@@ -345,10 +318,9 @@
             success: function (response) {
                 $(".zhegaiceng").css({ 'display': 'none' })
                 if (response.rescode == 200) {
-                    localStorage.removeItem('passunitradio')
-                    localStorage.removeItem('passunitinput')
-                    localStorage.removeItem('checkBoxValue')
-                    window.postMessage('success');//向app发送提交成功消息
+                    localStorage.removeItem('unitpassunitradio')
+                    localStorage.removeItem('unitpassunitinput')
+                    window.location.href = './circulation.html'
                 } else {
                     toast(response.resdes)
                 }

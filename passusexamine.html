@@ -129,11 +129,11 @@
         <div class="content">
            
             <div class="radioList">
-                <div class="inputBox">
+                <!-- <div class="inputBox">
                     <span class="font14 inputLable">被检查人：</span>
                     <input class="inputText font14 b1" onchange="changeValue('b1')" type='text'
                         placeholder="被检查人" />
-                </div>
+                </div> -->
                 <div class="inputBox">
                     <span class="font14  inputLable">检查场所：</span>
                     <input class="inputText font14 j2" onchange="changeValue('j2')" type='text' placeholder="检查场所" />
@@ -213,7 +213,6 @@
 </html>
 <script>
     var inputobj = {
-        b1: '',
         j2: '',
         f56: '',
         q57: '',
@@ -278,10 +277,10 @@
         // if (localStorage.getItem('checkBoxValue')) {
         //     setTheCheckBoxValue()
         // }
-        if (localStorage.getItem('passuseinput')) {
+        if (localStorage.getItem('unitpassuseinput')) {
             setinputValue()
         }
-        if (localStorage.getItem('passuseradio')) {
+        if (localStorage.getItem('unitpassuseradio')) {
             setradioValue()
         }
         changeRadio();
@@ -293,8 +292,8 @@
     function changeRadio() {
         $.each(radioobj, function (key, val) {
             $("input:radio[name='" + key + "']").click(function () {
-                if (JSON.parse(localStorage.getItem('passuseradio'))) {
-                    radioobj = JSON.parse(localStorage.getItem('passuseradio'))
+                if (JSON.parse(localStorage.getItem('unitpassuseradio'))) {
+                    radioobj = JSON.parse(localStorage.getItem('unitpassuseradio'))
                 }
                 var $radio = $(this);
                 // if this was previously checked
@@ -311,31 +310,31 @@
                     radioobj[key] = '';
                 }
               
-                localStorage.setItem('passuseradio', JSON.stringify(radioobj))
+                localStorage.setItem('unitpassuseradio', JSON.stringify(radioobj))
             })
         });
     }
     //回显radio
     function setradioValue() {
-        var passuseradio = JSON.parse(localStorage.getItem('passuseradio'));
-        $.each(passuseradio, function (key, val) {
-            if (passuseradio[key]) {
-                $("input[name='" + key + "'][value='" + passuseradio[key] + "']").attr('checked', 'true');
-                $("input[name='" + key + "'][value='" + passuseradio[key] + "']").data('waschecked', true);
+        var unitpassuseradio = JSON.parse(localStorage.getItem('unitpassuseradio'));
+        $.each(unitpassuseradio, function (key, val) {
+            if (unitpassuseradio[key]) {
+                $("input[name='" + key + "'][value='" + unitpassuseradio[key] + "']").attr('checked', 'true');
+                $("input[name='" + key + "'][value='" + unitpassuseradio[key] + "']").data('waschecked', true);
             }
         });
     }
     //监听存input text
     function changeValue(k) {
-        if (localStorage.getItem('passuseinput')) {
-            inputobj = JSON.parse(localStorage.getItem('passuseinput'));
+        if (localStorage.getItem('unitpassuseinput')) {
+            inputobj = JSON.parse(localStorage.getItem('unitpassuseinput'));
         }
         inputobj[k] = $("." + k).val();
-        localStorage.setItem('passuseinput', JSON.stringify(inputobj))
+        localStorage.setItem('unitpassuseinput', JSON.stringify(inputobj))
     }
     //回显input text
     function setinputValue() {
-        var inputVal = JSON.parse(localStorage.getItem('passuseinput'));
+        var inputVal = JSON.parse(localStorage.getItem('unitpassuseinput'));
         $.each(inputVal, function (key, val) {
             $("." + key).val(inputVal[key])
         })
@@ -364,11 +363,11 @@
         localStorage.setItem('checkBoxValue', checkBoxValue);
     }
     function submit() {
-        if (localStorage.getItem('passuseinput')) {
-            inputobj = JSON.parse(localStorage.getItem('passuseinput'));
+        if (localStorage.getItem('unitpassuseinput')) {
+            inputobj = JSON.parse(localStorage.getItem('unitpassuseinput'));
         }
-        if (localStorage.getItem('passuseradio')) {
-            radioobj = JSON.parse(localStorage.getItem('passuseradio'));
+        if (localStorage.getItem('unitpassuseradio')) {
+            radioobj = JSON.parse(localStorage.getItem('unitpassuseradio'));
         }
         var obj = {
             applyNum: applyNum
@@ -386,9 +385,9 @@
             success: function (response) {
                 $(".zhegaiceng").css({ 'display': 'none' })
                 if (response.rescode == 200) {
-                    localStorage.removeItem('passuseradio')
-                    localStorage.removeItem('passuseinput')
-                    window.postMessage('success');//向app发送提交成功消息
+                    localStorage.removeItem('unitpassuseradio')
+                    localStorage.removeItem('unitpassuseinput')
+                    window.location.href = './circulation.html'
                 } else {
                     toast(response.resdes)
                 }
