@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/airexamine.css">
+    <title>空防安全检查记录单
+    </title>
+    <style>
+        .content {
+            padding: 12px 8px;
+            margin: 10px 8px 0;
+        }
+
+        .radioList {
+            margin-top: 6px;
+        }
+
+        .textareaBox {
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        .contentBox {
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .checkbox .radiobox {
+            width: 50%;
+        }
+
+        .inputLable {
+            display: inline-block;
+            width: 126px;
+        }
+
+        .inputText {
+            width: 200px;
+        }
+
+        .dayInput {
+            width: 60px;
+            height: 26px;
+            border: 1px solid #ccc;
+        }
+
+        .inputButton {
+            display: flex;
+            justify-content: center;
+        }
+
+        .inputButton input {
+            margin-right: 15px;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+
+        #canvasBox {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .greet {
+            padding: 12px;
+            font-size: 20px;
+            user-select: none;
+        }
+
+        .greet select {
+            font-size: 18px;
+        }
+
+        canvas {
+            flex: 1;
+            cursor: crosshair;
+            border: 2px dashed lightgray;
+        }
+
+        .none {
+            display: none;
+        }
+
+        #pic,
+        #pic1 {
+            height: auto;
+            width: 100%;
+        }
+
+        .drawButton {
+            border: 1px solid #f9f9f9;
+            border-radius: 10px;
+            padding: 10px 16px;
+            background: #fff;
+            color: #232323;
+            font-size: 16px;
+            margin-left: 18px;
+        }
+        .margin6{
+            margin: 6px 0;
+        }
+        .itemcenter{
+            flex-wrap: wrap;
+        }
+        .lineBox {
+            height: 16px;
+            width: 3px;
+            background: #0D76EE;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body style="background:#f9f9f9;">
+    <div class="container none">
+        <div id="canvasBox">
+            <div class="greet">
+                <span>请在下方空白处签名</span>
+                <input type="button" class="drawButton" value="清除" ontouchstart="cleardraw()"
+                    onmousedown="cleardraw()" />
+                <input type="button" class="drawButton" value="确定" ontouchstart="savePNG()" onmousedown="savePNG()" />
+            </div>
+            <canvas></canvas>
+        </div>
+    </div>
+    <div id="examine" >
+        <div class="contentTitle">空防安全检查记录单（通行证的管理）</div>
+        <div class="content">
+           
+            <div class="radioList">
+                <!-- <div class="inputBox">
+                    <span class="font14 inputLable">被检查人：</span>
+                    <input class="inputText font14 b1" onchange="changeValue('b1')" type='text'
+                        placeholder="被检查人" />
+                </div> -->
+                <div class="inputBox">
+                    <span class="font14  inputLable">检查场所：</span>
+                    <input class="inputText font14 j2" onchange="changeValue('j2')" type='text' placeholder="检查场所" />
+                </div>
+                <div class="radioContent itemcenter margin6">
+                    <p class="radioTitle font14">检查方式：</p>
+                    <div class="radiobox font14">
+                        <input type="radio" name="j3" value="1">
+                        <label></label><span class="font14">文件检查</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="j3" value="2">
+                        <label></label><span class="font14">现场检查</span>
+                    </div>
+                </div>
+                <div class="radioContent itemcenter margin6">
+                    <p class="radioTitle font14">检查形式：</p>
+                    <div class="radiobox font14" >
+                        <input type="radio" name="j4" value="1">
+                        <label></label><span class="font14">单独检查</span>
+                    </div>
+                    <div class="radiobox font14">
+                        <input type="radio" name="j4" value="2">
+                        <label></label><span class="font14">联合检查</span>
+                    </div>
+                    <div class="radiobox font14" style="margin-right: 0;padding: 0 6px;">
+                        <input type="radio" name="j4" value="3">
+                        <label></label><span class="font14">交叉检查</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contentBox"></div>
+            <div class="radioContent" style="margin-top:5px;">
+                <div class="font14">发现问题描述：</div>
+                <textarea class="textareaBox font14 f36" onchange="changeValue('f36')"
+                    placeholder="多行输入" onblur="inputBlur()" onfocus="inputFocus()"></textarea>
+            </div>
+            <div class="inputBox">
+                <span class="font14  inputLable">签字人工作部门：</span>
+                <input class="inputText font14 q37"  onblur="inputBlur()" onfocus="inputFocus()" onchange="changeValue('q37')" type='text' placeholder="签字人工作部门" />
+            </div>
+            <div class="inputBox">
+                <span class="font14 inputLable">联系方式：</span>
+                <input class="inputText font14 l38" onblur="inputBlur()" onfocus="inputFocus()" onchange="changeValue('l38')" type='text' placeholder="联系方式" />
+            </div>
+        </div>
+        <!-- <div class="contentOne">
+        <div class="title">
+            <span class="lineBox"></span>
+            <span class="font16 titletext fontWeight" >签字</span>
+        </div>
+        <div class="flexBetween signBox">
+            <div class="font14">检查员签字:</div>
+            <div  class="signButton checkbutton" onclick="showsign()">请手写签名</div>
+        </div>
+        <img id="pic" src=""/>
+        <div class="flexBetween signBox">
+            <div class="font14">被检查人签字:</div>
+            <div  class="signButton checkbutton1" onclick="showsign1()">请手写签名</div>
+        </div>
+        <img id="pic1" />
+    </div> -->
+
+        <div class="smallButton" onclick="submit()">提交</div>
+        <div style="height: 300px;width: 100%;"></div>
+    </div>
+    <div id="tanwin" class="tan" style="display:none;"></div>
+    <div class="zhegaicengone zhegaiceng" style="display: none;">
+        <img class='lodingimg' src="./images/loadingpop.gif">
+    </div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/passexamine.js" type="text/javascript" charset="utf-8"></script>
+
+</html>
+<script>
+    var inputobj = {
+        j2: '',
+        f36: '',
+        q37: '',
+        l38: ''
+    };
+    var radioobj = {
+        j3: '',
+        j4: '',
+        d5: '',
+        d6: '',
+        d7: '',
+        d8: '',
+        d9: '',
+        d10: '',
+        d11: '',
+        d12: '',
+        d13: '',
+        d14: '',
+        d15: '',
+        d16: '',
+        d17: '',
+        d18: '',
+        d19: '',
+        d20: '',
+        d21: '',
+        d22: '',
+        d23: '',
+        d24: '',
+        d25: '',
+        d26: '',
+        d27: '',
+        d28: '',
+        d29: '',
+        d30: '',
+        d31: '',
+        d32: '',
+        d33: '',
+        d34: '',
+        d35: ''
+    };
+    $(function () {
+        // if (localStorage.getItem('checkBoxValue')) {
+        //     setTheCheckBoxValue()
+        // }
+        if (localStorage.getItem('unitpassmanageinput')) {
+            setinputValue()
+        }
+        if (localStorage.getItem('unitpassmanageradio')) {
+            setradioValue()
+        }
+        changeRadio();
+        // $('input:checkbox').click(function () {
+        //     getTheCheckBoxValue();
+        // });
+    })
+    //监听radio
+    function changeRadio() {
+        $.each(radioobj, function (key, val) {
+           
+            $("input:radio[name='" + key + "']").click(function () {
+                if (JSON.parse(localStorage.getItem('unitpassmanageradio'))) {
+                    radioobj = JSON.parse(localStorage.getItem('unitpassmanageradio'))
+                }
+                var $radio = $(this);
+                // if this was previously checked
+                if ($radio.data('waschecked') == true) {
+                    $radio.prop('checked', false);
+                    $radio.data('waschecked', false);
+                } else {
+                    $radio.prop('checked', true);
+                    $radio.data('waschecked', true);
+                }
+                if($("input[name='"+key+"']:checked").val()){
+                    radioobj[key] = $("input[name='"+key+"']:checked").val();
+                }else{
+                    radioobj[key] = '';
+                }
+              
+                localStorage.setItem('unitpassmanageradio', JSON.stringify(radioobj))
+            })
+        });
+    }
+    //回显radio
+    function setradioValue() {
+        var unitpassmanageradio = JSON.parse(localStorage.getItem('unitpassmanageradio'));
+        $.each(unitpassmanageradio, function (key, val) {
+            if (unitpassmanageradio[key]) {
+                $("input[name='" + key + "'][value='" + unitpassmanageradio[key] + "']").attr('checked', 'true');
+                $("input[name='" + key + "'][value='" + unitpassmanageradio[key] + "']").data('waschecked', true);
+            }
+        });
+    }
+    //监听存input text
+    function changeValue(k) {
+        if (localStorage.getItem('unitpassmanageinput')) {
+            inputobj = JSON.parse(localStorage.getItem('unitpassmanageinput'));
+        }
+        inputobj[k] = $("." + k).val();
+        localStorage.setItem('unitpassmanageinput', JSON.stringify(inputobj))
+    }
+    //回显input text
+    function setinputValue() {
+        var inputVal = JSON.parse(localStorage.getItem('unitpassmanageinput'));
+        $.each(inputVal, function (key, val) {
+            $("." + key).val(inputVal[key])
+        })
+    }
+    //回显多选框的值
+    function setTheCheckBoxValue() {
+        var checkBoxValue = localStorage.getItem('checkBoxValue')
+        var checkBoxArray = checkBoxValue.split(",");
+        for (var i = 0; i < checkBoxArray.length; i++) {
+            $("input[name='j1']").each(function () {
+                if ($(this).val() == checkBoxArray[i]) {
+                    $(this).attr("checked", "checked");
+                }
+            })
+        }
+    }
+    //多选框取值存储
+    function getTheCheckBoxValue() {
+        var test = $("input[name='j1']:checked");
+        var checkBoxValue = "";
+        test.each(function () {
+            checkBoxValue += $(this).val() + ',';
+        })
+        checkBoxValue = checkBoxValue.substring(0, checkBoxValue.length - 1);
+        console.log(checkBoxValue)
+        localStorage.setItem('checkBoxValue', checkBoxValue);
+    }
+    function submit() {
+        if (localStorage.getItem('unitpassmanageinput')) {
+            inputobj = JSON.parse(localStorage.getItem('unitpassmanageinput'));
+        }
+        if (localStorage.getItem('unitpassmanageradio')) {
+            radioobj = JSON.parse(localStorage.getItem('unitpassmanageradio'));
+        }
+        var obj = {
+            applyNum: applyNum
+        }
+       
+        var data = Object.assign(obj, inputobj, radioobj);
+        console.log(data)
+        data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'supervisionTemplate/kfAqjcjldTxzglCheckList',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function (response) {
+                $(".zhegaiceng").css({ 'display': 'none' })
+                if (response.rescode == 200) {
+                    localStorage.removeItem('unitpassmanageradio')
+                    localStorage.removeItem('unitpassmanageinput')
+                    localStorage.removeItem('checkBoxValue')
+                    window.postMessage('success');//向app发送提交成功消息
+                } else {
+                    toast(response.resdes)
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({ 'display': 'none' })
+            },
+            complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+                $(".zhegaiceng").css({ 'display': 'none' })
+            }
+        });
+    }
+</script>
+
+</html>
