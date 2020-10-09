@@ -374,9 +374,11 @@
         }
         var data = Object.assign(obj, inputobj, radioobj);
         console.log(data)
+        console.log( ajaxUrl + 'companycheckTemplate/kfAqjcjldTxzdsyCheckList')
+        return;
         data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'supervisionTemplate/kfAqjcjldTxzdsyCheckList',
+            url: ajaxUrl + 'companycheckTemplate/kfAqjcjldTxzdsyCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',
