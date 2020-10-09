@@ -373,9 +373,6 @@
             applyNum: applyNum
         }
         var data = Object.assign(obj, inputobj, radioobj);
-        console.log(data)
-        console.log( ajaxUrl + 'companycheckTemplate/kfAqjcjldTxzdsyCheckList')
-        return;
         data = JSON.stringify(data)
         $.ajax({
             url: ajaxUrl + 'companycheckTemplate/kfAqjcjldTxzdsyCheckList',

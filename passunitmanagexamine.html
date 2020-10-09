@@ -305,11 +305,7 @@
             applyNum: applyNum
         }
         var data = Object.assign(obj, inputobj, radioobj);
-        console.log(data)
-        console.log(ajaxUrl + 'companycheckTemplate/kfAqjcjldTxzcydwglCheckList')
-        return
         data = JSON.stringify(data)
-       
         $.ajax({
             url: ajaxUrl + 'companycheckTemplate/kfAqjcjldTxzcydwglCheckList',
             timeout: timeDelay,
