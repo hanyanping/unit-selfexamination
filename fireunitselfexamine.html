@@ -23,7 +23,8 @@
 
 <body style="background:#f9f9f9;">
 
-    <div id="examine">
+    <div id="examine" style="margin-bottom: 300px;">
+        <div class="contentTitle">单位消防安全自查自改登记表</div>
         <div class="content">
             <div class="radioList">
                 <div class="inputBox">
@@ -48,7 +49,7 @@
                 <div class="title"><span class="linebox"></span><span class="font14 titletext fontWeight">检查内容</span></div>
             </div>
         </div>
-        <div class="smallButton" onclick="gofly()">提交</div>
+        <div class="smallButton" onclick="submit()">提交</div>
     </div>
     <div id="tanwin" class="tan" style="display:none;"></div>
     <div class="zhegaicengone zhegaiceng" style="display: none;">
@@ -134,12 +135,12 @@
         }
         changeRadio();
     })
-    //监听radio
-    function changeRadio() {
-        $.each(aireobj, function (key, val) {
+  //监听radio
+  function changeRadio() {
+        $.each(radioobj, function (key, val) {
             $("input:radio[name='" + key + "']").click(function () {
-                if (JSON.parse(localStorage.getItem('unitflyObj1'))) {
-                    aireobj = JSON.parse(localStorage.getItem('unitflyObj1'))
+                if (JSON.parse(localStorage.getItem('fireunitselfradio'))) {
+                    radioobj = JSON.parse(localStorage.getItem('fireunitselfradio'))
                 }
                 var $radio = $(this);
                 // if this was previously checked
@@ -150,31 +151,79 @@
                     $radio.prop('checked', true);
                     $radio.data('waschecked', true);
                 }
-                if ($("input[name='" + key + "']:checked").val()) {
-                    aireobj[key] = $("input[name='" + key + "']:checked").val();
-                } else {
-                    aireobj[key] = '';
+                if($("input[name='"+key+"']:checked").val()){
+                    radioobj[key] = $("input[name='"+key+"']:checked").val();
+                }else{
+                    radioobj[key] = '';
                 }
-                localStorage.setItem('unitflyObj1', JSON.stringify(aireobj))
+              
+                localStorage.setItem('fireunitselfradio', JSON.stringify(radioobj))
             })
         });
     }
-    function gofly() {
-        var obj = {
-            w7: '',
-            w8: '',
-            j9: '',
-            j10: '',
-            g11: '',
-        };
-        $.each(obj, function (key, val) {
-            if ($("input[name='" + key + "']:checked").val()) {
-                obj[key] = $("input[name='" + key + "']:checked").val()
+    //回显radio
+    function setradioValue() {
+        var fireunitselfradio = JSON.parse(localStorage.getItem('fireunitselfradio'));
+        $.each(fireunitselfradio, function (key, val) {
+            if (fireunitselfradio[key]) {
+                $("input[name='" + key + "'][value='" + fireunitselfradio[key] + "']").attr('checked', 'true');
+                $("input[name='" + key + "'][value='" + fireunitselfradio[key] + "']").data('waschecked', true);
             }
         });
-        obj = JSON.stringify(obj);
-        localStorage.setItem('unitflyObj1', obj)
-        window.location.href = './fly2examine.html'
+    }
+    //监听存input text
+    function changeValue(k) {
+        if (localStorage.getItem('fireunitselfinput')) {
+            inputobj = JSON.parse(localStorage.getItem('fireunitselfinput'));
+        }
+        inputobj[k] = $("." + k).val();
+        localStorage.setItem('fireunitselfinput', JSON.stringify(inputobj))
+    }
+    //回显input text
+    function setinputValue() {
+        var inputVal = JSON.parse(localStorage.getItem('fireunitselfinput'));
+        $.each(inputVal, function (key, val) {
+            $("." + key).val(inputVal[key])
+        })
+    }
+    function submit() {
+        if (localStorage.getItem('fireunitselfinput')) {
+            inputobj = JSON.parse(localStorage.getItem('fireunitselfinput'));
+        }
+        if (localStorage.getItem('fireunitselfradio')) {
+            radioobj = JSON.parse(localStorage.getItem('fireunitselfradio'));
+        }
+        var obj = {
+            applyNum: applyNum
+        }
+        var data = Object.assign(obj, inputobj, radioobj);
+        console.log(data)
+        return
+        data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'companycheckTemplate/kfAqjcjldTxzcydwglCheckList',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function (response) {
+                $(".zhegaiceng").css({ 'display': 'none' })
+                if (response.rescode == 200) {
+                    localStorage.removeItem('fireunitselfradio')
+                    localStorage.removeItem('fireunitselfinput')
+                    window.location.href = './circulation.html'
+                } else {
+                    toast(response.resdes)
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({ 'display': 'none' })
+            },
+            complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+                $(".zhegaiceng").css({ 'display': 'none' })
+            }
+        });
     }
 
 </script>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/airexamine.css">
+    <title>单位消防安全自查自改登记表
+    </title>
+    <style>
+        .marginleft{
+            margin-left: 12px;
+        }
+        .contenttitle{
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+
+<body style="background:#f9f9f9;">
+    <div id="examine" style="margin-bottom: 300px;">
+        <div class="contentTitle">消防安全重点单位自查自改登记表</div>
+        <div class="content">
+            <div class="radioList">
+                <div class="inputBox">
+                    <span class="font14 inputLable">单位性质：</span>
+                    <input class="inputText font14 d1" onchange="changeValue('d1')" type='text' placeholder="单位性质" />
+                </div>
+                <div class="inputBox">
+                    <span class="font14 inputLable">单位地址：</span>
+                    <input class="inputText font14 d2" onchange="changeValue('d2')" type='text' placeholder="单位地址" />
+                </div>
+                <div class="inputBox">
+                    <span class="font14 inputLable">消防安全管理人：</span>
+                    <input class="inputText font14 x3" onchange="changeValue('x3')" type='text' placeholder="消防安全管理人" />
+                </div>
+
+                <div class="inputBox">
+                    <span class="font14 inputLable">联系电话：</span>
+                    <input class="inputText font14 l4" onchange="changeValue('l4')" type='text' placeholder="联系电话" />
+                </div>
+            </div>
+            <div class="contentBox">
+                <div class="title"><span class="linebox"></span><span class="font14 titletext fontWeight">检查内容</span></div>
+            </div>
+        </div>
+        <div class="smallButton" onclick="submit()">提交</div>
+    </div>
+    <div id="tanwin" class="tan" style="display:none;"></div>
+    <div class="zhegaicengone zhegaiceng" style="display: none;">
+        <img class='lodingimg' src="./images/loadingpop.gif">
+    </div>
+
+</body>
+<script src="./js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/aes.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/commen.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/fireunitexamine.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var radioobj = {
+        s5: '',
+        s6: '',
+        s9: '',
+        s10: '',
+        s13: '',
+        s14: '',
+        s17: '',
+        s18: '',
+        s21: '',
+        s22: '',
+        s25: '',
+        s26: '',
+        s29: '',
+        s30: '',
+        s33: '',
+        s34: '',
+        
+    };
+    var inputobj = {
+        d1: '',
+        d2:"",
+        l3: '',
+        l4: '',
+        z7: '',
+        z8: '',
+        z11: '',
+        z12: '',
+        z15: '',
+        z16: '',
+        z19: '',
+        z20: '',
+        z23: '',
+        z24: '',
+        z27: '',
+        z28: '',
+        z31: '',
+        z32: '',
+        z35: '',
+        z36: '',
+       
+    }
+    $(function () {
+        if (localStorage.getItem('firekeyunitselfinput')) {
+            setinputValue()
+        }
+        if (localStorage.getItem('firekeyunitselfradio')) {
+            setradioValue()
+        }
+        changeRadio();
+    })
+  //监听radio
+  function changeRadio() {
+        $.each(radioobj, function (key, val) {
+            $("input:radio[name='" + key + "']").click(function () {
+                if (JSON.parse(localStorage.getItem('firekeyunitselfradio'))) {
+                    radioobj = JSON.parse(localStorage.getItem('firekeyunitselfradio'))
+                }
+                var $radio = $(this);
+                // if this was previously checked
+                if ($radio.data('waschecked') == true) {
+                    $radio.prop('checked', false);
+                    $radio.data('waschecked', false);
+                } else {
+                    $radio.prop('checked', true);
+                    $radio.data('waschecked', true);
+                }
+                if($("input[name='"+key+"']:checked").val()){
+                    radioobj[key] = $("input[name='"+key+"']:checked").val();
+                }else{
+                    radioobj[key] = '';
+                }
+              
+                localStorage.setItem('firekeyunitselfradio', JSON.stringify(radioobj))
+            })
+        });
+    }
+    //回显radio
+    function setradioValue() {
+        var firekeyunitselfradio = JSON.parse(localStorage.getItem('firekeyunitselfradio'));
+        $.each(firekeyunitselfradio, function (key, val) {
+            if (firekeyunitselfradio[key]) {
+                $("input[name='" + key + "'][value='" + firekeyunitselfradio[key] + "']").attr('checked', 'true');
+                $("input[name='" + key + "'][value='" + firekeyunitselfradio[key] + "']").data('waschecked', true);
+            }
+        });
+    }
+    //监听存input text
+    function changeValue(k) {
+        if (localStorage.getItem('firekeyunitselfinput')) {
+            inputobj = JSON.parse(localStorage.getItem('firekeyunitselfinput'));
+        }
+        inputobj[k] = $("." + k).val();
+        localStorage.setItem('firekeyunitselfinput', JSON.stringify(inputobj))
+    }
+    //回显input text
+    function setinputValue() {
+        var inputVal = JSON.parse(localStorage.getItem('firekeyunitselfinput'));
+        $.each(inputVal, function (key, val) {
+            $("." + key).val(inputVal[key])
+        })
+    }
+    function submit() {
+        if (localStorage.getItem('firekeyunitselfinput')) {
+            inputobj = JSON.parse(localStorage.getItem('firekeyunitselfinput'));
+        }
+        if (localStorage.getItem('firekeyunitselfradio')) {
+            radioobj = JSON.parse(localStorage.getItem('firekeyunitselfradio'));
+        }
+        var obj = {
+            applyNum: applyNum
+        }
+        var data = Object.assign(obj, inputobj, radioobj);
+        console.log(data)
+        return
+        data = JSON.stringify(data)
+        $.ajax({
+            url: ajaxUrl + 'companycheckTemplate/kfAqjcjldTxzcydwglCheckList',
+            timeout: timeDelay,
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            dataType: "json",
+            data: data,
+            success: function (response) {
+                $(".zhegaiceng").css({ 'display': 'none' })
+                if (response.rescode == 200) {
+                    localStorage.removeItem('firekeyunitselfradio')
+                    localStorage.removeItem('firekeyunitselfinput')
+                    window.location.href = './circulation.html'
+                } else {
+                    toast(response.resdes)
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $(".zhegaiceng").css({ 'display': 'none' })
+            },
+            complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+                $(".zhegaiceng").css({ 'display': 'none' })
+            }
+        });
+    }
+
+</script>
+
+</html>
