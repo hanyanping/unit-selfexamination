@@ -26,9 +26,7 @@
 <body>
 <div id="home">
     <div class="titlename">请选择检查类别</div>
-    <div class="linebox  fon16">
-        定期检查
-    </div>
+    
     <div class="airDefence flexWrap margin10">
 
     </div>
@@ -49,7 +47,7 @@
         var applyNum = getUrlParms('applyNum');
         localStorage.setItem('applyNum',applyNum)
         // var data2 = [{url:'',name:'自动喷水灭火系统',color:'backgreen'},{url:'',name:'其他',color:'backgreen'}]
-        var data1 = [{url:'fireexaminedaily.html',name:'系统的每日检查和试验',color:'backblue'},{url:'fireexaminequater.html',name:'系统的季度检查及试验',color: 'backblue'},{url:'fireexamineyear.html',name:'系统年度检查及试验',color: 'backblue'},{url:'fireunitselfexamine.html',name:'单位消防安全自查自改登记表',color: 'backblue'},{url:'firekeyunitselfexamine.html',name:'消防安全重点单位自查自改登记表',color: 'backblue'},{url:'',name:'系统的每周、月检查',color: 'backgreen none'}]
+        var data1 = [{url:'fireexaminedaily.html',name:'系统的每日检查和试验',color:'backblue none'},{url:'fireexaminequater.html',name:'系统的季度检查及试验',color: 'backblue none'},{url:'fireexamineyear.html',name:'系统年度检查及试验',color: 'backblue none'},{url:'fireunitselfexamine.html',name:'单位消防安全自查自改登记表',color: 'backblue'},{url:'firekeyunitselfexamine.html',name:'消防安全重点单位自查自改登记表',color: 'backblue'},{url:'',name:'系统的每周、月检查',color: 'backgreen none'}]
         var str = '',str1 = '';
         $.each(data1,(i,item)=>{
             str+='<div onclick="goExamine(this)" data-url="'+item.url+'" class="chooseBox  colorfff font14 '+item.color+'" >' +item.name+

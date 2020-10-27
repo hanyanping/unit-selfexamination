@@ -28,20 +28,20 @@
             <div class="radioList">
                 <div class="inputBox">
                     <span class="font14 inputLable">单位性质：</span>
-                    <input class="inputText font14 d1" onchange="changeValue('d1')" type='text' placeholder="单位性质" />
+                    <input class="inputText font14 d2" onchange="changeValue('d2')" type='text' placeholder="单位性质" />
                 </div>
                 <div class="inputBox">
                     <span class="font14 inputLable">单位地址：</span>
-                    <input class="inputText font14 d2" onchange="changeValue('d2')" type='text' placeholder="单位地址" />
+                    <input class="inputText font14 d3" onchange="changeValue('d3')" type='text' placeholder="单位地址" />
                 </div>
                 <div class="inputBox">
                     <span class="font14 inputLable">消防安全管理人：</span>
-                    <input class="inputText font14 x3" onchange="changeValue('x3')" type='text' placeholder="消防安全管理人" />
+                    <input class="inputText font14 x4" onchange="changeValue('x4')" type='text' placeholder="消防安全管理人" />
                 </div>
 
                 <div class="inputBox">
                     <span class="font14 inputLable">联系电话：</span>
-                    <input class="inputText font14 l4" onchange="changeValue('l4')" type='text' placeholder="联系电话" />
+                    <input class="inputText font14 l5" onchange="changeValue('l5')" type='text' placeholder="联系电话" />
                 </div>
             </div>
             <div class="contentBox">
@@ -62,45 +62,45 @@
 <script src="./js/fireunitexamine.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var radioobj = {
-        s5: '',
-        s6: '',
-        s9: '',
-        s10: '',
-        s13: '',
-        s14: '',
-        s17: '',
-        s18: '',
-        s21: '',
-        s22: '',
-        s25: '',
-        s26: '',
-        s29: '',
-        s30: '',
-        s33: '',
-        s34: '',
+        y6: '',
+        y7: '',
+        a11: '',
+        a12: '',
+        a15: '',
+        a16: '',
+        x19: '',
+        x20: '',
+        c23: '',
+        c24: '',
+        f27: '',
+        f28: '',
+        x31: '',
+        x32: '',
+        q35: '',
+        q36: '',
         
     };
     var inputobj = {
-        d1: '',
-        d2:"",
-        l3: '',
-        l4: '',
-        z7: '',
-        z8: '',
-        z11: '',
-        z12: '',
-        z15: '',
-        z16: '',
-        z19: '',
-        z20: '',
-        z23: '',
-        z24: '',
-        z27: '',
-        z28: '',
-        z31: '',
-        z32: '',
-        z35: '',
-        z36: '',
+        d2: '',
+        d3:"",
+        x4: '',
+        l5: '',
+        y8: '',
+        y9: '',
+        a13: '',
+        a14: '',
+        a17: '',
+        a18: '',
+        x21: '',
+        x22: '',
+        c25: '',
+        c26: '',
+        f29: '',
+        f30: '',
+        x33: '',
+        x34: '',
+        q37: '',
+        q38: '',
        
     }
     $(function () {
@@ -175,10 +175,9 @@
         }
         var data = Object.assign(obj, inputobj, radioobj);
         console.log(data)
-        return
         data = JSON.stringify(data)
         $.ajax({
-            url: ajaxUrl + 'companycheckTemplate/kfAqjcjldTxzcydwglCheckList',
+            url: ajaxUrl + 'companycheckTemplate/xfAqzddwzczgdjbCheckList',
             timeout: timeDelay,
             type: 'post',
             contentType: 'application/json;charset=utf-8',
