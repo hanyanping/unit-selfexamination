@@ -32,7 +32,9 @@
     $(function(){
         var applyNum = getUrlParms('applyNum');
         localStorage.setItem('applyNum',applyNum)
-        var data1 = [{url:'airexamine.html',name:'货运区空防安全检查单',color:'backblue'},{url:'flyexamine.html',name:'飞行器活动区空防安全检查项',color:'backblue'},{url:'hzlexamine.html',name:'航站楼空防安全检查项',color:'backblue'}]
+        var data1 = [{url:'airexamine.html',name:'货运区空防安全检查项',color:'backblue'},{url:'flyexamine.html',name:'飞行器活动区空防安全检查项',color:'backblue'},{url:'hzlexamine.html',name:'航站楼空防安全检查项',color:'backblue'},
+        {url:'passmanagexamine.html',name:'空防安全检查项(通行证的管理)',color:'backblue'},{url:'passusexamine.html',name:'空防安全检查项(通行证的使用)',color:'backblue'},{url:'passunitmanagexamine.html',name:'空防安全检查项(通行证查验单位管理)',color:'backblue'},
+        ]
         var str = '';
         $.each(data1,(i,item)=>{
             str+='<div onclick="goExamine(this)" data-url="'+item.url+'" class="chooseBox  colorfff font14 '+item.color+'" >' +item.name+

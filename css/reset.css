@@ -21,6 +21,17 @@ img {
     padding: 0;
     fontFamily: Microsoft Yahei, pingfangSC;
 }
+.itemcenter {
+    display: flex;
+    align-items: center;
+}
+.lineBox {
+    height: 16px;
+    width: 3px;
+    background: #0D76EE;
+    display: inline-block;
+    vertical-align: middle;
+}
 html,
 body{
     height:100%;
